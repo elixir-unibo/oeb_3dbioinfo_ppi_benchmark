@@ -1,0 +1,38 @@
+{
+  "_id": "3DBioinfo:2023-05-15_P_Oliva_CP",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset",
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ],
+  "challenge_ids": [
+    "3DBioinfo:PPI-PhysioClassification"
+  ],
+  "visibility": "public",
+  "name": "Raw interface scores \u2014 Contact-Propensity (CP) raw score",
+  "version": "1",
+  "description": "Per-entry raw score produced by Contact-Propensity (CP) raw score on the 971 benchmark entries it covers.",
+  "type": "participant",
+  "dataset_contact_ids": [
+    "3DBioinfo:Baldo.Oliva"
+  ],
+  "dates": {
+    "creation": "2023-05-15T00:00:00Z",
+    "modification": "2023-05-15T00:00:00Z"
+  },
+  "depends_on": {
+    "tool_id": "3DBioinfo:Oliva_CP",
+    "rel_dataset_ids": [
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_input"
+      }
+    ]
+  },
+  "datalink": {
+    "attrs": [
+      "archive"
+    ],
+    "status": "ok",
+    "uri": "participant/Oliva_CP/predictions.csv",
+    "validation_date": "2023-05-15T00:00:00Z"
+  }
+}

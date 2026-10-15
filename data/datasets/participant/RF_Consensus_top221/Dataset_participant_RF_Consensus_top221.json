@@ -1,0 +1,38 @@
+{
+  "_id": "3DBioinfo:2023-05-15_P_RF_Consensus_top221",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset",
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ],
+  "challenge_ids": [
+    "3DBioinfo:PPI-PhysioClassification"
+  ],
+  "visibility": "public",
+  "name": "Raw interface scores \u2014 Cross-validated Random Forest consensus classifier (top-221 features)",
+  "version": "1",
+  "description": "Per-entry raw score produced by Cross-validated Random Forest consensus classifier (top-221 features) on the 968 benchmark entries it covers.",
+  "type": "participant",
+  "dataset_contact_ids": [
+    "3DBioinfo:3D-Bioinfo.Coordinators"
+  ],
+  "dates": {
+    "creation": "2023-05-15T00:00:00Z",
+    "modification": "2023-05-15T00:00:00Z"
+  },
+  "depends_on": {
+    "tool_id": "3DBioinfo:RF_Consensus_top221",
+    "rel_dataset_ids": [
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_input"
+      }
+    ]
+  },
+  "datalink": {
+    "attrs": [
+      "archive"
+    ],
+    "status": "ok",
+    "uri": "participant/RF_Consensus_top221/predictions.csv",
+    "validation_date": "2023-05-15T00:00:00Z"
+  }
+}

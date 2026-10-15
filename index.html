@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ELIXIR 3DBioinfo Community PPI Benchmark Experiment</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+  <style>
+    :root {
+      --brand: #0056b4;
+      --brand-dark: #003d80;
+      --bg: #f5f6f8;
+      --text: #2b2b2b;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Roboto', Arial, sans-serif; background: var(--bg); color: var(--text); }
+    header.oeb-header {
+      background: var(--brand); color: #fff; display: flex; align-items: center;
+      padding: 0 24px; height: 64px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      position: sticky; top: 0; z-index: 10;
+    }
+    header.oeb-header img.logo { height: 40px; margin-right: 14px; border-radius: 4px; background:#fff; padding:2px; }
+    header.oeb-header .title { font-size: 19px; font-weight: 500; letter-spacing: 0.2px; }
+    header.oeb-header .title small { display: block; font-size: 12px; font-weight: 400; opacity: 0.85; }
+    nav.oeb-nav { background: var(--brand-dark); display: flex; padding: 0 24px; height: 40px; align-items: center; gap: 24px; }
+    nav.oeb-nav a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.4px; }
+    nav.oeb-nav a.active { color: #fff; border-bottom: 2px solid #fff; height: 100%; display: flex; align-items: center; }
+
+    .layout { display: flex; max-width: 1300px; margin: 0 auto; align-items: flex-start; }
+    aside.sidebar {
+      width: 200px; flex-shrink: 0; background: #fff; margin: 24px 0 24px 24px;
+      border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); padding: 16px 0;
+      position: sticky; top: 104px;
+    }
+    aside.sidebar a {
+      display: flex; align-items: center; gap: 10px; padding: 10px 20px; font-size: 14px;
+      color: var(--text); text-decoration: none; border-left: 3px solid transparent;
+    }
+    aside.sidebar a:hover { background: #f0f5fb; border-left-color: var(--brand); color: var(--brand-dark); }
+    aside.sidebar a.nav-link.active { background: #e8f0fb; border-left-color: var(--brand); color: var(--brand-dark); font-weight: 500; }
+    /* Each sidebar-linked section (Results/Datasets/Tools) is shown independently -- only
+       one at a time -- instead of all being stacked on one continuously scrolling page. */
+    main .oeb-card.tab-section { display: none; }
+    main .oeb-card.tab-section.active-section { display: block; }
+    aside.sidebar a .material-icons { font-size: 18px; color: var(--brand); }
+
+    main { flex: 1; margin: 24px 24px 48px; min-width: 0; }
+    .breadcrumb { font-size: 13px; color: #6b6b6b; margin-bottom: 16px; }
+    .breadcrumb .material-icons { font-size: 14px; vertical-align: -2px; }
+    .oeb-card { background: #fff; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08); padding: 24px; margin-bottom: 24px; scroll-margin-top: 90px; }
+    #oeb-chart-wrapper { max-width: 100%; overflow-x: auto; }
+    #oeb-chart-wrapper svg.benchmarkingSVG { max-width: 100%; height: auto; display: block; }
+    #oeb-chart-wrapper .benchmarkingChart_scatter { max-width: 100%; }
+    td.qtd { text-align: center; font-weight: 600; font-size: 12.5px; }
+    td.qtd-Q1 { background: #e3f3e1; color: #1b6b35; }
+    td.qtd-Q2 { background: #eef5fb; color: #0056b4; }
+    td.qtd-Q3 { background: #fff8e1; color: #9a6a00; }
+    td.qtd-Q4 { background: #fdeceb; color: #a3291f; }
+    .oeb-card h1 { font-size: 21px; font-weight: 500; margin: 0 0 4px; color: var(--brand-dark); }
+    .oeb-card h2 { font-size: 17px; font-weight: 500; margin: 0 0 10px; color: var(--brand-dark); }
+    .oeb-card .subtitle { font-size: 14px; color: #6b6b6b; margin-bottom: 20px; }
+    .oeb-card .description { font-size: 14px; line-height: 1.6; color: #3a3a3a; margin-bottom: 14px; }
+    .meta-row { font-size: 13px; color: #6b6b6b; margin-bottom: 4px; }
+    .meta-row b { color: #3a3a3a; }
+    .oeb-chip { display: inline-block; background: #e8f0fb; color: var(--brand-dark); border-radius: 12px; padding: 3px 12px; font-size: 12px; font-weight: 500; margin-right: 8px; margin-bottom: 6px; }
+    .challenge-list { display: flex; gap: 12px; flex-wrap: wrap; }
+    .challenge-tab { border: 1px solid #d6e3f5; background: #f7faff; color: var(--brand-dark); border-radius: 4px; padding: 10px 16px; font-size: 13px; font-weight: 500; }
+    .challenge-tab.active { background: var(--brand); color: #fff; border-color: var(--brand); }
+    table.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    table.data-table th { text-align: left; padding: 8px 10px; border-bottom: 2px solid #e4e9f0; color: var(--brand-dark); }
+    table.data-table td { padding: 7px 10px; border-bottom: 1px solid #eef1f5; }
+    .notice { background: #fff8e1; border-left: 4px solid #f9a825; padding: 10px 16px; font-size: 13px; margin-bottom: 20px; border-radius: 2px; }
+    footer.oeb-footer { text-align: center; font-size: 12px; color: #8a8a8a; padding: 24px 0 40px; }
+
+    .form-row { margin-bottom: 14px; }
+    .form-row label { display:block; font-size:13px; font-weight:500; margin-bottom:5px; color:#3a3a3a; }
+    .form-row select, .form-row input[type=text] {
+      width: 100%; max-width: 480px; padding: 7px 10px; font-size:13px; border:1px solid #c9d3e0;
+      border-radius: 3px; font-family: inherit;
+    }
+    .form-row input[type=file] { font-size: 13px; }
+    .strategy-doc-link { font-size: 12px; margin-left: 4px; }
+    button.oeb-btn {
+      background: var(--brand); color: #fff; border: none; border-radius: 3px; padding: 9px 20px;
+      font-size: 13px; font-weight: 500; cursor: pointer; text-transform: uppercase; letter-spacing: 0.3px;
+    }
+    button.oeb-btn:hover { background: var(--brand-dark); }
+    button.oeb-btn:disabled { background: #9aa7b8; cursor: default; }
+    tr.highlight-row { background: #fff4d6; font-weight: 500; }
+    .cv-caveat { background: #eef2fb; border-left: 4px solid var(--brand); padding: 10px 16px; font-size: 12.5px; margin: 14px 0; border-radius: 2px; color:#3a3a3a; }
+
+  </style>
+</head>
+<body>
+  <header class="oeb-header">
+    <div class="title">ELIXIR 3DBioinfo Community PPI Benchmark Experiment<small>local challenge preview</small></div>
+  </header>
+  <nav class="oeb-nav">
+    <a href="#" class="active">Benchmarking</a>
+    <a href="#">Communities</a>
+    <a href="#">Tools</a>
+    <a href="#">Documentation</a>
+  </nav>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <a href="#results-section" data-section="results-section" class="nav-link active"><span class="material-icons">leaderboard</span> Results</a>
+      <a href="#datasets-section" data-section="datasets-section" class="nav-link"><span class="material-icons">dataset</span> Datasets</a>
+      <a href="#tools-section" data-section="tools-section" class="nav-link"><span class="material-icons">build</span> Tools</a>
+    </aside>
+
+    <main>
+      <div class="breadcrumb">
+        <span class="material-icons">home</span> Benchmarking &nbsp;/&nbsp; 3D-BioInfo &nbsp;/&nbsp; PPI-PhysioClassification
+      </div>
+
+      <div class="notice">
+        This is a local, offline preview rendered against this benchmark's own data, using the
+        real open-source OpenEBench visualizer component -- it is not connected to
+        openebench.bsc.es and does not reflect a live, published Benchmarking Event. Page
+        organization follows the real OpenEBench benchmarking-event page structure
+        (community &rarr; benchmarking event &rarr; challenges &rarr; leaderboard), referenced from
+        <a href="https://openebench.bsc.es/benchmarking/OEBC011?event=OEBE0110000000" style="color:var(--brand-dark)">the public CAID benchmarking page</a>.
+      </div>
+
+      <div class="oeb-card">
+        <h2>Community</h2>
+        <div class="meta-row"><b>ELIXIR 3D-BioInfo Community</b> (3D-BioInfo)</div>
+        <div class="description">ELIXIR 3D-BioInfo Community benchmarking activity on scoring and ranking of protein-protein interfaces and quaternary structure assignment, based on a curated benchmark of 1677 homodimer crystal structures.</div>
+        <div><span class="oeb-chip">protein-protein interaction</span><span class="oeb-chip">quaternary structure</span><span class="oeb-chip">interface scoring</span><span class="oeb-chip">homodimers</span><span class="oeb-chip">structural bioinformatics</span><span class="oeb-chip">AlphaFold-multimer</span></div>
+      </div>
+
+      <div class="oeb-card">
+        <h2>Benchmarking Event</h2>
+        <div class="meta-row"><b>Benchmarking of scoring functions for physiological vs. crystallographic protein-protein interfaces</b></div>
+        <div class="meta-row">Created: 2023-05-15 &middot; Modified: 2023-05-15</div>
+        <div class="meta-row">Reference: <a href="https://github.com/vibbits/Elixir-3DBioInfo-Benchmark-Protein-Interfaces" style="color:var(--brand-dark)">https://github.com/vibbits/Elixir-3DBioInfo-Benchmark-Protein-Interfaces</a></div>
+      </div>
+
+      <div class="oeb-card">
+        <h2>Challenges</h2>
+        <div class="challenge-list">
+          <div class="challenge-tab active">PPI-PhysioClassification &mdash; Discrimination of physiological vs. non-physiological (crystallographic) homodimer interfaces</div>
+        </div>
+      </div>
+
+      <div class="oeb-card tab-section active-section" id="results-section">
+        <h1>PPI-PhysioClassification challenge leaderboard</h1>
+        <div class="subtitle">AUC-ROC vs. Accuracy-at-threshold &middot; 14 participants
+</div>
+        <span class="oeb-chip">Community: 3D-BioInfo</span>
+        <span class="oeb-chip">Challenge: PPI-PhysioClassification</span>
+        <span class="oeb-chip">Metric X: AUC-ROC</span>
+        <span class="oeb-chip">Metric Y: Accuracy@threshold</span>
+        <div style="margin-top:20px;" id="oeb-chart-wrapper">
+          <div data-id="oeb-ppi-physio-classification"
+               class="benchmarkingChart_scatter" data-api-url="http://localhost:8080/graphql"></div>
+
+        <h2 style="margin-top:28px;">Full metrics table</h2>
+        <div class="subtitle">AUROC and AUCPR are threshold-free ranking metrics. Balanced Accuracy, F1 and MCC
+          are evaluated at each scoring function's published decision threshold, or at the data-driven
+          optimal threshold (Youden's J statistic) when no threshold was published (applies to Voronota only).
+          This is a fixed snapshot of the 14 published scoring functions -- see "Try it yourself" below to
+          evaluate your own predictions with a declared, leakage-safe cross-validation procedure using the full,
+          interactive version of this page.</div>
+        <table class="data-table" id="full-metrics-table">
+          <tr><th>Group</th><th>Participant</th><th>AUROC</th><th>AUCPR</th><th>Balanced Accuracy</th><th>F1 Score</th><th>MCC</th><th>Evaluation</th></tr>
+          <tbody id="full-metrics-tbody"><tr data-participant-id="RF_Consensus_top221" data-group="Consensus (cross-group RF)" data-auroc="0.9474" data-aucpr="0.9452" data-balancedaccuracy="0.8826" data-f1="0.8841" data-mcc="0.7650"><td>Consensus (cross-group RF)</td><td>Random Forest consensus (top-221 features)</td><td>0.947</td><td>0.945</td><td>0.883</td><td>0.884</td><td>0.765</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Bonvin_DeepRank-GNN" data-group="Bonvin" data-auroc="0.8603" data-aucpr="0.8158" data-balancedaccuracy="0.8041" data-f1="0.8234" data-mcc="0.6175"><td>Bonvin</td><td>DeepRank-GNN</td><td>0.860</td><td>0.816</td><td>0.804</td><td>0.823</td><td>0.618</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Furman_InterfaceAnalyzer" data-group="Schueler-Furman" data-auroc="0.8492" data-aucpr="0.8212" data-balancedaccuracy="0.7918" data-f1="0.8025" data-mcc="0.5864"><td>Schueler-Furman</td><td>Rosetta InterfaceAnalyzer</td><td>0.849</td><td>0.821</td><td>0.792</td><td>0.802</td><td>0.586</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Guerois_IESnorm" data-group="Guerois" data-auroc="0.8212" data-aucpr="0.8430" data-balancedaccuracy="0.7683" data-f1="0.8107" data-mcc="0.5375"><td>Guerois</td><td>IES (normalized)</td><td>0.821</td><td>0.843</td><td>0.768</td><td>0.811</td><td>0.537</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Zou_DLScoreBC" data-group="Zou" data-auroc="0.8166" data-aucpr="0.8020" data-balancedaccuracy="0.7473" data-f1="0.7561" data-mcc="0.4956"><td>Zou</td><td>DLScore-BC</td><td>0.817</td><td>0.802</td><td>0.747</td><td>0.756</td><td>0.496</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="SWISSMODEL_QSQE" data-group="SWISS-MODEL" data-auroc="0.8076" data-aucpr="0.9184" data-balancedaccuracy="0.7244" data-f1="0.7412" data-mcc="0.3964"><td>SWISS-MODEL</td><td>QSQE</td><td>0.808</td><td>0.918</td><td>0.724</td><td>0.741</td><td>0.396</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Venclovas_Voronota" data-group="Venclovas" data-auroc="0.8074" data-aucpr="0.7679" data-balancedaccuracy="0.7504" data-f1="0.7522" data-mcc="0.5009"><td>Venclovas</td><td>Voronota</td><td>0.807</td><td>0.768</td><td>0.750</td><td>0.752</td><td>0.501</td><td style="color:#6b6b6b;font-size:12px;">data-driven optimal threshold (resubstitution)</td></tr><tr data-participant-id="FernandezRecio_NIPacking" data-group="Fernandez-Recio" data-auroc="0.7912" data-aucpr="0.7454" data-balancedaccuracy="0.7659" data-f1="0.7665" data-mcc="0.5319"><td>Fernandez-Recio</td><td>NIPacking</td><td>0.791</td><td>0.745</td><td>0.766</td><td>0.766</td><td>0.532</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Bologna_ISPRED4" data-group="Casadio (Bologna)" data-auroc="0.7692" data-aucpr="0.7469" data-balancedaccuracy="0.7200" data-f1="0.7164" data-mcc="0.4402"><td>Casadio (Bologna)</td><td>ISPRED4</td><td>0.769</td><td>0.747</td><td>0.720</td><td>0.716</td><td>0.440</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Correia_MaSIF" data-group="Correia" data-auroc="0.7661" data-aucpr="0.7466" data-balancedaccuracy="0.7077" data-f1="0.7321" data-mcc="0.4174"><td>Correia</td><td>MaSIF</td><td>0.766</td><td>0.747</td><td>0.708</td><td>0.732</td><td>0.417</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Kihara_GOAP" data-group="Kihara" data-auroc="0.7540" data-aucpr="0.7130" data-balancedaccuracy="0.6927" data-f1="0.7080" data-mcc="0.3873"><td>Kihara</td><td>GOAP</td><td>0.754</td><td>0.713</td><td>0.693</td><td>0.708</td><td>0.387</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Oliva_CP" data-group="Oliva" data-auroc="0.7486" data-aucpr="0.7118" data-balancedaccuracy="0.6930" data-f1="0.6948" data-mcc="0.3860"><td>Oliva</td><td>CP/COCOMAPS</td><td>0.749</td><td>0.712</td><td>0.693</td><td>0.695</td><td>0.386</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="MOBI_ShapeHydroTails" data-group="MOBI" data-auroc="0.7307" data-aucpr="0.6985" data-balancedaccuracy="0.6797" data-f1="0.6858" data-mcc="0.3597"><td>MOBI</td><td>shape_hydro_tails</td><td>0.731</td><td>0.699</td><td>0.680</td><td>0.686</td><td>0.360</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Wolfson_ProbaConsensus" data-group="Wolfson" data-auroc="0.7262" data-aucpr="0.6610" data-balancedaccuracy="0.6777" data-f1="0.7256" data-mcc="0.3775"><td>Wolfson</td><td>ProbaConsensus (ScanNet F_Network)</td><td>0.726</td><td>0.661</td><td>0.678</td><td>0.726</td><td>0.378</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr></tbody>
+        </table>
+
+        <h2 style="margin-top:28px;">Quartile ranking</h2>
+        <div class="subtitle">Each participant's per-metric quartile/cluster rank, computed independently for each
+          of the 5 performance measures over the current set of participants (higher value is better for all 5
+          metrics). Follows the <b>same Classification Method currently selected in the chart above</b> (Square
+          quartiles, Diagonal quartiles, or K-Means clustering): Square and Diagonal quartiles reduce to the same
+          percentile-based split for a single metric (the 2D "distance-to-corner" score diagonals uses is just the
+          metric's own normalized value when there is only one axis); K-Means runs real 1-D k-means (k=4) on each
+          metric's values independently, grouping by natural breaks in the data rather than equal population
+          percentiles, with clusters ranked by mean (Q1 = highest-performing cluster). Select "No classification"
+          to hide this table, matching the chart's own behavior. Recomputed automatically whenever a submission is
+          added or the Classification Method changes.</div>
+        <div id="quartile-table-note" class="cv-caveat" style="display:block;">Select a classification method above
+          (Square quartiles, Diagonal quartiles, or K-Means clustering) to populate this table.</div>
+        <table class="data-table" id="quartile-table">
+          <tr><th>Group</th><th>Participant</th><th>AUROC</th><th>AUCPR</th><th>Balanced Accuracy</th><th>F1 Score</th><th>MCC</th></tr>
+
+          <tbody id="quartile-tbody"></tbody>
+        </table>
+
+        <h2 style="margin-top:28px;">Try it yourself</h2>
+        <div class="subtitle">This static page shows a fixed snapshot of the 14 participant scoring functions'
+          results. To evaluate your OWN predictions against this benchmark -- with a declared, leakage-safe
+          cross-validation procedure, a live-updating leaderboard chart and table, and your choice of CV
+          splitting strategy -- download the full package below and run it on your own machine (it ships with
+          its own local web server; no installation beyond Python 3 is required).</div>
+        <div class="cv-caveat">
+          <a href="oeb_ppi_benchmark.zip" style="color:var(--brand-dark); font-weight:600;">Download the full
+            benchmark package (oeb_ppi_benchmark.zip)</a> -- includes this page's live, interactive version
+          plus every OpenEBench submission file. After extracting it, run:
+          <code>cd oeb_ppi_benchmark &amp;&amp; python3 serve_local_openebench_visualizer.py</code>, then open
+          <code>http://localhost:8080/</code>. A <a href="data/demo_predictions_for_upload_test.csv"
+          style="color:var(--brand-dark)">demo predictions file</a> is provided to try the upload feature
+          immediately.
+        </div>
+        </div>
+      </div>
+
+      <div class="oeb-card tab-section" id="datasets-section">
+        <h2>Datasets</h2>
+        <table class="data-table">
+          <tr><th>Dataset type</th><th># instances</th></tr>
+          <tr><td>aggregation</td><td>1</td></tr><tr><td>assessment</td><td>28</td></tr><tr><td>input</td><td>1</td></tr><tr><td>metrics_reference</td><td>1</td></tr><tr><td>participant</td><td>14</td></tr><tr><td>public_reference</td><td>1</td></tr>
+        </table>
+
+        <div style="margin-top:16px; font-size:13px;">
+          <b>Reference data used for evaluation:</b><br>
+          <a href="data/datasets/metrics_reference/gold_standard_labels.csv" style="color:var(--brand-dark)">gold_standard_labels.csv</a>
+          (physiological / crystallographic ground truth, 1671 entries) &middot;
+          <a href="data/datasets/metrics_reference/cv_fold_assignment.csv" style="color:var(--brand-dark)">cv_fold_assignment.csv</a> (Strategy 1) &middot;
+          <a href="data/datasets/metrics_reference/cv_fold_strategy2_mmseqs2_strict.csv" style="color:var(--brand-dark)">cv_fold_strategy2_mmseqs2_strict.csv</a> (Strategy 2) &middot;
+          <a href="data/datasets/metrics_reference/cv_fold_strategy2b_blastclust_reference.csv" style="color:var(--brand-dark)">cv_fold_strategy2b_blastclust_reference.csv</a> (Strategy 2b) &middot;
+          <a href="data/datasets/metrics_reference/cv_fold_strategy3_combined_union.csv" style="color:var(--brand-dark)">cv_fold_strategy3_combined_union.csv</a> (Strategy 3, recommended) &middot;
+          <a href="CV_SPLITTING_STRATEGIES.md" style="color:var(--brand-dark)">full description of all 4 CV splitting strategies</a>
+        </div>
+      </div>
+
+      <div class="oeb-card tab-section" id="tools-section">
+        <h2>Tools</h2>
+        <table class="data-table">
+          <tr><th>Group</th><th>Participant tool</th><th>Internal ID</th><th>Submission file</th></tr>
+          <tr><td>Casadio (Bologna)</td><td>ISPRED4 physiological-score (MCC-optimized)</td><td style="color:#6b6b6b;font-size:12px;">3DBioinfo:Bologna_ISPRED4</td><td><a href="data/datasets/participant/Bologna_ISPRED4/predictions.csv" style="color:var(--brand-dark)">predictions.csv &#8595;</a></td></tr><tr><td>Bonvin</td><td>DeepRank-GNN</td><td style="color:#6b6b6b;font-size:12px;">3DBioinfo:Bonvin_DeepRank-GNN</td><td><a href="data/datasets/participant/Bonvin_DeepRank-GNN/predictions.csv" style="color:var(--brand-dark)">predictions.csv &#8595;</a></td></tr><tr><td>Correia</td><td>MaSIF descriptor-distance score</td><td style="color:#6b6b6b;font-size:12px;">3DBioinfo:Correia_MaSIF</td><td><a href="data/datasets/participant/Correia_MaSIF/predictions.csv" style="color:var(--brand-dark)">predictions.csv &#8595;</a></td></tr><tr><td>Fernandez-Recio</td><td>NIP (Normalized Interface Packing)</td><td style="color:#6b6b6b;font-size:12px;">3DBioinfo:FernandezRecio_NIPacking</td><td><a href="data/datasets/participant/FernandezRecio_NIPacking/predictions.csv" style="color:var(--brand-dark)">predictions.csv &#8595;</a></td></tr><tr><td>Schueler-Furman</td><td>Rosetta InterfaceAnalyzer (dG_cross/dSASA x100)</td><td style="color:#6b6b6b;font-size:12px;">3DBioinfo:Furman_InterfaceAnalyzer</td><td><a href="data/datasets/participant/Furman_InterfaceAnalyzer/predictions.csv" style="color:var(--brand-dark)">predictions.csv &#8595;</a></td></tr><tr><td>Guerois</td><td>IES homolog-normalized (10 seq, size-normalized)</td><td style="color:#6b6b6b;font-size:12px;">3DBioinfo:Guerois_IESnorm</td><td><a href="data/datasets/participant/Guerois_IESnorm/predictions.csv" style="color:var(--brand-dark)">predictions.csv &#8595;</a></td></tr><tr><td>Kihara</td><td>GOAP statistical potential</td><td style="color:#6b6b6b;font-size:12px;">3DBioinfo:Kihara_GOAP</td><td><a href="data/datasets/participant/Kihara_GOAP/predictions.csv" style="color:var(--brand-dark)">predictions.csv &#8595;</a></td></tr><tr><td>MOBI</td><td>MOBI shape+hydrophobicity+tails integrated score</td><td style="color:#6b6b6b;font-size:12px;">3DBioinfo:MOBI_ShapeHydroTails</td><td><a href="data/datasets/participant/MOBI_ShapeHydroTails/predictions.csv" style="color:var(--brand-dark)">predictions.csv &#8595;</a></td></tr><tr><td>Oliva</td><td>Contact-Propensity (CP) raw score</td><td style="color:#6b6b6b;font-size:12px;">3DBioinfo:Oliva_CP</td><td><a href="data/datasets/participant/Oliva_CP/predictions.csv" style="color:var(--brand-dark)">predictions.csv &#8595;</a></td></tr><tr><td>Consensus (cross-group RF)</td><td>Cross-validated Random Forest consensus classifier (top-221 features)</td><td style="color:#6b6b6b;font-size:12px;">3DBioinfo:RF_Consensus_top221</td><td><a href="data/datasets/participant/RF_Consensus_top221/predictions.csv" style="color:var(--brand-dark)">predictions.csv &#8595;</a></td></tr><tr><td>SWISS-MODEL</td><td>QSQE (Quaternary Structure Quality Estimate)</td><td style="color:#6b6b6b;font-size:12px;">3DBioinfo:SWISSMODEL_QSQE</td><td><a href="data/datasets/participant/SWISSMODEL_QSQE/predictions.csv" style="color:var(--brand-dark)">predictions.csv &#8595;</a></td></tr><tr><td>Venclovas</td><td>Voronota interface energy (normalized)</td><td style="color:#6b6b6b;font-size:12px;">3DBioinfo:Venclovas_Voronota</td><td><a href="data/datasets/participant/Venclovas_Voronota/predictions.csv" style="color:var(--brand-dark)">predictions.csv &#8595;</a></td></tr><tr><td>Wolfson</td><td>Consensus classifier probability (SOAP+Network+FireDock)</td><td style="color:#6b6b6b;font-size:12px;">3DBioinfo:Wolfson_ProbaConsensus</td><td><a href="data/datasets/participant/Wolfson_ProbaConsensus/predictions.csv" style="color:var(--brand-dark)">predictions.csv &#8595;</a></td></tr><tr><td>Zou</td><td>DLScore-BC</td><td style="color:#6b6b6b;font-size:12px;">3DBioinfo:Zou_DLScoreBC</td><td><a href="data/datasets/participant/Zou_DLScoreBC/predictions.csv" style="color:var(--brand-dark)">predictions.csv &#8595;</a></td></tr>
+        </table>
+      </div>
+
+
+      </div>
+    </main>
+  </div>
+
+  <footer class="oeb-footer">
+    Rendered locally with the open-source OpenEBench Scientific Visualizer
+    (github.com/inab/OpenEBench_scientific_visualizer).
+  </footer>
+  <script>
+    // Static-hosting shim: the real OpenEBench visualizer library (build.js) fetches its chart
+    // data via a GraphQL POST, issued through XMLHttpRequest (confirmed from its source -- not
+    // window.fetch). Since this page is served as plain static files (no backend), this overrides
+    // XMLHttpRequest with a tiny fake that recognizes the two queries the library ever issues
+    // (getDatasets, getMetrics) and resolves them instantly with a FIXED, pre-computed snapshot of
+    // the real 14-participant leaderboard data -- the exact same server-side response the live,
+    // interactive version of this page (see "Try it yourself" below) would have returned over the
+    // network. The real, unmodified visualizer code then renders the real chart from this data;
+    // nothing about the chart itself is reimplemented or approximated.
+    (function() {
+      const MOCK_DATASETS_RESPONSE = {"data": {"getDatasets": [{"_id": "3DBioinfo:2023-05-15_PPI-PhysioClassification_Aggregation", "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset", "community_ids": ["OEBC_3DBioinfo"], "challenge_ids": ["3DBioinfo:PPI-PhysioClassification"], "visibility": "public", "name": "Challenge leaderboard: PPI-PhysioClassification", "version": "3 (Correia two-tier entry_id resolution)", "description": "Aggregation of AUC-ROC (x) and Accuracy-at-threshold (y) across all 14 participant scoring functions. Entry-id matching corrected to ID_InterfaceID for ProtCID-derived complexes (previous version silently evaluated only the ~971 QSalign-derived entries, dropping the ~700 ProtCID-derived ones).", "type": "aggregation", "dataset_contact_ids": ["3DBioinfo:Coordinators"], "dates": {"creation": "2023-05-15T00:00:00Z", "modification": "2023-05-15T00:00:00Z"}, "depends_on": {"tool_id": "3DBioinfo:aggregate_benchmark", "rel_dataset_ids": [{"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Bonvin_DeepRank-GNN"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Bonvin_DeepRank-GNN"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Furman_InterfaceAnalyzer"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Furman_InterfaceAnalyzer"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Venclovas_Voronota"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Zou_DLScoreBC"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Zou_DLScoreBC"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Guerois_IESnorm"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Guerois_IESnorm"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_FernandezRecio_NIPacking"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_FernandezRecio_NIPacking"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_SWISSMODEL_QSQE"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_SWISSMODEL_QSQE"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Bologna_ISPRED4"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Bologna_ISPRED4"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Kihara_GOAP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Kihara_GOAP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Correia_MaSIF"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Correia_MaSIF"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Oliva_CP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Oliva_CP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_MOBI_ShapeHydroTails"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_MOBI_ShapeHydroTails"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Wolfson_ProbaConsensus"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Wolfson_ProbaConsensus"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_RF_Consensus_top221"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_RF_Consensus_top221"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Venclovas_Voronota"}]}, "datalink": {"inline_data": "{\"challenge_participants\": [{\"tool_id\": \"3DBioinfo:Bonvin_DeepRank-GNN\", \"metric_x\": 0.8603, \"metric_y\": 0.806}, {\"tool_id\": \"3DBioinfo:Furman_InterfaceAnalyzer\", \"metric_x\": 0.8492, \"metric_y\": 0.7922}, {\"tool_id\": \"3DBioinfo:Venclovas_Voronota\", \"metric_x\": 0.8074, \"metric_y\": 0.7504}, {\"tool_id\": \"3DBioinfo:Zou_DLScoreBC\", \"metric_x\": 0.8166, \"metric_y\": 0.7475}, {\"tool_id\": \"3DBioinfo:Guerois_IESnorm\", \"metric_x\": 0.8212, \"metric_y\": 0.7763}, {\"tool_id\": \"3DBioinfo:FernandezRecio_NIPacking\", \"metric_x\": 0.7912, \"metric_y\": 0.7658}, {\"tool_id\": \"3DBioinfo:SWISSMODEL_QSQE\", \"metric_x\": 0.8076, \"metric_y\": 0.6785}, {\"tool_id\": \"3DBioinfo:Bologna_ISPRED4\", \"metric_x\": 0.7692, \"metric_y\": 0.7199}, {\"tool_id\": \"3DBioinfo:Kihara_GOAP\", \"metric_x\": 0.754, \"metric_y\": 0.693}, {\"tool_id\": \"3DBioinfo:Correia_MaSIF\", \"metric_x\": 0.7661, \"metric_y\": 0.7101}, {\"tool_id\": \"3DBioinfo:Oliva_CP\", \"metric_x\": 0.7486, \"metric_y\": 0.693}, {\"tool_id\": \"3DBioinfo:MOBI_ShapeHydroTails\", \"metric_x\": 0.7307, \"metric_y\": 0.6798}, {\"tool_id\": \"3DBioinfo:Wolfson_ProbaConsensus\", \"metric_x\": 0.7262, \"metric_y\": 0.6786}, {\"tool_id\": \"3DBioinfo:RF_Consensus_top221\", \"metric_x\": 0.9474, \"metric_y\": 0.8825}], \"visualization\": {\"type\": \"2D-plot\", \"x_axis\": \"3DBioinfo:AUC-ROC\", \"y_axis\": \"3DBioinfo:ACC-at-threshold\", \"optimization\": \"top-right\"}}"}}]}};
+      const MOCK_METRICS_RESPONSE = {"data": {"getMetrics": [{"_id": "3DBioinfo:F1-Score", "title": "F1 Score", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:ACC-at-threshold", "title": "Classification Accuracy at reported optimal threshold", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:AUC-ROC", "title": "Area Under the ROC Curve (AUC-ROC)", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:leaderboard-aggregation", "title": "Challenge leaderboard aggregation (AUC vs. ACC per participant)", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:AUCPR", "title": "Area Under the Precision-Recall Curve (AUCPR)", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:MCC", "title": "Matthews Correlation Coefficient (MCC)", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:Balanced-Accuracy", "title": "Balanced Accuracy", "_metadata": "{}", "representation_hints": null}]}};
+
+      function FakeXHR() {
+        this.readyState = 0;
+        this._headers = {};
+      }
+      FakeXHR.prototype.open = function(method, url) { this._url = url; this.readyState = 1; };
+      FakeXHR.prototype.setRequestHeader = function(k, v) { this._headers[k] = v; };
+      FakeXHR.prototype.getAllResponseHeaders = function() { return "content-type: application/json\r\n"; };
+      FakeXHR.prototype.getResponseHeader = function() { return "application/json"; };
+      FakeXHR.prototype.addEventListener = function(ev, fn) {
+        if (ev === "load") this.onload = fn;
+        if (ev === "readystatechange") this.onreadystatechange = fn;
+        if (ev === "error") this.onerror_listener = fn;
+      };
+      FakeXHR.prototype.send = function(body) {
+        let payload = MOCK_DATASETS_RESPONSE;
+        try {
+          const parsed = JSON.parse(body);
+          if ((parsed.query || "").includes("getMetrics")) payload = MOCK_METRICS_RESPONSE;
+        } catch (e) { /* keep default */ }
+        const self = this;
+        setTimeout(function() {
+          self.status = 200;
+          self.responseText = JSON.stringify(payload);
+          self.readyState = 4;
+          if (self.onreadystatechange) self.onreadystatechange();
+          if (self.onload) self.onload();
+        }, 20);
+      };
+      window.XMLHttpRequest = FakeXHR;
+    })();
+  </script>
+  <script src="./build/build.js"></script>
+
+  <script>
+    (function() {
+      const TAB_SECTIONS = ["results-section", "datasets-section", "tools-section"];
+
+      function showSection(sectionId) {
+        if (!TAB_SECTIONS.includes(sectionId)) sectionId = "results-section";
+        TAB_SECTIONS.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.classList.toggle("active-section", id === sectionId);
+        });
+        document.querySelectorAll("aside.sidebar a.nav-link").forEach(a => {
+          a.classList.toggle("active", a.getAttribute("data-section") === sectionId);
+        });
+        window.scrollTo(0, 0);
+      }
+      window.showSection = showSection;
+
+      document.querySelectorAll("aside.sidebar a.nav-link").forEach(a => {
+        a.addEventListener("click", function(ev) {
+          ev.preventDefault();
+          const id = this.getAttribute("data-section");
+          showSection(id);
+          history.replaceState(null, "", "#" + id);
+        });
+      });
+
+      window.addEventListener("hashchange", function() {
+        const id = location.hash.replace("#", "");
+        if (TAB_SECTIONS.includes(id)) showSection(id);
+      });
+
+      showSection(TAB_SECTIONS.includes(location.hash.replace("#", "")) ? location.hash.replace("#", "") : "results-section");
+
+      function quartileLabel(value, q25, q50, q75) {
+        if (value >= q75) return "Q1";
+        if (value >= q50) return "Q2";
+        if (value >= q25) return "Q3";
+        return "Q4";
+      }
+
+      function quantile(sortedVals, p) {
+        const idx = p * (sortedVals.length - 1);
+        const lo = Math.floor(idx), hi = Math.ceil(idx);
+        if (lo === hi) return sortedVals[lo];
+        return sortedVals[lo] + (sortedVals[hi] - sortedVals[lo]) * (idx - lo);
+      }
+
+      let currentClassificationMethod = "none"; // matches the chart's own dropdown default
+
+      function oneDKMeans(values, k) {
+        if (values.length <= k) {
+          return values.map((v, i) => i);
+        }
+        let bestAssign = null, bestInertia = Infinity;
+        for (let restart = 0; restart < 8; restart++) {
+          const sorted = [...values].sort((a, b) => a - b);
+          let centroids = Array.from({ length: k }, (_, i) => sorted[Math.floor((i + 0.5) * sorted.length / k)]);
+          let assign = new Array(values.length).fill(0);
+          for (let iter = 0; iter < 50; iter++) {
+            let changed = false;
+            for (let i = 0; i < values.length; i++) {
+              let best = 0, bestDist = Infinity;
+              for (let c = 0; c < k; c++) {
+                const d = Math.abs(values[i] - centroids[c]);
+                if (d < bestDist) { bestDist = d; best = c; }
+              }
+              if (assign[i] !== best) { assign[i] = best; changed = true; }
+            }
+            for (let c = 0; c < k; c++) {
+              const members = values.filter((v, i) => assign[i] === c);
+              if (members.length) centroids[c] = members.reduce((a, b) => a + b, 0) / members.length;
+            }
+            if (!changed) break;
+          }
+          const inertia = values.reduce((sum, v, i) => sum + Math.pow(v - centroids[assign[i]], 2), 0);
+          if (inertia < bestInertia) { bestInertia = inertia; bestAssign = { assign, centroids }; }
+        }
+        return bestAssign.assign.map((clusterIdx) => clusterIdx === undefined ? 0 : clusterIdx);
+      }
+
+      function clusterQuartileLabels(values) {
+        const k = Math.min(4, new Set(values).size || 1);
+        if (k <= 1) return values.map(() => "Q1");
+        const assign = oneDKMeans(values, k);
+        const clusterMeans = {};
+        const clusterCounts = {};
+        values.forEach((v, i) => {
+          clusterMeans[assign[i]] = (clusterMeans[assign[i]] || 0) + v;
+          clusterCounts[assign[i]] = (clusterCounts[assign[i]] || 0) + 1;
+        });
+        const clusterIds = Object.keys(clusterMeans);
+        clusterIds.forEach(c => { clusterMeans[c] = clusterMeans[c] / clusterCounts[c]; });
+        const ranked = clusterIds.sort((a, b) => clusterMeans[b] - clusterMeans[a]);
+        const rankOf = {};
+        ranked.forEach((c, i) => { rankOf[c] = "Q" + Math.min(i + 1, 4); });
+        return values.map((v, i) => rankOf[assign[i]]);
+      }
+
+      function recomputeQuartileTable(metricsRows, method) {
+        if (method !== undefined) currentClassificationMethod = method;
+        const qBody = document.getElementById("quartile-tbody");
+        const note = document.getElementById("quartile-table-note");
+
+        if (currentClassificationMethod === "none" || !currentClassificationMethod) {
+          qBody.innerHTML = "";
+          note.style.display = "block";
+          return;
+        }
+        note.style.display = "none";
+
+        const metricKeys = ["auroc", "aucpr", "balancedaccuracy", "f1", "mcc"];
+        const labelsByKey = {};
+        metricKeys.forEach(key => {
+          const vals = metricsRows.map(r => parseFloat(r.getAttribute("data-" + key)));
+          if (currentClassificationMethod === "clusters") {
+            labelsByKey[key] = clusterQuartileLabels(vals);
+          } else {
+            const sorted = [...vals].filter(v => !isNaN(v)).sort((a, b) => a - b);
+            const bounds = [quantile(sorted, 0.25), quantile(sorted, 0.5), quantile(sorted, 0.75)];
+            labelsByKey[key] = vals.map(v => isNaN(v) ? "n/a" : quartileLabel(v, bounds[0], bounds[1], bounds[2]));
+          }
+        });
+
+        qBody.innerHTML = "";
+        metricsRows.forEach((row, idx) => {
+          const cells = row.querySelectorAll("td");
+          const group = row.getAttribute("data-group") || (cells[0] ? cells[0].textContent : "");
+          const name = cells[1] ? cells[1].textContent : (cells[0] ? cells[0].textContent : "");
+          const tr = document.createElement("tr");
+          let rowHtml = "<td>" + group + "</td><td>" + name + "</td>";
+          metricKeys.forEach(key => {
+            const lab = labelsByKey[key][idx];
+            rowHtml += "<td class=\"qtd qtd-" + lab + "\">" + lab + "</td>";
+          });
+          tr.innerHTML = rowHtml;
+          qBody.appendChild(tr);
+        });
+      }
+
+      // The chart's classification-method <select> is recreated from scratch every time the chart
+      // re-renders (e.g. the "optimal view" toggle button), so a direct listener would be lost on
+      // rebuild; delegating the 'change' event from a stable ancestor survives that.
+      document.getElementById("oeb-chart-wrapper").addEventListener("change", function(ev) {
+        const el = ev.target;
+        if (!el.id || !el.id.endsWith("_dropdown_list")) return;
+        const selected = el.options[el.selectedIndex];
+        const method = selected.id.split("__")[1]; // "none" | "squares" | "diagonals" | "clusters"
+        const rows = Array.from(document.getElementById("full-metrics-tbody").querySelectorAll("tr"));
+        recomputeQuartileTable(rows, method);
+      });
+    })();
+  </script></body>
+</html>
