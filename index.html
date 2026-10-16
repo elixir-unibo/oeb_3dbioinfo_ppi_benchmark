@@ -5,106 +5,124 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>ELIXIR 3DBioinfo Community PPI Benchmark Experiment</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
   <style>
+    /* Palette matched to the ELIXIR University of Bologna site (elixir.unibo.it/css/site.css):
+       navy #00233b, accent blue #0077be, light panel backgrounds #f8fbfe/#ecf3f9, Inter font. */
     :root {
-      --brand: #0056b4;
-      --brand-dark: #003d80;
-      --bg: #f5f6f8;
-      --text: #2b2b2b;
+      --brand: #0077be;
+      --brand-dark: #00233b;
+      --bg: #ffffff;
+      --text: #1e2b3c;
     }
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: 'Roboto', Arial, sans-serif; background: var(--bg); color: var(--text); }
-    header.oeb-header {
-      background: var(--brand); color: #fff; display: flex; align-items: center;
-      padding: 0 24px; height: 64px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      position: sticky; top: 0; z-index: 10;
-    }
-    header.oeb-header img.logo { height: 40px; margin-right: 14px; border-radius: 4px; background:#fff; padding:2px; }
-    header.oeb-header .title { font-size: 19px; font-weight: 500; letter-spacing: 0.2px; }
-    header.oeb-header .title small { display: block; font-size: 12px; font-weight: 400; opacity: 0.85; }
-    nav.oeb-nav { background: var(--brand-dark); display: flex; padding: 0 24px; height: 40px; align-items: center; gap: 24px; }
-    nav.oeb-nav a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.4px; }
-    nav.oeb-nav a.active { color: #fff; border-bottom: 2px solid #fff; height: 100%; display: flex; align-items: center; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+    a { color: var(--brand); }
 
-    .layout { display: flex; max-width: 1300px; margin: 0 auto; align-items: flex-start; }
+    .site-top-bar { background: var(--brand-dark); color: #fff; font-size: 0.85rem; border-bottom: 1px solid #1a3f5a; }
+    .site-top-bar .top-bar-inner { max-width: 1280px; margin: 0 auto; padding: 0.6rem 2rem; display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; }
+    .site-top-bar a { color: #cbd5e0; text-decoration: none; font-weight: 500; }
+    .site-top-bar a:hover { color: #fff; }
+    .site-top-bar .sep { color: #4a6a85; }
+
+    header.oeb-header {
+      background: linear-gradient(145deg, #f8fbfe 0%, #ecf3f9 100%);
+      border-bottom: 1px solid #d6e2ed; padding: 1.6rem 2rem;
+    }
+    header.oeb-header .header-inner { max-width: 1280px; margin: 0 auto; }
+    header.oeb-header .title { font-size: 1.6rem; font-weight: 600; color: var(--brand-dark); letter-spacing: -0.02em; }
+    header.oeb-header .title small { display: block; margin-top: 0.5rem; font-size: 1.05rem; font-weight: 400; color: #1e405e; max-width: 760px; }
+
+    .layout { display: flex; max-width: 1280px; margin: 0 auto; align-items: flex-start; padding: 0 2rem; }
     aside.sidebar {
-      width: 200px; flex-shrink: 0; background: #fff; margin: 24px 0 24px 24px;
-      border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.12); padding: 16px 0;
-      position: sticky; top: 104px;
+      width: 210px; flex-shrink: 0; background: #fff; margin: 24px 24px 24px 0;
+      border: 1px solid #d6e2ed; border-radius: 12px; padding: 12px 0;
+      position: sticky; top: 24px;
     }
     aside.sidebar a {
       display: flex; align-items: center; gap: 10px; padding: 10px 20px; font-size: 14px;
       color: var(--text); text-decoration: none; border-left: 3px solid transparent;
     }
     aside.sidebar a:hover { background: #f0f5fb; border-left-color: var(--brand); color: var(--brand-dark); }
-    aside.sidebar a.nav-link.active { background: #e8f0fb; border-left-color: var(--brand); color: var(--brand-dark); font-weight: 500; }
-    /* Each sidebar-linked section (Results/Datasets/Tools) is shown independently -- only
-       one at a time -- instead of all being stacked on one continuously scrolling page. */
+    aside.sidebar a.nav-link.active { background: #ecf3f9; border-left-color: var(--brand); color: var(--brand-dark); font-weight: 600; }
+    /* Each sidebar-linked section (Home/Results/Datasets/Tools/Submit) is shown independently --
+       only one at a time -- instead of all being stacked on one continuously scrolling page. */
     main .oeb-card.tab-section { display: none; }
     main .oeb-card.tab-section.active-section { display: block; }
     aside.sidebar a .material-icons { font-size: 18px; color: var(--brand); }
 
-    main { flex: 1; margin: 24px 24px 48px; min-width: 0; }
-    .breadcrumb { font-size: 13px; color: #6b6b6b; margin-bottom: 16px; }
+    main { flex: 1; margin: 24px 0 48px; min-width: 0; }
+    .breadcrumb { font-size: 0.85rem; color: #5a6f7e; margin-bottom: 16px; }
     .breadcrumb .material-icons { font-size: 14px; vertical-align: -2px; }
-    .oeb-card { background: #fff; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08); padding: 24px; margin-bottom: 24px; scroll-margin-top: 90px; }
-    #oeb-chart-wrapper { max-width: 100%; overflow-x: auto; }
+    .breadcrumb a { color: var(--brand); text-decoration: none; }
+    .oeb-card { background: #f8fbfe; border: 1px solid #d6e2ed; border-radius: 12px; padding: 1.4rem 1.6rem; margin-bottom: 24px; scroll-margin-top: 24px; }
+    #oeb-chart-wrapper { max-width: 100%; overflow-x: auto; background: #fff; border-radius: 8px; }
     #oeb-chart-wrapper svg.benchmarkingSVG { max-width: 100%; height: auto; display: block; }
     #oeb-chart-wrapper .benchmarkingChart_scatter { max-width: 100%; }
     td.qtd { text-align: center; font-weight: 600; font-size: 12.5px; }
     td.qtd-Q1 { background: #e3f3e1; color: #1b6b35; }
-    td.qtd-Q2 { background: #eef5fb; color: #0056b4; }
+    td.qtd-Q2 { background: #eef5fb; color: #0077be; }
     td.qtd-Q3 { background: #fff8e1; color: #9a6a00; }
     td.qtd-Q4 { background: #fdeceb; color: #a3291f; }
     #submit-status { font-size: 13px; margin-top: 12px; }
     #submit-status.error { color: #b3261e; }
     #submit-status.ok { color: #1b6b35; }
-    .oeb-card h1 { font-size: 21px; font-weight: 500; margin: 0 0 4px; color: var(--brand-dark); }
-    .oeb-card h2 { font-size: 17px; font-weight: 500; margin: 0 0 10px; color: var(--brand-dark); }
-    .oeb-card .subtitle { font-size: 14px; color: #6b6b6b; margin-bottom: 20px; }
-    .oeb-card .description { font-size: 14px; line-height: 1.6; color: #3a3a3a; margin-bottom: 14px; }
-    .meta-row { font-size: 13px; color: #6b6b6b; margin-bottom: 4px; }
-    .meta-row b { color: #3a3a3a; }
-    .oeb-chip { display: inline-block; background: #e8f0fb; color: var(--brand-dark); border-radius: 12px; padding: 3px 12px; font-size: 12px; font-weight: 500; margin-right: 8px; margin-bottom: 6px; }
+    .oeb-card h1 { font-size: 1.4rem; font-weight: 600; margin: 0 0 6px; color: var(--brand-dark); letter-spacing: -0.01em; }
+    .oeb-card h2 { font-size: 1.15rem; font-weight: 600; margin: 1.6rem 0 0.8rem; padding-left: 0.6rem; border-left: 4px solid var(--brand); color: var(--brand-dark); }
+    .oeb-card h2:first-of-type { margin-top: 0; }
+    .oeb-card .subtitle { font-size: 14px; color: #5a6f7e; margin-bottom: 20px; }
+    .oeb-card .description { font-size: 14px; line-height: 1.6; color: #3a4b5c; margin-bottom: 14px; }
+    .oeb-card .description code { background: #ecf3f9; border-radius: 4px; padding: 1px 5px; font-size: 0.92em; }
+    .meta-row { font-size: 13px; color: #5a6f7e; margin-bottom: 4px; }
+    .meta-row b { color: #3a4b5c; }
+    .oeb-chip { display: inline-block; background: #ecf3f9; color: var(--brand-dark); border-radius: 12px; padding: 3px 12px; font-size: 12px; font-weight: 500; margin-right: 8px; margin-bottom: 6px; border: 1px solid #d6e2ed; }
     .challenge-list { display: flex; gap: 12px; flex-wrap: wrap; }
-    .challenge-tab { border: 1px solid #d6e3f5; background: #f7faff; color: var(--brand-dark); border-radius: 4px; padding: 10px 16px; font-size: 13px; font-weight: 500; }
+    .challenge-tab { border: 1px solid #d6e2ed; background: #fff; color: var(--brand-dark); border-radius: 8px; padding: 10px 16px; font-size: 13px; font-weight: 500; }
     .challenge-tab.active { background: var(--brand); color: #fff; border-color: var(--brand); }
     table.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    table.data-table th { text-align: left; padding: 8px 10px; border-bottom: 2px solid #e4e9f0; color: var(--brand-dark); }
-    table.data-table td { padding: 7px 10px; border-bottom: 1px solid #eef1f5; }
-    .notice { background: #fff8e1; border-left: 4px solid #f9a825; padding: 10px 16px; font-size: 13px; margin-bottom: 20px; border-radius: 2px; }
-    footer.oeb-footer { text-align: center; font-size: 12px; color: #8a8a8a; padding: 24px 0 40px; }
+    table.data-table th { text-align: left; padding: 8px 10px; border-bottom: 2px solid #e3eaf1; background: #f0f6fc; color: var(--brand-dark); }
+    table.data-table td { padding: 7px 10px; border-bottom: 1px solid #e3eaf1; }
+    .notice { background: #f8fbfe; border: 1px solid #cde0f0; border-left: 4px solid var(--brand); padding: 1rem 1.3rem; font-size: 0.95rem; color: #1e405e; margin-bottom: 20px; border-radius: 8px; }
+    footer.oeb-footer {
+      background: var(--brand-dark); color: #d0dfee; text-align: center; font-size: 0.85rem;
+      padding: 1.6rem 2rem; margin-top: 2rem;
+    }
+    footer.oeb-footer a { color: #b6d0e6; }
 
     .form-row { margin-bottom: 14px; }
-    .form-row label { display:block; font-size:13px; font-weight:500; margin-bottom:5px; color:#3a3a3a; }
+    .form-row label { display:block; font-size:13px; font-weight:500; margin-bottom:5px; color:#3a4b5c; }
     .form-row select, .form-row input[type=text] {
       width: 100%; max-width: 480px; padding: 7px 10px; font-size:13px; border:1px solid #c9d3e0;
-      border-radius: 3px; font-family: inherit;
+      border-radius: 6px; font-family: inherit;
     }
     .form-row input[type=file] { font-size: 13px; }
     .strategy-doc-link { font-size: 12px; margin-left: 4px; }
     button.oeb-btn {
-      background: var(--brand); color: #fff; border: none; border-radius: 3px; padding: 9px 20px;
-      font-size: 13px; font-weight: 500; cursor: pointer; text-transform: uppercase; letter-spacing: 0.3px;
+      background: var(--brand); color: #fff; border: none; border-radius: 20px; padding: 9px 22px;
+      font-size: 13px; font-weight: 600; cursor: pointer; letter-spacing: 0.3px;
     }
     button.oeb-btn:hover { background: var(--brand-dark); }
     button.oeb-btn:disabled { background: #9aa7b8; cursor: default; }
     tr.highlight-row { background: #fff4d6; font-weight: 500; }
-    .cv-caveat { background: #eef2fb; border-left: 4px solid var(--brand); padding: 10px 16px; font-size: 12.5px; margin: 14px 0; border-radius: 2px; color:#3a3a3a; }
+    .cv-caveat { background: #ecf3f9; border-left: 4px solid var(--brand); padding: 10px 16px; font-size: 12.5px; margin: 14px 0; border-radius: 8px; color:#3a4b5c; }
 
   </style>
 </head>
 <body>
+  <div class="site-top-bar">
+    <div class="top-bar-inner">
+      <a href="https://elixir.unibo.it/index.html" target="_blank" rel="noopener">ELIXIR University of Bologna</a>
+      <span class="sep">/</span>
+      <a href="https://elixir.unibo.it/tools/index.html" target="_blank" rel="noopener">Tools Platform</a>
+      <span class="sep">/</span>
+      <span>PPI Benchmark &mdash; OpenEBench Experiment</span>
+    </div>
+  </div>
   <header class="oeb-header">
-    <div class="title">ELIXIR 3DBioinfo Community PPI Benchmark Experiment<small>local challenge preview</small></div>
+    <div class="header-inner">
+      <div class="title">ELIXIR 3D-BioInfo Community PPI Benchmark Experiment<small>Local, offline preview of the OpenEBench-style benchmarking event -- part of the ELIXIR University of Bologna node's Tools Platform FAIRification work.</small></div>
+    </div>
   </header>
-  <nav class="oeb-nav">
-    <a href="#" class="active">Benchmarking</a>
-    <a href="#">Communities</a>
-    <a href="#">Tools</a>
-    <a href="#">Documentation</a>
-  </nav>
 
   <div class="layout">
     <aside class="sidebar">
@@ -113,7 +131,7 @@
       <a href="#datasets-section" data-section="datasets-section" class="nav-link"><span class="material-icons">dataset</span> Datasets</a>
       <a href="#tools-section" data-section="tools-section" class="nav-link"><span class="material-icons">build</span> Tools</a>
       <a href="#submit-section" data-section="submit-section" class="nav-link"><span class="material-icons">upload_file</span> Submit</a>
-      <a href="oeb_ppi_benchmark.zip" download class="sidebar-download-link" style="display:flex; align-items:center; gap:8px; padding:12px 18px; color:#444; text-decoration:none; border-top:1px solid #e3e8ee; margin-top:8px; padding-top:14px;"><span class="material-icons" style="font-size:18px; color:var(--brand);">archive</span> Download OEB bundle</a>
+      <a href="oeb_ppi_benchmark.zip" download class="sidebar-download-link" style="display:flex; align-items:center; gap:8px; padding:12px 18px; color:#444; text-decoration:none; border-top:1px solid #e3e8ee; margin-top:8px; padding-top:14px;"><span class="material-icons" style="font-size:18px; color:var(--brand);">archive</span> OEB Bundle</a>
     </aside>
 
     <main>
@@ -124,10 +142,7 @@
       <div class="notice">
         This is a local, offline preview rendered against this benchmark's own data, using the
         real open-source OpenEBench visualizer component -- it is not connected to
-        openebench.bsc.es and does not reflect a live, published Benchmarking Event. Page
-        organization follows the real OpenEBench benchmarking-event page structure
-        (community &rarr; benchmarking event &rarr; challenges &rarr; leaderboard), referenced from
-        <a href="https://openebench.bsc.es/benchmarking/OEBC011?event=OEBE0110000000" style="color:var(--brand-dark)">the public CAID benchmarking page</a>.
+        openebench.bsc.es and does not reflect a live, published Benchmarking Event.
       </div>
 
       <div class="oeb-card">
@@ -194,10 +209,46 @@
           leakage-safe cross-validation engine (ported to JavaScript and numerically validated
           against the original Python implementation) entirely in your browser &mdash; no backend,
           nothing uploaded anywhere &mdash; to evaluate and rank your own scores against the 14
-          baselines. The sidebar's <b>Download OEB bundle</b> link provides the complete,
-          self-contained OpenEBench submission package (metadata, schemas, Docker drafts, and the
-          submission-preparation wizard) for anyone who wants the full offline version or needs to
-          actually submit this benchmark to OpenEBench.
+          baselines.
+        </div>
+
+        <h2 style="margin-top:22px;">OEB Bundle &mdash; submitting this benchmark to OpenEBench</h2>
+        <div class="description">
+          The <b>OEB Bundle</b> link in the sidebar downloads <code>oeb_ppi_benchmark.zip</code>,
+          the complete, self-contained OpenEBench submission package behind this page: the
+          Community/Benchmarking Event/Challenge/Dataset metadata JSON files (OpenEBench Scientific
+          Benchmarking Data Model), the 14 participants' and consensus predictor's submission
+          files, the offline copy of the OpenEBench JSON Schemas used to validate them, draft
+          Docker images for each workflow step, and this same interactive page for local use.
+        </div>
+        <div class="description">
+          To actually import this data into OpenEBench after downloading:
+        </div>
+        <ol class="description" style="padding-left:22px; margin-top:-6px;">
+          <li>Extract the zip, then run
+            <code>cd oeb_ppi_benchmark && python3 workflow/prepare_for_openebench_submission.py</code>.
+            The
+            wizard replaces the placeholder Community ID and contact emails throughout every
+            metadata file with your real ones, and re-validates each file against the bundled
+            OpenEBench JSON Schemas (<code>schemas/</code>) as it goes.</li>
+          <li>Build and push the three Docker images under <code>workflow/</code>
+            (<code>Dockerfile.validate</code>, <code>Dockerfile.compute_metrics</code>,
+            <code>Dockerfile.consolidate</code>) to a registry OpenEBench's VRE can pull from --
+            every benchmarking workflow step on OpenEBench's infrastructure runs as a container for
+            reproducibility.</li>
+          <li>Register the participant tools and this benchmarking workflow with OpenEBench
+            (or your ELIXIR community's OpenEBench liaison), providing the Community ID, the Git
+            repository URL/tag, and the Docker image references from the previous two steps -- the
+            wizard drafts a ready-to-send support-request email summarizing these for you.</li>
+          <li>Once OpenEBench ingests the metadata and runs the workflow, this benchmark becomes a
+            real, citable Benchmarking Event on <a href="https://openebench.bsc.es" target="_blank" rel="noopener" style="color:var(--brand-dark)">openebench.bsc.es</a>,
+            and anyone can submit new predictions there the same way this page's own
+            <b>Submit new predictions</b> tab demonstrates locally.</li>
+        </ol>
+        <div class="description">
+          Full detail on what remains to be filled in (real Community ID, registered Tool IDs,
+          contact emails, built images) is tracked in
+          <code>OPENEBENCH_SUBMISSION_READINESS.md</code> inside the bundle.
         </div>
       </div>
 
@@ -341,8 +392,9 @@
   </div>
 
   <footer class="oeb-footer">
-    Rendered locally with the open-source OpenEBench Scientific Visualizer
-    (github.com/inab/OpenEBench_scientific_visualizer).
+    Part of the <a href="https://elixir.unibo.it/tools/index.html" target="_blank" rel="noopener">ELIXIR University of Bologna node's Tools Platform</a>
+    &middot; rendered locally with the open-source
+    <a href="https://github.com/inab/OpenEBench_scientific_visualizer" target="_blank" rel="noopener">OpenEBench Scientific Visualizer</a>.
   </footer>
   <script>
     // Static-hosting shim: the real OpenEBench visualizer library (build.js) fetches its chart
