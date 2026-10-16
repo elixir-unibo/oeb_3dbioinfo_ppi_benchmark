@@ -108,7 +108,8 @@
 
   <div class="layout">
     <aside class="sidebar">
-      <a href="#results-section" data-section="results-section" class="nav-link active"><span class="material-icons">leaderboard</span> Results</a>
+      <a href="#home-section" data-section="home-section" class="nav-link active"><span class="material-icons">home</span> Home</a>
+      <a href="#results-section" data-section="results-section" class="nav-link"><span class="material-icons">leaderboard</span> Results</a>
       <a href="#datasets-section" data-section="datasets-section" class="nav-link"><span class="material-icons">dataset</span> Datasets</a>
       <a href="#tools-section" data-section="tools-section" class="nav-link"><span class="material-icons">build</span> Tools</a>
       <a href="#submit-section" data-section="submit-section" class="nav-link"><span class="material-icons">upload_file</span> Submit</a>
@@ -150,7 +151,57 @@
         </div>
       </div>
 
-      <div class="oeb-card tab-section active-section" id="results-section">
+      <div class="oeb-card tab-section active-section" id="home-section">
+        <h1>Implementing the PPI Benchmark as an OpenEBench Experiment</h1>
+        <div class="subtitle">ELIXIR 3D-BioInfo Community &middot; PPI-PhysioClassification challenge &middot; overview</div>
+
+        <div class="description" style="margin-top:14px;">
+          This page implements the <b>physiological-vs-crystallographic protein-protein interface
+          classification benchmark</b> (Schweke <i>et al.</i>) as an OpenEBench-style Benchmarking
+          Event, following the OpenEBench Scientific Benchmarking Data Model (community &rarr;
+          benchmarking event &rarr; challenge &rarr; participants &rarr; metrics). It is a working
+          preview, not a connection to the live openebench.bsc.es service.
+        </div>
+
+        <h2 style="margin-top:22px;">The challenge</h2>
+        <div class="description">
+          <b>1671 homodimer entries</b> (840 physiological, 831 non-physiological/crystallographic,
+          after curation) are scored and ranked by <b>14 participant methods</b>
+          &mdash; DeepRank-GNN, Rosetta InterfaceAnalyzer, Voronota, DLScore-BC, IES normalized,
+          NIPacking, QSQE, ISPRED4, GOAP, MaSIF, CP/COCOMAPS, shape_hydro_tails, ScanNet
+          ProbaConsensus, and a cross-group Random Forest consensus &mdash; each evaluated on
+          <b>5 metrics</b> (AUROC, AUCPR, Balanced Accuracy, F1, MCC).
+        </div>
+
+        <h2 style="margin-top:22px;">Leakage-safe cross-validation</h2>
+        <div class="description">
+          Because many entries share homologous chains, metrics computed by simple resubstitution
+          over-estimate real-world performance. This package instead provides
+          <b>4 homology-aware CV splitting strategies</b> (CATH/UniProt-based, this package's own
+          MMseqs2 clustering, an authoritative blastclust reference, and a recommended combined
+          union of the two), documented in
+          <a href="CV_SPLITTING_STRATEGIES.md" style="color:var(--brand-dark)">CV_SPLITTING_STRATEGIES.md</a>,
+          so every participant's decision threshold is learned only from the <i>other</i> folds,
+          never from the held-out one.
+        </div>
+
+        <h2 style="margin-top:22px;">What's on this page</h2>
+        <div class="description">
+          <b>Results</b> &mdash; the real OpenEBench Scientific Visualizer renders the
+          AUC-ROC-vs-Accuracy leaderboard chart plus a full metrics table and a quartile/cluster
+          ranking view. <b>Datasets</b> and <b>Tools</b> link to the underlying data files and
+          participant tool registrations. <b>Submit new predictions</b> runs the exact same
+          leakage-safe cross-validation engine (ported to JavaScript and numerically validated
+          against the original Python implementation) entirely in your browser &mdash; no backend,
+          nothing uploaded anywhere &mdash; to evaluate and rank your own scores against the 14
+          baselines. The sidebar's <b>Download OEB bundle</b> link provides the complete,
+          self-contained OpenEBench submission package (metadata, schemas, Docker drafts, and the
+          submission-preparation wizard) for anyone who wants the full offline version or needs to
+          actually submit this benchmark to OpenEBench.
+        </div>
+      </div>
+
+      <div class="oeb-card tab-section" id="results-section">
         <h1>PPI-PhysioClassification challenge leaderboard</h1>
         <div class="subtitle">AUC-ROC vs. Accuracy-at-threshold &middot; 14 participants
 </div>
@@ -532,10 +583,10 @@
         return result;
       }
 
-      const TAB_SECTIONS = ["results-section", "datasets-section", "tools-section", "submit-section"];
+      const TAB_SECTIONS = ["home-section", "results-section", "datasets-section", "tools-section", "submit-section"];
 
       function showSection(sectionId) {
-        if (!TAB_SECTIONS.includes(sectionId)) sectionId = "results-section";
+        if (!TAB_SECTIONS.includes(sectionId)) sectionId = "home-section";
         TAB_SECTIONS.forEach(id => {
           const el = document.getElementById(id);
           if (el) el.classList.toggle("active-section", id === sectionId);
@@ -561,7 +612,7 @@
         if (TAB_SECTIONS.includes(id)) showSection(id);
       });
 
-      showSection(TAB_SECTIONS.includes(location.hash.replace("#", "")) ? location.hash.replace("#", "") : "results-section");
+      showSection(TAB_SECTIONS.includes(location.hash.replace("#", "")) ? location.hash.replace("#", "") : "home-section");
 
       function quartileLabel(value, q25, q50, q75) {
         if (value >= q75) return "Q1";
