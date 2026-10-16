@@ -57,6 +57,9 @@
     td.qtd-Q2 { background: #eef5fb; color: #0056b4; }
     td.qtd-Q3 { background: #fff8e1; color: #9a6a00; }
     td.qtd-Q4 { background: #fdeceb; color: #a3291f; }
+    #submit-status { font-size: 13px; margin-top: 12px; }
+    #submit-status.error { color: #b3261e; }
+    #submit-status.ok { color: #1b6b35; }
     .oeb-card h1 { font-size: 21px; font-weight: 500; margin: 0 0 4px; color: var(--brand-dark); }
     .oeb-card h2 { font-size: 17px; font-weight: 500; margin: 0 0 10px; color: var(--brand-dark); }
     .oeb-card .subtitle { font-size: 14px; color: #6b6b6b; margin-bottom: 20px; }
@@ -108,6 +111,7 @@
       <a href="#results-section" data-section="results-section" class="nav-link active"><span class="material-icons">leaderboard</span> Results</a>
       <a href="#datasets-section" data-section="datasets-section" class="nav-link"><span class="material-icons">dataset</span> Datasets</a>
       <a href="#tools-section" data-section="tools-section" class="nav-link"><span class="material-icons">build</span> Tools</a>
+      <a href="#submit-section" data-section="submit-section" class="nav-link"><span class="material-icons">upload_file</span> Submit</a>
     </aside>
 
     <main>
@@ -188,20 +192,13 @@
           <tbody id="quartile-tbody"></tbody>
         </table>
 
-        <h2 style="margin-top:28px;">Try it yourself</h2>
-        <div class="subtitle">This static page shows a fixed snapshot of the 14 participant scoring functions'
-          results. To evaluate your OWN predictions against this benchmark -- with a declared, leakage-safe
-          cross-validation procedure, a live-updating leaderboard chart and table, and your choice of CV
-          splitting strategy -- download the full package below and run it on your own machine (it ships with
-          its own local web server; no installation beyond Python 3 is required).</div>
         <div class="cv-caveat">
-          <a href="oeb_ppi_benchmark.zip" style="color:var(--brand-dark); font-weight:600;">Download the full
-            benchmark package (oeb_ppi_benchmark.zip)</a> -- includes this page's live, interactive version
-          plus every OpenEBench submission file. After extracting it, run:
-          <code>cd oeb_ppi_benchmark &amp;&amp; python3 serve_local_openebench_visualizer.py</code>, then open
-          <code>http://localhost:8080/</code>. A <a href="data/demo_predictions_for_upload_test.csv"
-          style="color:var(--brand-dark)">demo predictions file</a> is provided to try the upload feature
-          immediately.
+          Want to evaluate your own scoring function against this benchmark? Head to the
+          <a href="#submit-section" style="color:var(--brand-dark); font-weight:600;" onclick="showSection('submit-section'); history.replaceState(null,'','#submit-section'); return false;">Submit</a>
+          tab -- the whole evaluation (leakage-safe cross-validation, your choice of splitting strategy) runs
+          directly in your browser, no server needed. The
+          <a href="oeb_ppi_benchmark.zip" style="color:var(--brand-dark)">full OpenEBench submission package</a>
+          (metadata, Docker images, the submission-prep wizard) is also available here for those steps.
         </div>
         </div>
       </div>
@@ -234,7 +231,60 @@
       </div>
 
 
+      
+      <div class="oeb-card tab-section" id="submit-section">
+        <h1>Submit new predictions</h1>
+        <div class="subtitle">Upload a scoring-function predictions file and see how it ranks against the 14
+          package participants, under a declared, leakage-safe cross-validation splitting procedure -- computed
+          entirely in your browser (the file is never uploaded anywhere).</div>
+
+        <div class="cv-caveat">
+          Every number shown here is a <b>held-out, cross-validated</b> metric: for each fold of the chosen
+          splitting strategy, the decision threshold used by Balanced Accuracy / F1 / MCC is learned only from
+          the other folds (Youden's J statistic), never from the held-out fold itself. This is different from
+          (and stricter than) the plain resubstitution comparison against the manuscript shown in the Results
+          section above. All computation happens client-side in JavaScript -- your file is read locally via the
+          browser's File API and never leaves your machine.
+        </div>
+
+        <form id="submit-form">
+          <div class="form-row">
+            <label for="group_name">Group name</label>
+            <input type="text" id="group_name" name="group_name" placeholder="e.g. My Lab / Institute name" required>
+          </div>
+          <div class="form-row">
+            <label for="participant_name">Submission name</label>
+            <input type="text" id="participant_name" name="participant_name" placeholder="e.g. MyLab_NewScoringFunction" required>
+          </div>
+          <div class="form-row">
+            <label for="strategy">CV splitting strategy</label>
+            <select id="strategy" name="strategy">
+              <option value="strategy1">Strategy 1 &mdash; CATH superfamily / UniProt gene (853 groups)</option>
+              <option value="strategy2">Strategy 2 &mdash; this package's own MMseqs2 clustering (1076 clusters)</option>
+              <option value="strategy2b">Strategy 2b &mdash; authoritative blastclust reference, -S25 -L0.5 -bF (1045 clusters)</option>
+              <option value="strategy3" selected>Strategy 3 &mdash; combined union of Strategy 1 + 2b (688 components) &mdash; RECOMMENDED</option>
+            </select>
+            <span class="strategy-doc-link"><a href="CV_SPLITTING_STRATEGIES.md" target="_blank" style="color:var(--brand-dark)">full description of all 4 strategies &#8599;</a></span>
+          </div>
+          <div class="form-row">
+            <label for="predictions_file">Predictions file (CSV)</label>
+            <input type="file" id="predictions_file" name="predictions_file" accept=".csv" required>
+            <div style="font-size:12px;color:#6b6b6b;margin-top:4px;">
+              Columns: <code>entry_id</code> (e.g. <code>1a17_6</code>) and a score column named
+              <code>score</code>, <code>raw_score</code> or <code>raw_score_oriented</code> -- higher value must
+              mean MORE physiological. <a href="data/predictions_template.csv" style="color:var(--brand-dark)">download a template &#8595;</a>
+              or try the <a href="data/demo_predictions_for_upload_test.csv" style="color:var(--brand-dark)">bundled demo file</a>.
+            </div>
+          </div>
+          <button type="submit" class="oeb-btn" id="submit-btn">Evaluate submission</button>
+        </form>
+        <div id="submit-status"></div>
+
+        <div id="submit-results" style="display:none; margin-top:20px;">
+          <div class="cv-caveat" id="submit-results-refs" style="margin:0;"></div>
+        </div>
       </div>
+    </div>
     </main>
   </div>
 
@@ -253,7 +303,7 @@
     // network. The real, unmodified visualizer code then renders the real chart from this data;
     // nothing about the chart itself is reimplemented or approximated.
     (function() {
-      const MOCK_DATASETS_RESPONSE = {"data": {"getDatasets": [{"_id": "3DBioinfo:2023-05-15_PPI-PhysioClassification_Aggregation", "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset", "community_ids": ["OEBC_3DBioinfo"], "challenge_ids": ["3DBioinfo:PPI-PhysioClassification"], "visibility": "public", "name": "Challenge leaderboard: PPI-PhysioClassification", "version": "3 (Correia two-tier entry_id resolution)", "description": "Aggregation of AUC-ROC (x) and Accuracy-at-threshold (y) across all 14 participant scoring functions. Entry-id matching corrected to ID_InterfaceID for ProtCID-derived complexes (previous version silently evaluated only the ~971 QSalign-derived entries, dropping the ~700 ProtCID-derived ones).", "type": "aggregation", "dataset_contact_ids": ["3DBioinfo:Coordinators"], "dates": {"creation": "2023-05-15T00:00:00Z", "modification": "2023-05-15T00:00:00Z"}, "depends_on": {"tool_id": "3DBioinfo:aggregate_benchmark", "rel_dataset_ids": [{"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Bonvin_DeepRank-GNN"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Bonvin_DeepRank-GNN"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Furman_InterfaceAnalyzer"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Furman_InterfaceAnalyzer"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Venclovas_Voronota"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Zou_DLScoreBC"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Zou_DLScoreBC"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Guerois_IESnorm"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Guerois_IESnorm"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_FernandezRecio_NIPacking"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_FernandezRecio_NIPacking"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_SWISSMODEL_QSQE"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_SWISSMODEL_QSQE"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Bologna_ISPRED4"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Bologna_ISPRED4"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Kihara_GOAP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Kihara_GOAP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Correia_MaSIF"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Correia_MaSIF"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Oliva_CP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Oliva_CP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_MOBI_ShapeHydroTails"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_MOBI_ShapeHydroTails"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Wolfson_ProbaConsensus"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Wolfson_ProbaConsensus"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_RF_Consensus_top221"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_RF_Consensus_top221"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Venclovas_Voronota"}]}, "datalink": {"inline_data": "{\"challenge_participants\": [{\"tool_id\": \"3DBioinfo:Bonvin_DeepRank-GNN\", \"metric_x\": 0.8603, \"metric_y\": 0.806}, {\"tool_id\": \"3DBioinfo:Furman_InterfaceAnalyzer\", \"metric_x\": 0.8492, \"metric_y\": 0.7922}, {\"tool_id\": \"3DBioinfo:Venclovas_Voronota\", \"metric_x\": 0.8074, \"metric_y\": 0.7504}, {\"tool_id\": \"3DBioinfo:Zou_DLScoreBC\", \"metric_x\": 0.8166, \"metric_y\": 0.7475}, {\"tool_id\": \"3DBioinfo:Guerois_IESnorm\", \"metric_x\": 0.8212, \"metric_y\": 0.7763}, {\"tool_id\": \"3DBioinfo:FernandezRecio_NIPacking\", \"metric_x\": 0.7912, \"metric_y\": 0.7658}, {\"tool_id\": \"3DBioinfo:SWISSMODEL_QSQE\", \"metric_x\": 0.8076, \"metric_y\": 0.6785}, {\"tool_id\": \"3DBioinfo:Bologna_ISPRED4\", \"metric_x\": 0.7692, \"metric_y\": 0.7199}, {\"tool_id\": \"3DBioinfo:Kihara_GOAP\", \"metric_x\": 0.754, \"metric_y\": 0.693}, {\"tool_id\": \"3DBioinfo:Correia_MaSIF\", \"metric_x\": 0.7661, \"metric_y\": 0.7101}, {\"tool_id\": \"3DBioinfo:Oliva_CP\", \"metric_x\": 0.7486, \"metric_y\": 0.693}, {\"tool_id\": \"3DBioinfo:MOBI_ShapeHydroTails\", \"metric_x\": 0.7307, \"metric_y\": 0.6798}, {\"tool_id\": \"3DBioinfo:Wolfson_ProbaConsensus\", \"metric_x\": 0.7262, \"metric_y\": 0.6786}, {\"tool_id\": \"3DBioinfo:RF_Consensus_top221\", \"metric_x\": 0.9474, \"metric_y\": 0.8825}], \"visualization\": {\"type\": \"2D-plot\", \"x_axis\": \"3DBioinfo:AUC-ROC\", \"y_axis\": \"3DBioinfo:ACC-at-threshold\", \"optimization\": \"top-right\"}}"}}]}};
+      window.MOCK_DATASETS_RESPONSE = {"data": {"getDatasets": [{"_id": "3DBioinfo:2023-05-15_PPI-PhysioClassification_Aggregation", "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset", "community_ids": ["OEBC_3DBioinfo"], "challenge_ids": ["3DBioinfo:PPI-PhysioClassification"], "visibility": "public", "name": "Challenge leaderboard: PPI-PhysioClassification", "version": "3 (Correia two-tier entry_id resolution)", "description": "Aggregation of AUC-ROC (x) and Accuracy-at-threshold (y) across all 14 participant scoring functions. Entry-id matching corrected to ID_InterfaceID for ProtCID-derived complexes (previous version silently evaluated only the ~971 QSalign-derived entries, dropping the ~700 ProtCID-derived ones).", "type": "aggregation", "dataset_contact_ids": ["3DBioinfo:Coordinators"], "dates": {"creation": "2023-05-15T00:00:00Z", "modification": "2023-05-15T00:00:00Z"}, "depends_on": {"tool_id": "3DBioinfo:aggregate_benchmark", "rel_dataset_ids": [{"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Bonvin_DeepRank-GNN"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Bonvin_DeepRank-GNN"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Furman_InterfaceAnalyzer"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Furman_InterfaceAnalyzer"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Venclovas_Voronota"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Zou_DLScoreBC"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Zou_DLScoreBC"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Guerois_IESnorm"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Guerois_IESnorm"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_FernandezRecio_NIPacking"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_FernandezRecio_NIPacking"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_SWISSMODEL_QSQE"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_SWISSMODEL_QSQE"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Bologna_ISPRED4"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Bologna_ISPRED4"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Kihara_GOAP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Kihara_GOAP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Correia_MaSIF"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Correia_MaSIF"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Oliva_CP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Oliva_CP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_MOBI_ShapeHydroTails"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_MOBI_ShapeHydroTails"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Wolfson_ProbaConsensus"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Wolfson_ProbaConsensus"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_RF_Consensus_top221"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_RF_Consensus_top221"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Venclovas_Voronota"}]}, "datalink": {"inline_data": "{\"challenge_participants\": [{\"tool_id\": \"3DBioinfo:Bonvin_DeepRank-GNN\", \"metric_x\": 0.8603, \"metric_y\": 0.806}, {\"tool_id\": \"3DBioinfo:Furman_InterfaceAnalyzer\", \"metric_x\": 0.8492, \"metric_y\": 0.7922}, {\"tool_id\": \"3DBioinfo:Venclovas_Voronota\", \"metric_x\": 0.8074, \"metric_y\": 0.7504}, {\"tool_id\": \"3DBioinfo:Zou_DLScoreBC\", \"metric_x\": 0.8166, \"metric_y\": 0.7475}, {\"tool_id\": \"3DBioinfo:Guerois_IESnorm\", \"metric_x\": 0.8212, \"metric_y\": 0.7763}, {\"tool_id\": \"3DBioinfo:FernandezRecio_NIPacking\", \"metric_x\": 0.7912, \"metric_y\": 0.7658}, {\"tool_id\": \"3DBioinfo:SWISSMODEL_QSQE\", \"metric_x\": 0.8076, \"metric_y\": 0.6785}, {\"tool_id\": \"3DBioinfo:Bologna_ISPRED4\", \"metric_x\": 0.7692, \"metric_y\": 0.7199}, {\"tool_id\": \"3DBioinfo:Kihara_GOAP\", \"metric_x\": 0.754, \"metric_y\": 0.693}, {\"tool_id\": \"3DBioinfo:Correia_MaSIF\", \"metric_x\": 0.7661, \"metric_y\": 0.7101}, {\"tool_id\": \"3DBioinfo:Oliva_CP\", \"metric_x\": 0.7486, \"metric_y\": 0.693}, {\"tool_id\": \"3DBioinfo:MOBI_ShapeHydroTails\", \"metric_x\": 0.7307, \"metric_y\": 0.6798}, {\"tool_id\": \"3DBioinfo:Wolfson_ProbaConsensus\", \"metric_x\": 0.7262, \"metric_y\": 0.6786}, {\"tool_id\": \"3DBioinfo:RF_Consensus_top221\", \"metric_x\": 0.9474, \"metric_y\": 0.8825}], \"visualization\": {\"type\": \"2D-plot\", \"x_axis\": \"3DBioinfo:AUC-ROC\", \"y_axis\": \"3DBioinfo:ACC-at-threshold\", \"optimization\": \"top-right\"}}"}}]}};
       const MOCK_METRICS_RESPONSE = {"data": {"getMetrics": [{"_id": "3DBioinfo:F1-Score", "title": "F1 Score", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:ACC-at-threshold", "title": "Classification Accuracy at reported optimal threshold", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:AUC-ROC", "title": "Area Under the ROC Curve (AUC-ROC)", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:leaderboard-aggregation", "title": "Challenge leaderboard aggregation (AUC vs. ACC per participant)", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:AUCPR", "title": "Area Under the Precision-Recall Curve (AUCPR)", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:MCC", "title": "Matthews Correlation Coefficient (MCC)", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:Balanced-Accuracy", "title": "Balanced Accuracy", "_metadata": "{}", "representation_hints": null}]}};
 
       function FakeXHR() {
@@ -285,13 +335,203 @@
         }, 20);
       };
       window.XMLHttpRequest = FakeXHR;
+
+      // CRITICAL: the chart library (build/build.js) calls the GraphQL endpoint via a bare
+      // fetch(), not XMLHttpRequest (confirmed by tracing the bundle's apollo-fetch call site --
+      // `(customFetch||fetch)(uri, opts)`). It only falls back to an XHR-backed fetch *polyfill*
+      // when window.fetch is absent -- true in this jsdom test harness, but NEVER true in a real
+      // browser, which always ships native fetch. Overriding window.XMLHttpRequest alone is
+      // therefore not sufficient in production: window.fetch itself must be shimmed so the
+      // GraphQL call is intercepted regardless of which transport the bundle picks. Non-GraphQL
+      // fetch() calls (our own client-side CV engine fetching static CSV/JSON files below) are
+      // passed through to whatever fetch existed before this override.
+      const _nativeFetch = window.fetch ? window.fetch.bind(window) : null;
+      window.fetch = function(url, opts) {
+        const body = opts && opts.body;
+        let payload = null;
+        if (typeof body === "string") {
+          try {
+            const parsed = JSON.parse(body);
+            if (parsed && parsed.query) {
+              payload = (parsed.query || "").includes("getMetrics") ? MOCK_METRICS_RESPONSE : MOCK_DATASETS_RESPONSE;
+            }
+          } catch (e) { /* not a GraphQL body */ }
+        }
+        if (payload) {
+          return new Promise(function(resolve) {
+            setTimeout(function() {
+              resolve({
+                ok: true, status: 200,
+                text: function() { return Promise.resolve(JSON.stringify(payload)); },
+                json: function() { return Promise.resolve(payload); },
+                headers: { get: function() { return "application/json"; } },
+              });
+            }, 20);
+          });
+        }
+        if (_nativeFetch) return _nativeFetch(url, opts);
+        return Promise.reject(new Error("fetch('" + url + "') called with no native fetch available and no GraphQL match."));
+      };
     })();
   </script>
   <script src="./build/build.js"></script>
 
   <script>
     (function() {
-      const TAB_SECTIONS = ["results-section", "datasets-section", "tools-section"];
+      /* ===================================================================
+       * Client-side port of workflow/cv_evaluate.py -- the SAME leakage-safe
+       * cross-validation engine used by the full package's Python server
+       * (serve_local_openebench_visualizer.py), reimplemented in JavaScript
+       * so a new prediction file can be evaluated entirely in the browser,
+       * with no backend: for each fold, the decision threshold for Balanced
+       * Accuracy/F1/MCC is learned ONLY from the other folds (Youden's J),
+       * never from the held-out fold itself; AUROC/AUCPR are threshold-free
+       * and computed directly on the held-out fold. Applied identically to
+       * every participant (baseline and uploaded alike) for a fair
+       * comparison -- see CV_SPLITTING_STRATEGIES.md.
+       * =================================================================== */
+
+      function parseCSV(text) {
+        const lines = text.split(/\r?\n/).filter(l => l.length > 0);
+        const header = lines[0].split(",").map(h => h.trim());
+        return lines.slice(1).map(line => {
+          const cells = line.split(",");
+          const row = {};
+          header.forEach((h, i) => { row[h] = cells[i] !== undefined ? cells[i].trim() : ""; });
+          return row;
+        });
+      }
+
+      function aucMannWhitney(y, s) {
+        const pairs = s.map((v, i) => [v, y[i]]).sort((a, b) => a[0] - b[0]);
+        const n = pairs.length;
+        const ranks = new Array(n).fill(0);
+        let i = 0;
+        while (i < n) {
+          let j = i;
+          while (j + 1 < n && pairs[j + 1][0] === pairs[i][0]) j++;
+          const avgRank = (i + 1 + j + 1) / 2.0;
+          for (let k = i; k <= j; k++) ranks[k] = avgRank;
+          i = j + 1;
+        }
+        const n1 = pairs.filter(p => p[1] === 1).length;
+        const n0 = n - n1;
+        if (n1 === 0 || n0 === 0) return NaN;
+        let sumRanksPos = 0;
+        for (let k = 0; k < n; k++) if (pairs[k][1] === 1) sumRanksPos += ranks[k];
+        return (sumRanksPos - n1 * (n1 + 1) / 2) / (n1 * n0);
+      }
+
+      function aucprAveragePrecision(y, s) {
+        const order = s.map((v, i) => i).sort((a, b) => s[b] - s[a]);
+        const ySorted = order.map(i => y[i]);
+        const nPos = ySorted.reduce((a, b) => a + b, 0);
+        if (nPos === 0) return NaN;
+        let tp = 0, fp = 0, prevRecall = 0, ap = 0;
+        for (const lab of ySorted) {
+          if (lab === 1) tp++; else fp++;
+          const precision = tp / (tp + fp);
+          const recall = tp / nPos;
+          ap += precision * (recall - prevRecall);
+          prevRecall = recall;
+        }
+        return ap;
+      }
+
+      function confusionMatrix(y, preds) {
+        let tp = 0, tn = 0, fp = 0, fn = 0;
+        for (let i = 0; i < y.length; i++) {
+          if (preds[i] === 1 && y[i] === 1) tp++;
+          else if (preds[i] === 0 && y[i] === 0) tn++;
+          else if (preds[i] === 1 && y[i] === 0) fp++;
+          else fn++;
+        }
+        return { tp, tn, fp, fn };
+      }
+
+      function balancedAccuracy(c) {
+        const tpr = (c.tp + c.fn) ? c.tp / (c.tp + c.fn) : NaN;
+        const tnr = (c.tn + c.fp) ? c.tn / (c.tn + c.fp) : NaN;
+        return (tpr + tnr) / 2;
+      }
+      function f1ScoreJS(c) {
+        const denom = 2 * c.tp + c.fp + c.fn;
+        return denom ? (2 * c.tp / denom) : NaN;
+      }
+      function mccScoreJS(c) {
+        const denom = Math.sqrt((c.tp + c.fp) * (c.tp + c.fn) * (c.tn + c.fp) * (c.tn + c.fn));
+        return denom ? ((c.tp * c.tn - c.fp * c.fn) / denom) : NaN;
+      }
+
+      function youdenThreshold(y, s) {
+        const candidates = Array.from(new Set(s)).sort((a, b) => a - b);
+        let bestJ = -1, bestThr = candidates[0];
+        for (const thr of candidates) {
+          const preds = s.map(v => v >= thr ? 1 : 0);
+          const c = confusionMatrix(y, preds);
+          const tpr = (c.tp + c.fn) ? c.tp / (c.tp + c.fn) : 0;
+          const fpr = (c.fp + c.tn) ? c.fp / (c.fp + c.tn) : 0;
+          const j = tpr - fpr;
+          if (j > bestJ) { bestJ = j; bestThr = thr; }
+        }
+        return bestThr;
+      }
+
+      function mean(arr) { return arr.reduce((a, b) => a + b, 0) / arr.length; }
+      function pstdev(arr) {
+        if (arr.length < 2) return 0;
+        const m = mean(arr);
+        return Math.sqrt(arr.reduce((a, b) => a + (b - m) * (b - m), 0) / arr.length);
+      }
+
+      function crossValidate(scoreMap, goldMap, foldMap) {
+        const entries = Object.keys(scoreMap).filter(e => (e in goldMap) && (e in foldMap));
+        if (!entries.length) return { error: "no overlapping entries between predictions, gold standard and fold assignment", n_entries: 0 };
+
+        const labels = {}, folds = {};
+        entries.forEach(e => { labels[e] = goldMap[e]; folds[e] = foldMap[e]; });
+        const K = Math.max(...entries.map(e => folds[e])) + 1;
+
+        const perFold = [];
+        for (let k = 0; k < K; k++) {
+          const train = entries.filter(e => folds[e] !== k);
+          const test = entries.filter(e => folds[e] === k);
+          if (!train.length || !test.length) continue;
+          const trainY = train.map(e => labels[e]), trainS = train.map(e => scoreMap[e]);
+          const testY = test.map(e => labels[e]), testS = test.map(e => scoreMap[e]);
+
+          let auc = NaN, aucpr = NaN;
+          if (new Set(testY).size >= 2) {
+            auc = aucMannWhitney(testY, testS);
+            aucpr = aucprAveragePrecision(testY, testS);
+          }
+          const thr = youdenThreshold(trainY, trainS);
+          const preds = testS.map(v => v >= thr ? 1 : 0);
+          const c = confusionMatrix(testY, preds);
+          const acc = preds.reduce((a, p, i) => a + (p === testY[i] ? 1 : 0), 0) / testY.length;
+          perFold.push({
+            fold: k, n_test: test.length, threshold: thr,
+            auroc: isNaN(auc) ? null : auc, aucpr: isNaN(aucpr) ? null : aucpr,
+            accuracy: acc, balanced_accuracy: balancedAccuracy(c), f1: f1ScoreJS(c), mcc: mccScoreJS(c),
+          });
+        }
+
+        function agg(key) {
+          const vals = perFold.map(f => f[key]).filter(v => v !== null && v !== undefined && !isNaN(v));
+          if (!vals.length) return [null, null];
+          return [mean(vals), pstdev(vals)];
+        }
+
+        const result = { n_entries: entries.length, n_folds: K, per_fold: perFold };
+        for (const key of ["auroc", "aucpr", "accuracy", "balanced_accuracy", "f1", "mcc"]) {
+          const [m, sd] = agg(key);
+          result["cv_" + key + "_mean"] = m;
+          result["cv_" + key + "_std"] = sd;
+        }
+        return result;
+      }
+
+      const TAB_SECTIONS = ["results-section", "datasets-section", "tools-section", "submit-section"];
 
       function showSection(sectionId) {
         if (!TAB_SECTIONS.includes(sectionId)) sectionId = "results-section";
@@ -438,6 +678,249 @@
         const method = selected.id.split("__")[1]; // "none" | "squares" | "diagonals" | "clusters"
         const rows = Array.from(document.getElementById("full-metrics-tbody").querySelectorAll("tr"));
         recomputeQuartileTable(rows, method);
+      });
+
+      const STRATEGY_FILES = {
+        strategy1: "data/datasets/metrics_reference/cv_fold_assignment.csv",
+        strategy2: "data/datasets/metrics_reference/cv_fold_strategy2_mmseqs2_strict.csv",
+        strategy2b: "data/datasets/metrics_reference/cv_fold_strategy2b_blastclust_reference.csv",
+        strategy3: "data/datasets/metrics_reference/cv_fold_strategy3_combined_union.csv",
+      };
+      const STRATEGY_LABELS = {
+        strategy1: "Strategy 1 \u2014 CATH superfamily / UniProt gene (853 groups)",
+        strategy2: "Strategy 2 \u2014 this package's own MMseqs2 clustering (1076 clusters)",
+        strategy2b: "Strategy 2b \u2014 authoritative blastclust reference, -S25 -L0.5 -bF (1045 clusters)",
+        strategy3: "Strategy 3 \u2014 combined union of Strategy 1 + 2b (688 components) \u2014 RECOMMENDED",
+      };
+
+      function fmtMean(v, s) { return (v === null || v === undefined || isNaN(v)) ? "n/a" : (v.toFixed(3) + " \u00b1 " + (s || 0).toFixed(3)); }
+
+      function parsePredictionsCSV(text) {
+        const rows = parseCSV(text);
+        const cols = Object.keys(rows[0] || {});
+        let scoreCol = null;
+        for (const cand of ["raw_score_oriented", "score", "raw_score"]) {
+          if (cols.includes(cand)) { scoreCol = cand; break; }
+        }
+        if (!cols.includes("entry_id") || !scoreCol) {
+          throw new Error("uploaded file must have an 'entry_id' column and a score column named " +
+            "'raw_score_oriented', 'score' or 'raw_score'. Columns found: " + cols.join(", "));
+        }
+        const scoreMap = {};
+        rows.forEach(r => {
+          const v = parseFloat(r[scoreCol]);
+          if (r.entry_id && !isNaN(v)) scoreMap[r.entry_id] = v;
+        });
+        return scoreMap;
+      }
+
+      function updateMetricsTable(result) {
+        const tbody = document.getElementById("full-metrics-tbody");
+        const old = tbody.querySelector('tr[data-submitted="true"]');
+        if (old) old.remove();
+        const r = result.new_result;
+        const tr = document.createElement("tr");
+        tr.setAttribute("data-submitted", "true");
+        tr.setAttribute("data-group", r.group_name || "User submission");
+        tr.setAttribute("data-auroc", r.cv_auroc_mean);
+        tr.setAttribute("data-aucpr", r.cv_aucpr_mean);
+        tr.setAttribute("data-balancedaccuracy", r.cv_balanced_accuracy_mean);
+        tr.setAttribute("data-f1", r.cv_f1_mean);
+        tr.setAttribute("data-mcc", r.cv_mcc_mean);
+        tr.className = "highlight-row";
+        tr.innerHTML = "<td>" + (r.group_name || "User submission") + "</td><td>" + r.display_name + "</td>" +
+          "<td>" + fmtMean(r.cv_auroc_mean, r.cv_auroc_std) + "</td>" +
+          "<td>" + fmtMean(r.cv_aucpr_mean, r.cv_aucpr_std) + "</td>" +
+          "<td>" + fmtMean(r.cv_balanced_accuracy_mean, r.cv_balanced_accuracy_std) + "</td>" +
+          "<td>" + fmtMean(r.cv_f1_mean, r.cv_f1_std) + "</td>" +
+          "<td>" + fmtMean(r.cv_mcc_mean, r.cv_mcc_std) + "</td>" +
+          "<td style=\"color:#a85314;font-size:12px;font-weight:600;\">CV (" + result.strategy_label + ")</td>";
+        tbody.appendChild(tr);
+
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        rows.sort((a, b) => parseFloat(b.getAttribute("data-auroc")) - parseFloat(a.getAttribute("data-auroc")));
+        rows.forEach(row => tbody.appendChild(row));
+        recomputeQuartileTable(rows);
+      }
+
+      function refreshExistingChart() {
+        const chartDiv = document.querySelector("#oeb-chart-wrapper .benchmarkingChart_scatter");
+        if (!chartDiv) return;
+        chartDiv.innerHTML = "";
+        if (typeof window.load_scatter_visualization === "function") {
+          window.load_scatter_visualization();
+          const note = document.getElementById("chart-live-note");
+          if (note) { note.style.display = "inline"; note.textContent = " (updated with your latest submission)"; }
+        }
+      }
+
+      function highlightNewSubmissionDot(chartToolId) {
+        const chartDiv = document.querySelector("#oeb-chart-wrapper .benchmarkingChart_scatter");
+        if (!chartDiv || !chartToolId) return;
+        function applyBlack(el) { el.style.fill = "black"; el.setAttribute("stroke", "black"); }
+        function findAndApply() {
+          let found = null;
+          chartDiv.querySelectorAll("svg path").forEach(p => {
+            const datum = (window.d3 ? window.d3.select(p).datum() : null) || p.__data__;
+            const name = datum && typeof datum === "object" ? datum.toolname : datum;
+            if (name === chartToolId) { applyBlack(p); found = p; }
+          });
+          return found;
+        }
+        findAndApply();
+        const observer = new MutationObserver(() => findAndApply());
+        observer.observe(chartDiv, { childList: true, subtree: true, attributes: true, attributeFilter: ["style", "class"] });
+        let tries = 0;
+        const poll = setInterval(() => { tries++; findAndApply(); if (tries >= 60) clearInterval(poll); }, 500);
+      }
+
+      function renderResults(result) {
+        const refs = document.getElementById("submit-results-refs");
+        const wrap = document.getElementById("submit-results");
+        refs.innerHTML = "Evaluated under <b>" + result.strategy_label + "</b> against reference data " +
+          "<a href=\"" + result.reference_data_url + "\" style=\"color:var(--brand-dark)\">gold_standard_labels.csv</a> " +
+          "using the fold assignment <a href=\"" + result.fold_file_url + "\" style=\"color:var(--brand-dark)\">" +
+          result.fold_file + "</a> (<a href=\"" + result.strategy_doc_url + "\" style=\"color:var(--brand-dark)\">" +
+          "strategy description</a>). Rank " + result.new_result.rank + " of " + result.leaderboard_size +
+          " under this strategy. Results appended to the existing leaderboard table and chart above. " +
+          "<a href=\"#results-section\" id=\"view-updated-results-link\" class=\"oeb-btn\" style=\"display:inline-block; margin-top:10px; text-decoration:none; padding:7px 16px;\">View updated results</a>";
+        wrap.style.display = "block";
+        updateMetricsTable(result);
+
+        // Merge the new point into the SAME embedded chart data the XHR/fetch shim serves, so the
+        // existing chart updates in place rather than a second chart being created. NOTE:
+        // inline_data is stored as a JSON STRING here (the chart library JSON.parses it itself
+        // client-side, matching the real server's response shape), so it must be parsed, mutated,
+        // and re-stringified -- not mutated as if it were already a plain object. Rebuilding from
+        // a cached PRISTINE copy of the 14 baseline participants (rather than filtering the live
+        // array by the new tool_id) guarantees at most one user-submitted point ever exists, even
+        // across repeated submissions under different participant names.
+        const record = window.MOCK_DATASETS_RESPONSE.data.getDatasets[0];
+        const inline = JSON.parse(record.datalink.inline_data);
+        if (!window.__BASELINE_PARTICIPANTS__) {
+          window.__BASELINE_PARTICIPANTS__ = inline.challenge_participants.slice();
+        }
+        inline.challenge_participants = window.__BASELINE_PARTICIPANTS__.concat([
+          { tool_id: result.chart_tool_id, metric_x: result.new_result.cv_auroc_mean, metric_y: result.new_result.cv_accuracy_mean }
+        ]);
+        record.datalink.inline_data = JSON.stringify(inline);
+
+        refreshExistingChart();
+        highlightNewSubmissionDot(result.chart_tool_id);
+      }
+
+      document.getElementById("submit-results").addEventListener("click", function(ev) {
+        if (ev.target && ev.target.id === "view-updated-results-link") {
+          ev.preventDefault();
+          showSection("results-section");
+          history.replaceState(null, "", "#results-section");
+        }
+      });
+
+      let CACHED_GOLD = null;
+      const CACHED_FOLDS = {};
+      const CACHED_LEADERBOARD = {};
+
+      function fetchText(url) { return fetch(url).then(r => r.text()); }
+      function fetchJSON(url) { return fetch(url).then(r => r.json()); }
+
+      async function getGoldMap() {
+        if (CACHED_GOLD) return CACHED_GOLD;
+        const text = await fetchText("data/datasets/metrics_reference/gold_standard_labels.csv");
+        const rows = parseCSV(text);
+        const map = {};
+        rows.forEach(r => { map[r.entry_id] = parseInt(r.label); });
+        CACHED_GOLD = map;
+        return map;
+      }
+
+      async function getFoldMap(strategyKey) {
+        if (CACHED_FOLDS[strategyKey]) return CACHED_FOLDS[strategyKey];
+        const text = await fetchText(STRATEGY_FILES[strategyKey]);
+        const rows = parseCSV(text);
+        const map = {};
+        rows.forEach(r => { map[r.entry_id] = parseInt(r.fold); });
+        CACHED_FOLDS[strategyKey] = map;
+        return map;
+      }
+
+      async function getBaselineLeaderboard(strategyKey) {
+        if (CACHED_LEADERBOARD[strategyKey]) return CACHED_LEADERBOARD[strategyKey];
+        const data = await fetchJSON("data/cv_leaderboard/" + strategyKey + ".json");
+        CACHED_LEADERBOARD[strategyKey] = data;
+        return data;
+      }
+
+      document.getElementById("submit-form").addEventListener("submit", function(ev) {
+        ev.preventDefault();
+        const status = document.getElementById("submit-status");
+        const btn = document.getElementById("submit-btn");
+        const fileInput = document.getElementById("predictions_file");
+        if (!fileInput.files.length) return;
+
+        const groupName = document.getElementById("group_name").value.trim() || "User submission";
+        const participantName = document.getElementById("participant_name").value.trim() || "Uploaded submission";
+        const strategyKey = document.getElementById("strategy").value;
+
+        btn.disabled = true;
+        status.className = ""; status.textContent = "Evaluating submission under the selected CV strategy (in your browser)...";
+        document.getElementById("submit-results").style.display = "none";
+
+        const reader = new FileReader();
+        reader.onerror = function() {
+          btn.disabled = false;
+          status.className = "error"; status.textContent = "Could not read the uploaded file.";
+        };
+        reader.onload = async function() {
+          try {
+            const scoreMap = parsePredictionsCSV(reader.result);
+            const [goldMap, foldMap, baseline] = await Promise.all([
+              getGoldMap(), getFoldMap(strategyKey), getBaselineLeaderboard(strategyKey)
+            ]);
+            const cvResult = crossValidate(scoreMap, goldMap, foldMap);
+            if (cvResult.n_entries === 0) {
+              throw new Error("No uploaded entry_id matched the gold standard / fold assignment -- check the entry_id format (expects e.g. '1a17_6').");
+            }
+            const chartToolId = participantName.length > 22 ? participantName.substring(0, 22) : participantName;
+            const newRow = {
+              display_name: participantName, group_name: groupName,
+              n_entries: cvResult.n_entries, n_folds: cvResult.n_folds,
+              cv_auroc_mean: cvResult.cv_auroc_mean, cv_auroc_std: cvResult.cv_auroc_std,
+              cv_aucpr_mean: cvResult.cv_aucpr_mean, cv_aucpr_std: cvResult.cv_aucpr_std,
+              cv_accuracy_mean: cvResult.cv_accuracy_mean,
+              cv_balanced_accuracy_mean: cvResult.cv_balanced_accuracy_mean, cv_balanced_accuracy_std: cvResult.cv_balanced_accuracy_std,
+              cv_f1_mean: cvResult.cv_f1_mean, cv_f1_std: cvResult.cv_f1_std,
+              cv_mcc_mean: cvResult.cv_mcc_mean, cv_mcc_std: cvResult.cv_mcc_std,
+            };
+            const combined = baseline.participants.map(p => ({ display_name: p.display_name, cv_auroc_mean: p.cv_auroc_mean }));
+            combined.push({ display_name: newRow.display_name, cv_auroc_mean: newRow.cv_auroc_mean });
+            combined.sort((a, b) => (b.cv_auroc_mean || 0) - (a.cv_auroc_mean || 0));
+            newRow.rank = combined.findIndex(c => c.display_name === newRow.display_name && c.cv_auroc_mean === newRow.cv_auroc_mean) + 1;
+
+            const result = {
+              strategy: strategyKey, strategy_label: STRATEGY_LABELS[strategyKey],
+              fold_file: STRATEGY_FILES[strategyKey].split("/").pop(),
+              fold_file_url: STRATEGY_FILES[strategyKey],
+              reference_data_url: "data/datasets/metrics_reference/gold_standard_labels.csv",
+              strategy_doc_url: "CV_SPLITTING_STRATEGIES.md",
+              chart_tool_id: chartToolId,
+              new_result: newRow,
+              leaderboard_size: combined.length,
+            };
+
+            btn.disabled = false;
+            status.className = "ok";
+            status.textContent = "Done. \"" + newRow.display_name + "\" scored on " + newRow.n_entries +
+              " entries across " + newRow.n_folds + " folds, ranked #" + newRow.rank + " of " + combined.length + ".";
+            renderResults(result);
+            showSection("results-section");
+            history.replaceState(null, "", "#results-section");
+          } catch (err) {
+            btn.disabled = false;
+            status.className = "error"; status.textContent = "Error: " + (err && err.message ? err.message : err);
+          }
+        };
+        reader.readAsText(fileInput.files[0]);
       });
     })();
   </script></body>
