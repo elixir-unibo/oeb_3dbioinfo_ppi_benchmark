@@ -19,11 +19,19 @@
     body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
     a { color: var(--brand); }
 
-    .site-top-bar { background: var(--brand-dark); color: #fff; font-size: 0.85rem; border-bottom: 1px solid #1a3f5a; }
-    .site-top-bar .top-bar-inner { max-width: 1280px; margin: 0 auto; padding: 0.6rem 2rem; display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap; }
-    .site-top-bar a { color: #cbd5e0; text-decoration: none; font-weight: 500; }
-    .site-top-bar a:hover { color: #fff; }
-    .site-top-bar .sep { color: #4a6a85; }
+    .site-container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+
+    .top-bar { background-color: #00233b; color: white; font-size: 0.9rem; padding: 0; border-bottom: 1px solid #1a3f5a; }
+    .top-bar .site-container { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
+    .top-nav { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .top-nav a { color: #cbd5e0; text-decoration: none; font-weight: 500; padding: 0.7rem 1rem; display: inline-block; }
+    .top-nav a:hover { color: white; background: rgba(255,255,255,0.06); }
+
+    .brand-bar { background-color: #ffffff; border-bottom: 1px solid #eaeef2; padding: 1rem 0; }
+    .brand-bar .site-container { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .brand-logo-elixir img { height: 56px; width: auto; }
+    .brand-logo-unibo img { height: 56px; width: auto; }
+    .brand-title { flex: 1; text-align: center; font-size: 2.1rem; font-weight: 700; color: #00233b; letter-spacing: -0.01em; }
 
     header.oeb-header {
       background: linear-gradient(145deg, #f8fbfe 0%, #ecf3f9 100%);
@@ -32,6 +40,10 @@
     header.oeb-header .header-inner { max-width: 1280px; margin: 0 auto; }
     header.oeb-header .title { font-size: 1.6rem; font-weight: 600; color: var(--brand-dark); letter-spacing: -0.02em; }
     header.oeb-header .title small { display: block; margin-top: 0.5rem; font-size: 1.05rem; font-weight: 400; color: #1e405e; max-width: 760px; }
+
+    @media (max-width: 760px) {
+      .brand-title { font-size: 1.5rem; }
+    }
 
     .layout { display: flex; max-width: 1280px; margin: 0 auto; align-items: flex-start; padding: 0 2rem; }
     aside.sidebar {
@@ -109,18 +121,41 @@
   </style>
 </head>
 <body>
-  <div class="site-top-bar">
-    <div class="top-bar-inner">
-      <a href="https://elixir.unibo.it/index.html" target="_blank" rel="noopener">ELIXIR University of Bologna</a>
-      <span class="sep">/</span>
-      <a href="https://elixir.unibo.it/tools/index.html" target="_blank" rel="noopener">Tools Platform</a>
-      <span class="sep">/</span>
-      <span>PPI Benchmark &mdash; OpenEBench Experiment</span>
+  <!-- top navigation bar: the 8 site pages, matching elixir.unibo.it. This page is deployed two
+       levels below the site root (tools/oeb_3dbioinfo_ppi_benchmark/index.html), so links to the
+       site's own top-level pages go up two levels, same convention as every other page on the
+       site (which link one level up from tools/). -->
+  <div class="top-bar">
+    <div class="site-container">
+      <nav class="top-nav">
+        <a href="../../index.html">Home</a>
+        <a href="../../activities.html">Activities</a>
+        <a href="../../services.html">Services</a>
+        <a href="../../people.html">People</a>
+        <a href="../../infrastructure.html">Infrastructure</a>
+        <a href="../../training.html">Training</a>
+        <a href="../../news.html">News</a>
+        <a href="../../contact.html">Contact</a>
+      </nav>
     </div>
   </div>
+
+  <!-- brand bar: ELIXIR logo (left) - site title (center) - University of Bologna logo (right) -->
+  <div class="brand-bar">
+    <div class="site-container">
+      <div class="brand-logo-elixir">
+        <a href="../../index.html"><img src="../../img/elixir_bologna.png" alt="ELIXIR University of Bologna logo"></a>
+      </div>
+      <div class="brand-title">ELIXIR University of Bologna</div>
+      <div class="brand-logo-unibo">
+        <a href="https://www.unibo.it" target="_blank" rel="noopener"><img src="../../img/unibo_logo.png" alt="University of Bologna logo"></a>
+      </div>
+    </div>
+  </div>
+
   <header class="oeb-header">
     <div class="header-inner">
-      <div class="title">ELIXIR 3D-BioInfo Community PPI Benchmark Experiment<small>Local, offline preview of the OpenEBench-style benchmarking event -- part of the ELIXIR University of Bologna node's Tools Platform FAIRification work.</small></div>
+      <div class="title">ELIXIR 3D-BioInfo Community PPI Benchmark Experiment<small>Local, preview of the OpenEBench-style benchmarking event.</small></div>
     </div>
   </header>
 
