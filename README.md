@@ -1,5 +1,10 @@
 # ELIXIR 3D-BioInfo PPI Benchmark — OpenEBench experiment
 
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24323529.svg)](https://doi.org/10.5281/zenodo.24323529)
+
+> **Original work.** The benchmark was published by Schweke H, Xu Q, Tauriello G, *et al.* (2023) *Discriminating physiological from non-physiological interfaces in structures of protein complexes: A community-wide study.* Proteomics 23(17):e2200323, [doi:10.1002/pmic.202200323](https://doi.org/10.1002/pmic.202200323). The data come from the community repository [vibbits/Elixir-3DBioInfo-Benchmark-Protein-Interfaces](https://github.com/vibbits/Elixir-3DBioInfo-Benchmark-Protein-Interfaces). This repository turns the benchmark into an OpenEBench experiment; please cite the paper when you use the benchmark (see [Citation](#licence-and-citation)).
+
 **Interactive page: [https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/](https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/)**
 **Submit your own predictions: [https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/#submit-section](https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/#submit-section)**
 Load your own predictions there and see how they rank against the 14 reference methods of Schweke *et al.* (*Proteomics* 2023, DOI [10.1002/pmic.202200323](https://doi.org/10.1002/pmic.202200323)). The evaluation runs in your browser; no file is uploaded anywhere.
@@ -74,9 +79,45 @@ The package is also available as a single file, `oeb_ppi_benchmark.zip`, attache
 | `data/` | copy of the datasets read by the page, the per-strategy leaderboards (`data/cv_leaderboard/`), the demo and template prediction files |
 | `CV_SPLITTING_STRATEGIES.md` | description of the four splitting strategies |
 
+## Relation to the FAIR repository
+
+[biofold/ppi-benchmark-fair](https://github.com/biofold/ppi-benchmark-fair) (Zenodo concept DOI [10.5281/zenodo.24149636](https://doi.org/10.5281/zenodo.24149636)) is a related but separate repository with its own Zenodo record. It addresses a different task: it makes the benchmark data FAIR (metadata, portal, machine-learning-ready files). This repository addresses the benchmarking itself: an OpenEBench package, a workflow and a leaderboard in which new methods are compared with the reference methods. The two records are linked but not merged, and each has its own DOI.
+
 ## Licence and citation
 
 Released under [CC BY-NC 4.0](LICENSE). The source benchmark (vibbits/Elixir-3DBioInfo-Benchmark-Protein-Interfaces) is distributed under CC BY 4.0 and its attribution is preserved. Please cite the original publication (Schweke *et al.*, *Proteomics* 2023, DOI [10.1002/pmic.202200323](https://doi.org/10.1002/pmic.202200323)) and this package; GitHub's "Cite this repository" uses `CITATION.cff`. Each tagged release is archived on Zenodo, which assigns a DOI; cite the concept DOI shown on the repository for the latest version.
+
+### Citation
+
+```bibtex
+@article{schweke2023discriminating,
+title={Discriminating physiological from non-physiological interfaces in structures of protein complexes: A community-wide study},
+author={Schweke, Hugo and Xu, Qifang and Tauriello, Gerardo and Pantolini, Lorenzo and Schwede, Torsten and Cazals, Frédéric and Lhéritier, Alix and Fernandez-Recio, Juan and Rodríguez-Lumbreras, Luis Angel and Schueler-Furman, Ora and Varga, Julia K. and Jiménez-García, Brian and Réau, Manon F. and Bonvin, Alexandre M. J. J. and Savojardo, Castrense and Martelli, Pier-Luigi and Casadio, Rita and Tubiana, Jérôme and Wolfson, Haim J. and Oliva, Romina and Barradas-Bautista, Didier and Ricciardelli, Tiziana and Cavallo, Luigi and Venclovas, Česlovas and Olechnovič, Kliment and Guerois, Raphael and Andreani, Jessica and Martin, Juliette and Wang, Xiao and Terashi, Genki and Sarkar, Daipayan and Christoffer, Charles and Aderinwale, Tunde and Verburgt, Jacob and Kihara, Daisuke and Marchand, Anthony and Correia, Bruno E. and Duan, Rui and Qiu, Liming and Xu, Xianjin and Zhang, Shuang and Zou, Xiaoqin and Dey, Sucharita and Dunbrack, Roland L. and Levy, Emmanuel D. and Wodak, Shoshana J.},
+journal={Proteomics},
+volume={23},
+number={17},
+pages={e2200323},
+year={2023},
+month={sep},
+publisher={Wiley},
+doi={10.1002/pmic.202200323},
+pmid={37365936},
+pmcid={PMC10937251}
+}
+
+@dataset{capriotti2026ppiopenebench,
+  title={ELIXIR - Protein-Protein Interface Benchmark - OpenEBench Experiment},
+  author={Capriotti, Emidio and Martelli, Pier Luigi and Savojardo, Castrense},
+  year={2026},
+  version={1.0.0},
+  publisher={Zenodo},
+  url={https://github.com/elixir-unibo/oeb_3dbioinfo_ppi_benchmark},
+  doi={10.5281/zenodo.24323529},
+  note={Zenodo concept DOI, all versions}
+}
+```
+
+Please cite **both** the original publication and this package.
 
 ## Deployment note
 
