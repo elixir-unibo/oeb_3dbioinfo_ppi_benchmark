@@ -60,9 +60,9 @@ Rank by AUROC: **6 of 15** (the 14 reference methods plus the new one). The page
 | `datasets/` | input, public reference, metrics reference (gold-standard labels, fold assignments), participant, assessment and aggregation datasets |
 | `workflow/` | validation, metric computation and consolidation scripts, Nextflow description, Dockerfile drafts, and `prepare_for_openebench_submission.py` |
 | `schemas/` | offline copy of the OpenEBench 1.0.x JSON Schemas |
-| `qc_analysis/` | quality-control tables and the cross-validated results of the reference methods |
+| `qc_analysis/` | cross-validated results of the reference methods (`cv_leaderboard/`), working analyses (`diagnostics/`) and analyses computed before a correction and kept for transparency (`superseded/`); see its README |
 | `workflow/build_bundle_zip.py` | builds `oeb_ppi_benchmark.zip`, the single-file download of this package, from the files above |
-| `README_STEP_BY_STEP.md`, `OPENEBENCH_SUBMISSION_READINESS.md` | how the package was built and what remains before the registration on OpenEBench |
+| `README_STEP_BY_STEP.md`, `OPENEBENCH_SUBMISSION_READINESS.md` | how the package was built, and its status and what remains before the registration on OpenEBench |
 
 The package is also available as a single file, `oeb_ppi_benchmark.zip`, attached to each [release](https://github.com/elixir-unibo/oeb_3dbioinfo_ppi_benchmark/releases/latest). It is not stored in the repository: it is built from these files, so the two cannot differ.
 

@@ -7,7 +7,7 @@ OpenEBench Scientific Benchmarking Data Model (v1.0.x) used as the target schema
 https://github.com/inab/benchmarking-data-model, docs at https://openebench.readthedocs.io
 
 This package was generated programmatically from the files actually present in the source
-repository (no synthetic data). Every number in `benchmark_summary_published_vs_recomputed.csv`
+repository (no synthetic data). Every number in `qc_analysis/diagnostics/benchmark_summary_published_vs_recomputed.csv`
 and every JSON file under `metadata/` and `datasets/` was produced by parsing the repository's
 own CSVs. All numbered steps below are exactly the steps a maintainer would repeat to update or
 extend this benchmarking event.
@@ -62,7 +62,7 @@ suggesting MaSIF genuinely failed to compute a score for a large fraction of str
 coverage gap, not a bug in this package's matching logic.
 
 **Consequence for earlier sections of this README**: Steps 4.4, 5b, 5c, and
-MOBI_WOLFSON_DISCREPANCY_DIAGNOSTIC.md / training_flag_hypothesis_test.csv were all computed
+qc_analysis/diagnostics/MOBI_WOLFSON_DISCREPANCY_DIAGNOSTIC.md / qc_analysis/diagnostics/training_flag_hypothesis_test.csv were all computed
 on the BUGGY ~971-entry population and their specific numeric conclusions (e.g. "mean abs
 diff 0.043 via nested CV", the Training-flag test table, the F_Network_full/bsa-correlation
 finding) are retained below for transparency and audit trail, but are SUPERSEDED by this
@@ -71,7 +71,7 @@ answer is this ID-matching bug, not cross-validation methodology, score selectio
 Training-flag semantics. The CV infrastructure (Step 5b/5c scripts) remains correct and
 useful, but should be re-run on the corrected `cv_fold_assignment.csv` and
 `gold_standard_labels.csv` (already updated in this version of the package) for any future
-work -- the nested-CV score-selection results in `cv_score_selection_vs_published.csv` were
+work -- the nested-CV score-selection results in `qc_analysis/superseded/cv_score_selection_vs_published.csv` were
 NOT regenerated in this pass and still reflect the buggy ID matching.
 
 ---------------------------------------------------------------------------------------------
@@ -157,7 +157,7 @@ NOT regenerated in this pass and still reflect the buggy ID matching.
      a `Dataset_participant_<participant_id>.json` (`type: participant`,
      `depends_on.tool_id`, `depends_on.rel_dataset_ids -> input dataset`).
 
-4.4  QC note kept in the package (`benchmark_summary_published_vs_recomputed.csv`, now with
+4.4  QC note kept in the package (`qc_analysis/diagnostics/benchmark_summary_published_vs_recomputed.csv`, now with
      `published_rank` / `recomputed_rank` columns): the AUC-ROC recomputed directly from each
      `predictions.csv` against the gold standard is numerically close to the value published in
      `ROC_analysis/AUC_best_scores_participants.csv` for some participants (e.g. Bonvin 0.878
@@ -274,7 +274,7 @@ directly supports.
       `compute_metrics.py` computes. This isolates one question only: does this package's
       full-dataset AUC change once homology-safe held-out evaluation is used?
 
-5b.4  **Finding, saved to `cv_vs_resubstitution_auc.csv`**: for all 14 participants, the
+5b.4  **Finding, saved to `qc_analysis/superseded/cv_vs_resubstitution_auc.csv`**: for all 14 participants, the
       cross-validated AUC is nearly identical to the resubstitution AUC (e.g. Bonvin 0.8796 CV
       vs. 0.8779 resubstitution; Fernandez-Recio 0.5716 CV vs. 0.5675 resubstitution) — because
       AUC-ROC is a threshold-free, rank-based statistic, and this package already uses each
@@ -314,7 +314,7 @@ numbers.
       to pick it.
 
 5c.2  Run for all 13 groups (`datasets/cv_score_selection/group_*/cv_selection_results.json`,
-      summarized in `cv_score_selection_vs_published.csv`):
+      summarized in `qc_analysis/superseded/cv_score_selection_vs_published.csv`):
 
       | group | published AUC | CV-selected AUC (this split) | abs diff |
       |---|---|---|---|
@@ -388,7 +388,7 @@ workflow/
   validate.py, compute_metrics.py, consolidate.py
   nextflow_main.nf, run_pipeline.sh
   example_leaderboard.svg   (output of a full test run of the pipeline)
-benchmark_summary_published_vs_recomputed.csv
+qc_analysis/diagnostics/benchmark_summary_published_vs_recomputed.csv
 ```
 
 
@@ -476,7 +476,7 @@ those 4 rows directly: **their `I_p_biological`/`I_p_crystal` score columns are 
 these are entries DeepRank-GNN produced no prediction for at all (not just an unlabeled
 Training status), so they are already excluded from every AUC/accuracy computation in this
 package via the score-column `.dropna()`, independent of how the Training column is handled.
-No bug, no double-counting: `training_flag_hypothesis_test.csv`'s `dropna(subset=["label",
+No bug, no double-counting: `qc_analysis/diagnostics/training_flag_hypothesis_test.csv`'s `dropna(subset=["label",
 "score","tflag"])` and the main pipeline's score-only dropna agree on excluding exactly these
 4 rows for Bonvin. Casadio has zero NaN in its Training column across both files.
 
@@ -487,7 +487,7 @@ Re-ran the column-name scan (train, test, split, fold, cv, holdout, held, calib,
 class_set, subset) across every CSV/.out file in the ENTIRE repository, not just `groups/` --
 including `AlphaFold_models/`, `random_forest_analysis/`, `ROC_analysis/`, and `benchmark/`.
 
-Result (full list in `training_flag_wholerepo_scan.csv`):
+Result (full list in `qc_analysis/diagnostics/training_flag_wholerepo_scan.csv`):
 - Zero hits outside `groups/`.
 - Every hit inside `groups/imported/` (Casadio's, Bonvin's, MOBI's, Venclovas's files bundled
   under `group_Kihara/imported/`) is BYTE-IDENTICAL (verified by checksum) to the origin
@@ -602,7 +602,7 @@ New package contents added for these metrics:
   in the local visualizer page.
 - `Challenge_PPI-PhysioClassification.json`'s `metrics_categories` updated to register all
   6 assessment metrics and reference all 4 aggregation datasets.
-- `benchmark_summary_published_vs_recomputed.csv` extended with `aucpr`, `balanced_accuracy`,
+- `qc_analysis/diagnostics/benchmark_summary_published_vs_recomputed.csv` extended with `aucpr`, `balanced_accuracy`,
   `f1_score`, `mcc`, `threshold_used_oriented` and `threshold_source` columns.
 - The local visualizer page's Results section now also shows a full table with all 5 metrics
   for all 14 participants, underneath the original AUC-vs-Accuracy scatter chart.
@@ -627,7 +627,7 @@ analysis into an interactive comparison tool:
 - **Baseline CV leaderboards** were precomputed for all 14 participants under all 4 strategies
   (`qc_analysis/cv_leaderboard/strategy{1,2,2b,3}.json`) so a new upload is compared against
   numbers computed with the exact same held-out procedure, not against the resubstitution values
-  in `benchmark_summary_published_vs_recomputed.csv` (which use each tool's own published
+  in `qc_analysis/diagnostics/benchmark_summary_published_vs_recomputed.csv` (which use each tool's own published
   threshold and are not cross-validated).
 - The server (`serve_local_openebench_visualizer.py`) exposes `POST /api/evaluate_submission`
   (multipart file upload + chosen strategy + submission name), `GET /api/strategies`, and a

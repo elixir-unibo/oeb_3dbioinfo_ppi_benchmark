@@ -22,7 +22,7 @@ No participant's *published* threshold is used here on purpose: mixing a
 globally fixed published threshold for some tools with a data-driven one for
 others (including any newly uploaded tool, which has no published threshold)
 would make the comparison apples-to-oranges. The resubstitution metrics in
-benchmark_summary_published_vs_recomputed.csv (which DO use published
+qc_analysis/diagnostics/benchmark_summary_published_vs_recomputed.csv (which DO use published
 thresholds) remain the correct place to compare against the manuscript.
 """
 import csv

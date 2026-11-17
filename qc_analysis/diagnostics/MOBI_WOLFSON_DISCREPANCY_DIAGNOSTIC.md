@@ -37,7 +37,7 @@ discrepancy, not resolved.
 Tested across ALL 6 groups whose raw-score files carry a Training/TrainingColumn flag
 (Bonvin, Zou, SWISS-MODEL, Bologna, MOBI, Wolfson), not just the two outliers, by comparing
 full-dataset AUC vs. held-out-only (Training==False/0) AUC vs. flagged-subset-only AUC
-(see training_flag_hypothesis_test.csv).
+(see qc_analysis/diagnostics/training_flag_hypothesis_test.csv).
 
 **Result: refuted as a general explanation.**
 - Only 2/6 groups (Bonvin, SWISS-MODEL) move even marginally closer to the published value when
@@ -80,17 +80,17 @@ The Training-flag hypothesis test below, and the F_Network_full/buried-surface-a
 were genuine observations on the (buggy) ~971-entry population and are retained for the audit
 trail, but neither was the actual explanation -- the ID bug was. This file's title should be
 read as historical; the live, corrected numbers are in
-`benchmark_summary_published_vs_recomputed.csv` and the datasets under `datasets/assessment/`.
+`qc_analysis/diagnostics/benchmark_summary_published_vs_recomputed.csv` and the datasets under `datasets/assessment/`.
 
 
-## Correction: training_flag_hypothesis_test.csv regenerated on corrected entry_id + fixed NaN handling
+## Correction: qc_analysis/diagnostics/training_flag_hypothesis_test.csv regenerated on corrected entry_id + fixed NaN handling
 
 The version of this table referenced above was computed on the pre-fix ~971-entry population
 AND had a bug counting `tflag != false_val` rows that were actually NaN (missing Training flag)
 as "flagged/training" (e.g. Bonvin showed n_flagged=133 = 129 True + 4 NaN). Both are now fixed:
 entry_id uses the corrected ID_InterfaceID composite, and rows with a missing Training flag are
 dropped before computing held-out/flagged subsets (Bonvin n_flagged is now correctly 129).
-See the regenerated training_flag_hypothesis_test.csv for the corrected numbers. The qualitative
+See the regenerated qc_analysis/diagnostics/training_flag_hypothesis_test.csv for the corrected numbers. The qualitative
 conclusion is unchanged: the Training flag does not behave as a leakage-marking split -- on the
 corrected data, 4 of 6 groups (Bonvin, Zou, SWISS-MODEL, MOBI) show the flagged subset with a
 HIGHER AUC than held-out (opposite of leakage inflation), and only Bologna and Wolfson show it
