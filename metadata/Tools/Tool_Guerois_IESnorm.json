@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:Guerois_IESnorm",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "IES homolog-normalized (10 seq, size-normalized)",
+  "description": "Interface Evolutionary Score normalized by homolog count and interface size.",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:Raphael.Guerois"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}

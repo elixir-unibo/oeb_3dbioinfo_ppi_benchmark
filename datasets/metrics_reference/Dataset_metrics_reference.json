@@ -1,0 +1,37 @@
+{
+  "_id": "3DBioinfo:2023-05-15_goldstandard",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset",
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ],
+  "challenge_ids": [
+    "3DBioinfo:PPI-PhysioClassification"
+  ],
+  "visibility": "challenge",
+  "name": "Metrics reference (gold standard): physiological vs. non-physiological labels",
+  "version": "2023-04-30 (manually curated)",
+  "description": "Ground-truth physiological (1) / non-physiological-crystallographic (0) annotation for each benchmark entry, derived from ProtCID and QSalign consensus plus manual curation of ambiguous cases (6 entries removed, 13 relabeled relative to the original release). Kept at challenge-level visibility: only used internally by the metrics-generation step.",
+  "type": "metrics_reference",
+  "dataset_contact_ids": [
+    "3DBioinfo:3D-Bioinfo.Coordinators"
+  ],
+  "dates": {
+    "creation": "2023-05-15T00:00:00Z",
+    "modification": "2023-05-15T00:00:00Z"
+  },
+  "depends_on": {
+    "rel_dataset_ids": [
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_input"
+      }
+    ]
+  },
+  "datalink": {
+    "attrs": [
+      "archive"
+    ],
+    "status": "ok",
+    "uri": "gold_standard_labels.csv",
+    "validation_date": "2023-05-15T00:00:00Z"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "_id": "3DBioinfo:3D-Bioinfo.Coordinators",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Contact",
+  "givenName": "3D-Bioinfo",
+  "surname": "Coordinators",
+  "email": [
+    "unknown@email.es"
+  ],
+  "notes": "ELIXIR 3D-BioInfo Community benchmarking coordinators",
+  "contact_type": "person",
+  "community_id": "OEBC_3DBioinfo"
+}

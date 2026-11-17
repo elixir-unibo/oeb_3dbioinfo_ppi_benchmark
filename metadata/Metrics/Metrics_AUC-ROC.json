@@ -1,0 +1,13 @@
+{
+  "_id": "3DBioinfo:AUC-ROC",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Metrics",
+  "title": "Area Under the ROC Curve (AUC-ROC)",
+  "description": "Ability of a raw interface score to discriminate physiological from crystallographic (non-physiological) homodimer interfaces, measured as the area under the Receiver Operating Characteristic curve.",
+  "metrics_contact_ids": [
+    "3DBioinfo:3D-Bioinfo.Coordinators"
+  ],
+  "formal_definition": "AUC = P(score(physiological) > score(non-physiological)) estimated via the Mann-Whitney U statistic",
+  "references": [
+    "doi:10.22541/au.167569565.51141128/v1"
+  ]
+}

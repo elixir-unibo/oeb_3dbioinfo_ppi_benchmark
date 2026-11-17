@@ -1,0 +1,41 @@
+{
+  "_id": "3DBioinfo:2023-05-15_A_BalancedAccuracy_Correia_MaSIF",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset",
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ],
+  "challenge_ids": [
+    "3DBioinfo:PPI-PhysioClassification"
+  ],
+  "visibility": "public",
+  "name": "Balanced Accuracy of MaSIF",
+  "version": "1",
+  "description": "Balanced Accuracy of MaSIF at published threshold (13.99936, oriented scale) on 1552 scored entries, corrected entry_id matching.",
+  "type": "assessment",
+  "dataset_contact_ids": [
+    "3DBioinfo:Coordinators"
+  ],
+  "dates": {
+    "creation": "2023-05-15T00:00:00Z",
+    "modification": "2023-05-15T00:00:00Z"
+  },
+  "depends_on": {
+    "metrics_id": "3DBioinfo:Balanced-Accuracy",
+    "tool_id": "3DBioinfo:compute_BalancedAccuracy",
+    "rel_dataset_ids": [
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_P_Correia_MaSIF"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_goldstandard"
+      }
+    ]
+  },
+  "datalink": {
+    "inline_data": {
+      "value": 0.7077,
+      "n_entries": 1552,
+      "threshold_used": 13.99936
+    }
+  }
+}

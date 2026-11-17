@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:Oliva_CP",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "Contact-Propensity (CP) raw score",
+  "description": "Residue-contact-propensity-based raw interface score.",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:Baldo.Oliva"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}

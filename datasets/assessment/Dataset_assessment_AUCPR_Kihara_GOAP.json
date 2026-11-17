@@ -1,0 +1,40 @@
+{
+  "_id": "3DBioinfo:2023-05-15_A_AUCPR_Kihara_GOAP",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset",
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ],
+  "challenge_ids": [
+    "3DBioinfo:PPI-PhysioClassification"
+  ],
+  "visibility": "public",
+  "name": "AUCPR of GOAP",
+  "version": "1",
+  "description": "AUCPR of GOAP on 1671 scored entries, corrected entry_id matching. Threshold-free ranking metric (no decision threshold applied).",
+  "type": "assessment",
+  "dataset_contact_ids": [
+    "3DBioinfo:Coordinators"
+  ],
+  "dates": {
+    "creation": "2023-05-15T00:00:00Z",
+    "modification": "2023-05-15T00:00:00Z"
+  },
+  "depends_on": {
+    "metrics_id": "3DBioinfo:AUCPR",
+    "tool_id": "3DBioinfo:compute_AUCPR",
+    "rel_dataset_ids": [
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_P_Kihara_GOAP"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_goldstandard"
+      }
+    ]
+  },
+  "datalink": {
+    "inline_data": {
+      "value": 0.713,
+      "n_entries": 1671
+    }
+  }
+}

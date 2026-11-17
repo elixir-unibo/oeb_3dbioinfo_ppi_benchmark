@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:Furman_InterfaceAnalyzer",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "Rosetta InterfaceAnalyzer (dG_cross/dSASA x100)",
+  "description": "Rosetta InterfaceAnalyzer binding-energy-per-buried-area term after short docking refinement.",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:Ora.Schueler-Furman"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}

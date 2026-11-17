@@ -1,0 +1,12 @@
+{
+  "_id": "3DBioinfo:Ora.Schueler-Furman",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Contact",
+  "givenName": "Ora",
+  "surname": "Schueler-Furman",
+  "email": [
+    "unknown@email.es"
+  ],
+  "notes": "Schueler-Furman Lab, Hebrew University of Jerusalem",
+  "contact_type": "person",
+  "community_id": "OEBC_3DBioinfo"
+}

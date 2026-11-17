@@ -1,0 +1,28 @@
+{
+  "_id": "OEBC_3DBioinfo",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Community",
+  "name": "ELIXIR 3D-BioInfo Community",
+  "acronym": "3D-BioInfo",
+  "status": "active",
+  "description": "ELIXIR 3D-BioInfo Community benchmarking activity on scoring and ranking of protein-protein interfaces and quaternary structure assignment, based on a curated benchmark of 1677 homodimer crystal structures.",
+  "community_contact_ids": [
+    "3DBioinfo:3D-Bioinfo.Coordinators"
+  ],
+  "references": [
+    "doi:10.22541/au.167569565.51141128/v1"
+  ],
+  "keywords": [
+    "protein-protein interaction",
+    "quaternary structure",
+    "interface scoring",
+    "homodimers",
+    "structural bioinformatics",
+    "AlphaFold-multimer"
+  ],
+  "links": [
+    {
+      "label": "MainSite",
+      "uri": "https://github.com/vibbits/Elixir-3DBioInfo-Benchmark-Protein-Interfaces"
+    }
+  ]
+}

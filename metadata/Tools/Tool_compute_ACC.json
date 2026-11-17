@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:compute_ACC",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "Accuracy-at-threshold computation script",
+  "description": "Computes classification accuracy of a participant's raw score, thresholded at its reported optimal cut-off, against the gold-standard label.",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:3D-Bioinfo.Coordinators"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}

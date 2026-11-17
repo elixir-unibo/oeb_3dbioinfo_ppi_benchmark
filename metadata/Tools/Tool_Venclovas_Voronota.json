@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:Venclovas_Voronota",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "Voronota interface energy (normalized)",
+  "description": "Voronoi-tessellation-based contact-area-derived interface energy, normalized.",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:Ceslovas.Venclovas"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}

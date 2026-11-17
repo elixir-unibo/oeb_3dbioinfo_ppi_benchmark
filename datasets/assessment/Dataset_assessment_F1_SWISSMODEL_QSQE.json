@@ -1,0 +1,41 @@
+{
+  "_id": "3DBioinfo:2023-05-15_A_F1_SWISSMODEL_QSQE",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset",
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ],
+  "challenge_ids": [
+    "3DBioinfo:PPI-PhysioClassification"
+  ],
+  "visibility": "public",
+  "name": "F1 Score of QSQE",
+  "version": "1",
+  "description": "F1 Score of QSQE at published threshold (0.670138, oriented scale) on 1123 scored entries, corrected entry_id matching.",
+  "type": "assessment",
+  "dataset_contact_ids": [
+    "3DBioinfo:Coordinators"
+  ],
+  "dates": {
+    "creation": "2023-05-15T00:00:00Z",
+    "modification": "2023-05-15T00:00:00Z"
+  },
+  "depends_on": {
+    "metrics_id": "3DBioinfo:F1-Score",
+    "tool_id": "3DBioinfo:compute_F1",
+    "rel_dataset_ids": [
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_P_SWISSMODEL_QSQE"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_goldstandard"
+      }
+    ]
+  },
+  "datalink": {
+    "inline_data": {
+      "value": 0.7412,
+      "n_entries": 1123,
+      "threshold_used": 0.670138
+    }
+  }
+}

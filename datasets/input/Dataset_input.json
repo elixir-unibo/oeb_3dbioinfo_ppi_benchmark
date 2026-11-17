@@ -1,0 +1,30 @@
+{
+  "_id": "3DBioinfo:2023-05-15_input",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset",
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ],
+  "challenge_ids": [
+    "3DBioinfo:PPI-PhysioClassification"
+  ],
+  "visibility": "public",
+  "name": "PPI benchmark structures (1671 curated homodimer interfaces)",
+  "version": "2023-04-30",
+  "description": "PDB and mmCIF coordinate files for 1671 curated homodimer crystal structures (836/841 physiological/non-physiological split before curation, 840/831 after manual curation), to be scored by participant tools. Labels are withheld from this dataset; see the public_reference dataset for the list of valid entry identifiers participants must cover.",
+  "type": "input",
+  "dataset_contact_ids": [
+    "3DBioinfo:3D-Bioinfo.Coordinators"
+  ],
+  "dates": {
+    "creation": "2023-05-15T00:00:00Z",
+    "modification": "2023-05-15T00:00:00Z"
+  },
+  "datalink": {
+    "uri": "https://github.com/vibbits/Elixir-3DBioInfo-Benchmark-Protein-Interfaces/tree/main/benchmark",
+    "attrs": [
+      "archive"
+    ],
+    "status": "ok",
+    "validation_date": "2023-05-15T00:00:00Z"
+  }
+}

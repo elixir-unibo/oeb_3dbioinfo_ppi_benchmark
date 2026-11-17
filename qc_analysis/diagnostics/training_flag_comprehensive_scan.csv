@@ -1,0 +1,10 @@
+group,file,column,n_unique_values,value_counts,informative
+group_Bonvin,group_Bonvin/results-raw/deeprank.csv,Training,2,"{False: 1548, True: 129}",True
+group_Bonvin,group_Bonvin/results-raw/prodigy-crystal.csv,Training,2,"{False: 1548, True: 129}",True
+group_Bonvin,group_Bonvin/results-raw/deeprank-gnn.csv,Training,2,"{False: 1545, True: 129, nan: 4}",True
+group_Casadio,group_Casadio/results-classifier/bolognabiocomputing.ispred4-sens-score.csv,Training,2,"{0: 1667, 1: 10}",True
+group_Casadio,group_Casadio/results-classifier/bolognabiocomputing.ispred4-mcc-score.csv,Training,2,"{0: 1667, 1: 10}",True
+group_MOBI,group_MOBI/results-raw/MOBI_raw_scores.csv,Training,2,"{False: 1477, True: 200}",True
+group_SWISS-MODEL,group_SWISS-MODEL/results-raw/qsqe_results.csv,Training,2,"{False: 1520, True: 157}",True
+group_Wolfson,group_Wolfson/results-classifier/classifier-data.csv,TrainingColumn,2,"{0: 1243, 1: 434}",True
+group_Zou,group_Zou/results-raw/Zoulab_results_DLScoreBC.csv,Training,2,"{False: 1599, True: 78}",True

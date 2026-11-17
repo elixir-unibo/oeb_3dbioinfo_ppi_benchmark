@@ -1,0 +1,13 @@
+{
+  "_id": "3DBioinfo:MCC",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Metrics",
+  "title": "Matthews Correlation Coefficient (MCC)",
+  "description": "Correlation coefficient between observed and predicted binary classifications (physiological vs. crystallographic) at a decision threshold; considered a robust single-number summary of a binary classifier's quality even under class imbalance. Threshold is the published threshold reported for the scoring function when available; otherwise the data-driven optimal threshold (Youden's J statistic) is used.",
+  "metrics_contact_ids": [
+    "3DBioinfo:3D-Bioinfo.Coordinators"
+  ],
+  "formal_definition": "MCC = (TP*TN - FP*FN) / sqrt((TP+FP)(TP+FN)(TN+FP)(TN+FN))",
+  "references": [
+    "doi:10.22541/au.167569565.51141128/v1"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:Correia_MaSIF",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "MaSIF descriptor-distance score",
+  "description": "Molecular Surface Interaction Fingerprints (MaSIF) geometric/chemical descriptor distance score.",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:Bruno.Correia"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}

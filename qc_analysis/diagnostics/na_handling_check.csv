@@ -1,0 +1,15 @@
+participant_id,file_rows,score_is_NaN,matched_to_gold_standard,final_n_used_NaN_excluded
+Bonvin_DeepRank-GNN,1678,37,1672,1635
+Furman_InterfaceAnalyzer,1671,0,1665,1665
+Venclovas_Voronota,1677,0,1671,1671
+Zou_DLScoreBC,1677,0,1671,1671
+Guerois_IESnorm,1677,250,1585,1395
+FernandezRecio_NIPacking,1677,14,1671,1657
+SWISSMODEL_QSQE,1677,548,1671,1123
+Bologna_ISPRED4,1677,0,1671,1671
+Kihara_GOAP,1677,0,1671,1671
+Correia_MaSIF,1677,66,1618,1552
+Oliva_CP,1677,0,1671,1671
+MOBI_ShapeHydroTails,1677,0,1671,1671
+Wolfson_ProbaConsensus,1677,0,1671,1671
+RF_Consensus_top221,1648,0,1642,1642

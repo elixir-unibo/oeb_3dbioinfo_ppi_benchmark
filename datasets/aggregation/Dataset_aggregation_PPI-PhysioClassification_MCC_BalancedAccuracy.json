@@ -1,0 +1,194 @@
+{
+  "_id": "3DBioinfo:2023-05-15_PPI-PhysioClassification_Aggregation_MCC_BalancedAccuracy",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset",
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ],
+  "challenge_ids": [
+    "3DBioinfo:PPI-PhysioClassification"
+  ],
+  "visibility": "public",
+  "name": "Challenge leaderboard: PPI-PhysioClassification (MCC vs BalancedAccuracy)",
+  "version": "1",
+  "description": "Combines MCC (x) and Balanced Accuracy (y), both evaluated at the published threshold (or data-driven optimal threshold when none is published), across all 14 participant scoring functions.",
+  "type": "aggregation",
+  "dataset_contact_ids": [
+    "3DBioinfo:Coordinators"
+  ],
+  "dates": {
+    "creation": "2023-05-15T00:00:00Z",
+    "modification": "2023-05-15T00:00:00Z"
+  },
+  "depends_on": {
+    "tool_id": "3DBioinfo:aggregate_benchmark",
+    "rel_dataset_ids": [
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_MCC_Zou_DLScoreBC"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_BalancedAccuracy_Zou_DLScoreBC"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_MCC_SWISSMODEL_QSQE"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_BalancedAccuracy_SWISSMODEL_QSQE"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_MCC_Furman_InterfaceAnalyzer"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_BalancedAccuracy_Furman_InterfaceAnalyzer"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_MCC_FernandezRecio_NIPacking"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_BalancedAccuracy_FernandezRecio_NIPacking"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_MCC_Guerois_IESnorm"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_BalancedAccuracy_Guerois_IESnorm"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_MCC_RF_Consensus_top221"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_BalancedAccuracy_RF_Consensus_top221"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_MCC_Oliva_CP"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_BalancedAccuracy_Oliva_CP"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_MCC_Bonvin_DeepRank-GNN"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_BalancedAccuracy_Bonvin_DeepRank-GNN"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_MCC_Kihara_GOAP"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_BalancedAccuracy_Kihara_GOAP"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_MCC_MOBI_ShapeHydroTails"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_BalancedAccuracy_MOBI_ShapeHydroTails"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_MCC_Venclovas_Voronota"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_BalancedAccuracy_Venclovas_Voronota"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_MCC_Wolfson_ProbaConsensus"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_BalancedAccuracy_Wolfson_ProbaConsensus"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_MCC_Correia_MaSIF"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_BalancedAccuracy_Correia_MaSIF"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_MCC_Bologna_ISPRED4"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_A_BalancedAccuracy_Bologna_ISPRED4"
+      }
+    ]
+  },
+  "datalink": {
+    "inline_data": {
+      "challenge_participants": [
+        {
+          "tool_id": "3DBioinfo:Zou_DLScoreBC",
+          "metric_x": 0.4956,
+          "metric_y": 0.7473
+        },
+        {
+          "tool_id": "3DBioinfo:SWISSMODEL_QSQE",
+          "metric_x": 0.3964,
+          "metric_y": 0.7244
+        },
+        {
+          "tool_id": "3DBioinfo:Furman_InterfaceAnalyzer",
+          "metric_x": 0.5864,
+          "metric_y": 0.7918
+        },
+        {
+          "tool_id": "3DBioinfo:FernandezRecio_NIPacking",
+          "metric_x": 0.5319,
+          "metric_y": 0.7659
+        },
+        {
+          "tool_id": "3DBioinfo:Guerois_IESnorm",
+          "metric_x": 0.5375,
+          "metric_y": 0.7683
+        },
+        {
+          "tool_id": "3DBioinfo:RF_Consensus_top221",
+          "metric_x": 0.765,
+          "metric_y": 0.8826
+        },
+        {
+          "tool_id": "3DBioinfo:Oliva_CP",
+          "metric_x": 0.386,
+          "metric_y": 0.693
+        },
+        {
+          "tool_id": "3DBioinfo:Bonvin_DeepRank-GNN",
+          "metric_x": 0.6175,
+          "metric_y": 0.8041
+        },
+        {
+          "tool_id": "3DBioinfo:Kihara_GOAP",
+          "metric_x": 0.3873,
+          "metric_y": 0.6927
+        },
+        {
+          "tool_id": "3DBioinfo:MOBI_ShapeHydroTails",
+          "metric_x": 0.3597,
+          "metric_y": 0.6797
+        },
+        {
+          "tool_id": "3DBioinfo:Venclovas_Voronota",
+          "metric_x": 0.5009,
+          "metric_y": 0.7504
+        },
+        {
+          "tool_id": "3DBioinfo:Wolfson_ProbaConsensus",
+          "metric_x": 0.3775,
+          "metric_y": 0.6777
+        },
+        {
+          "tool_id": "3DBioinfo:Correia_MaSIF",
+          "metric_x": 0.4174,
+          "metric_y": 0.7077
+        },
+        {
+          "tool_id": "3DBioinfo:Bologna_ISPRED4",
+          "metric_x": 0.4402,
+          "metric_y": 0.72
+        }
+      ],
+      "visualization": {
+        "type": "2D-plot",
+        "x_axis": "3DBioinfo:MCC",
+        "y_axis": "3DBioinfo:Balanced-Accuracy",
+        "optimization": "top-right"
+      }
+    },
+    "schema_url": "https://raw.githubusercontent.com/inab/OpenEBench_scientific_visualizer/js/benchmarking_data_model/inline_data_visualizer.json"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "_id": "3DBioinfo:PPI-PhysioClassification",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Challenge",
+  "acronym": "PPI-PhysioClassification",
+  "benchmarking_event_id": "3DBioinfo:PPI-Benchmark-2023",
+  "challenge_contact_ids": [
+    "3DBioinfo:3D-Bioinfo.Coordinators"
+  ],
+  "dates": {
+    "challenge_start": "2022-01-01T00:00:00Z",
+    "challenge_stop": "2023-05-15T00:00:00Z",
+    "creation": "2023-05-15T00:00:00Z",
+    "modification": "2023-05-15T00:00:00Z"
+  },
+  "is_automated": false,
+  "metrics_categories": [
+    {
+      "category": "assessment",
+      "description": "Metrics used to benchmark each scoring function's ability to classify the 1671 homodimer interfaces as physiological or crystallographic: two threshold-free ranking metrics (AUC-ROC, AUCPR) and three threshold-based metrics (Accuracy, Balanced Accuracy, F1 Score, MCC) evaluated at the published threshold reported for that scoring function, or at a data-driven optimal threshold (Youden's J statistic) when no published threshold exists.",
+      "metrics": [
+        {
+          "metrics_id": "3DBioinfo:AUC-ROC",
+          "tool_id": "3DBioinfo:compute_AUC"
+        },
+        {
+          "metrics_id": "3DBioinfo:ACC-at-threshold",
+          "tool_id": "3DBioinfo:compute_ACC"
+        },
+        {
+          "metrics_id": "3DBioinfo:AUCPR",
+          "tool_id": "3DBioinfo:compute_AUCPR"
+        },
+        {
+          "metrics_id": "3DBioinfo:Balanced-Accuracy",
+          "tool_id": "3DBioinfo:compute_BalancedAccuracy"
+        },
+        {
+          "metrics_id": "3DBioinfo:F1-Score",
+          "tool_id": "3DBioinfo:compute_F1"
+        },
+        {
+          "metrics_id": "3DBioinfo:MCC",
+          "tool_id": "3DBioinfo:compute_MCC"
+        }
+      ]
+    },
+    {
+      "category": "aggregation",
+      "description": "Combines pairs of metrics (AUC-ROC vs. Accuracy, AUC-ROC vs. AUCPR, Balanced Accuracy vs. F1 Score, MCC vs. Balanced Accuracy) of all participating scoring functions into four complementary 2D challenge leaderboards.",
+      "metrics": [
+        {
+          "metrics_id": "3DBioinfo:leaderboard-aggregation",
+          "tool_id": "3DBioinfo:aggregate_benchmark"
+        }
+      ]
+    }
+  ],
+  "name": "Discrimination of physiological vs. non-physiological (crystallographic) homodimer interfaces",
+  "references": [
+    "doi:10.22541/au.167569565.51141128/v1"
+  ],
+  "url": "https://github.com/vibbits/Elixir-3DBioInfo-Benchmark-Protein-Interfaces"
+}

@@ -1,0 +1,41 @@
+{
+  "_id": "3DBioinfo:2023-05-15_A_AUC_Correia_MaSIF",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset",
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ],
+  "challenge_ids": [
+    "3DBioinfo:PPI-PhysioClassification"
+  ],
+  "visibility": "public",
+  "name": "AUC-ROC of MaSIF descriptor-distance score",
+  "version": "3 (two-tier entry_id resolution)",
+  "description": "AUC-ROC of MaSIF descriptor-distance score on 1552 entries. Correia's own score file identifies ProtCID-derived complexes by the BARE PDB code (not ID_InterfaceID like other groups), so entry_id resolution falls back to the bare code ONLY when the gold standard has a single, unambiguous interface for that code (647 of 700 cases); the remaining 53 genuinely ambiguous cases are excluded rather than guessed. Recomputed value 0.7661 vs. published 0.75 (was 0.80 on the 947-entry population before this fallback).",
+  "type": "assessment",
+  "dataset_contact_ids": [
+    "3DBioinfo:Coordinators"
+  ],
+  "dates": {
+    "creation": "2023-05-15T00:00:00Z",
+    "modification": "2023-05-15T00:00:00Z"
+  },
+  "depends_on": {
+    "metrics_id": "3DBioinfo:AUC-ROC",
+    "tool_id": "3DBioinfo:compute_AUC",
+    "rel_dataset_ids": [
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_P_Correia_MaSIF"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_goldstandard"
+      }
+    ]
+  },
+  "datalink": {
+    "inline_data": {
+      "value": 0.7661,
+      "published_value": 0.75,
+      "n_entries": 1552
+    }
+  }
+}

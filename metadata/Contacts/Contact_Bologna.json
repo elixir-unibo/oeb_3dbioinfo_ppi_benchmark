@@ -1,0 +1,12 @@
+{
+  "_id": "3DBioinfo:Rita.Casadio",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Contact",
+  "givenName": "Rita",
+  "surname": "Casadio",
+  "email": [
+    "unknown@email.es"
+  ],
+  "notes": "Casadio Lab (Bologna Biocomputing Group), University of Bologna",
+  "contact_type": "person",
+  "community_id": "OEBC_3DBioinfo"
+}

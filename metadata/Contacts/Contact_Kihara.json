@@ -1,0 +1,12 @@
+{
+  "_id": "3DBioinfo:Daisuke.Kihara",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Contact",
+  "givenName": "Daisuke",
+  "surname": "Kihara",
+  "email": [
+    "unknown@email.es"
+  ],
+  "notes": "Kihara Lab, Purdue University",
+  "contact_type": "person",
+  "community_id": "OEBC_3DBioinfo"
+}

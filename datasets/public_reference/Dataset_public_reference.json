@@ -1,0 +1,37 @@
+{
+  "_id": "3DBioinfo:2023-05-15_publicref",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset",
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ],
+  "challenge_ids": [
+    "3DBioinfo:PPI-PhysioClassification"
+  ],
+  "visibility": "public",
+  "name": "Public reference: valid benchmark entry identifiers",
+  "version": "2023-04-30",
+  "description": "List of the 1671 valid entry identifiers (PDB id [+ biological-assembly suffix]) that a conformant participant submission must score, used by the validation step to check submission completeness/format.",
+  "type": "public_reference",
+  "dataset_contact_ids": [
+    "3DBioinfo:3D-Bioinfo.Coordinators"
+  ],
+  "dates": {
+    "creation": "2023-05-15T00:00:00Z",
+    "modification": "2023-05-15T00:00:00Z"
+  },
+  "depends_on": {
+    "rel_dataset_ids": [
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_input"
+      }
+    ]
+  },
+  "datalink": {
+    "attrs": [
+      "archive"
+    ],
+    "status": "ok",
+    "uri": "public_reference_ids.csv",
+    "validation_date": "2023-05-15T00:00:00Z"
+  }
+}

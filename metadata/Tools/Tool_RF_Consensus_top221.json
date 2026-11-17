@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:RF_Consensus_top221",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "Cross-validated Random Forest consensus classifier (top-221 features)",
+  "description": "Random-Forest classifier trained on the 221 features pooled across all 13 participating groups (cross-validated).",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:3D-Bioinfo.Coordinators"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}

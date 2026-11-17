@@ -1,0 +1,14 @@
+group,published_auc,cv_selected_auc,cv_selected_std,n_candidates_considered,top_winner,abs_diff_vs_published,published_rank,cv_selected_rank,rank_diff
+Bonvin,0.85,0.8796,0.0219,11,deeprank-gnn::I_p_biological,0.03,1,1,0
+Furman,0.84,0.8346,0.0527,8,interface_analyzer_docked_100::F_dG-cross/dSASAx100,0.005,2,4,2
+Venclovas,0.82,0.8285,0.0497,74,VenclovasLab::F_Voronota_diff_glob_light_score,0.009,3,6,3
+Guerois,0.81,0.8606,0.0404,11,GueroisAndreani::I_IESh-10seq-normsize,0.051,4,3,1
+Zou,0.81,0.8068,0.0285,2,Zoulab_results_DLScoreBC::I_p_biological,0.003,4,9,5
+Fernandez-Recio,0.79,0.754,0.0402,88,Fernandez-Recio::F_CP_SKOIP,0.036,6,13,7
+SWISS-MODEL,0.79,0.8254,0.0256,1,qsqe_results::I_QSQE,0.035,6,7,1
+Bologna,0.76,0.8191,0.0358,2,bolognabiocomputing.ispred4-mcc-score::I_physiological_score,0.059,8,8,0
+Correia,0.75,0.7668,0.0102,3,Masif_score::I_descriptor_distance_score,0.017,9,11,2
+Kihara,0.75,0.7658,0.0811,8,Kiharalab_feature::F_RosettaInterfaceEnergy,0.016,9,12,3
+Oliva,0.75,0.7813,0.0527,43,Oliva_classifiers_data_v3::I_Probability_true_RFC_all_feat,0.031,9,10,1
+MOBI,0.72,0.8289,0.0151,4,MOBI_raw_scores::I_shape_hydro_tails,0.109,12,5,7
+Wolfson,0.71,0.8671,0.0113,6,classifier-data::F_Network_full,0.157,13,2,11
