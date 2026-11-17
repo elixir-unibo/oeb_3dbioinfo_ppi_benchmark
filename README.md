@@ -1,7 +1,8 @@
 # ELIXIR 3D-BioInfo PPI Benchmark — OpenEBench experiment
 
-**Interactive page: [https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/index.html](https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/index.html)**
-Load your own predictions there ("Submit new predictions" tab) and see how they rank against the 14 reference methods of Schweke *et al.* (DOI [10.22541/au.167569565.51141128/v1](https://doi.org/10.22541/au.167569565.51141128/v1)). The evaluation runs in your browser; no file is uploaded anywhere.
+**Interactive page: [https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/](https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/)**
+**Submit your own predictions: [https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/#submit-section](https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/#submit-section)**
+Load your own predictions there and see how they rank against the 14 reference methods of Schweke *et al.* (DOI [10.22541/au.167569565.51141128/v1](https://doi.org/10.22541/au.167569565.51141128/v1)). The evaluation runs in your browser; no file is uploaded anywhere.
 
 Benchmark task: discriminate **physiological** from **crystallographic (non-physiological)** protein homodimer interfaces. 1,671 curated entries (840 physiological, 831 non-physiological). The data were FAIRified in [ppi-benchmark-fair](https://biofold.github.io/ppi-benchmark-fair); this repository connects them to the [OpenEBench](https://openebench.bsc.es) ecosystem (ELIXIR Tools Platform, WP4 Activity 1, University of Bologna node).
 
@@ -45,7 +46,7 @@ Rank by AUROC: **6 of 15** (the 14 reference methods plus the new one). The page
 ### How to submit your own predictions
 
 1. Prepare a CSV with two columns, `entry_id` and `score` (higher score = more likely physiological), as in [`data/predictions_template.csv`](data/predictions_template.csv).
-2. Open the [page](https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/index.html), choose **Submit new predictions**, select a cross-validation strategy (Strategy 3 is the default recommendation) and upload the file.
+2. Open the [submission section](https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/#submit-section), select a cross-validation strategy (Strategy 3 is the default recommendation) and upload the file.
 
 ## What is in this repository
 
