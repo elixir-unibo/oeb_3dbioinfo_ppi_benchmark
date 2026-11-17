@@ -1,0 +1,4 @@
+FROM python:3.11-slim
+WORKDIR /app
+COPY compute_metrics.py .
+ENTRYPOINT ["python3", "compute_metrics.py"]

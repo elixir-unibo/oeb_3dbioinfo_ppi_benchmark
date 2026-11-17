@@ -1,0 +1,12 @@
+{
+  "_id": "3DBioinfo:Juan.Fernandez-Recio",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Contact",
+  "givenName": "Juan",
+  "surname": "Fernandez-Recio",
+  "email": [
+    "unknown@email.es"
+  ],
+  "notes": "Fernandez-Recio Lab, CSIC",
+  "contact_type": "person",
+  "community_id": "OEBC_3DBioinfo"
+}

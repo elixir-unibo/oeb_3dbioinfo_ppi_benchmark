@@ -1,0 +1,41 @@
+{
+  "_id": "3DBioinfo:2023-05-15_A_ACC_Bologna_ISPRED4",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset",
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ],
+  "challenge_ids": [
+    "3DBioinfo:PPI-PhysioClassification"
+  ],
+  "visibility": "public",
+  "name": "Accuracy-at-threshold of ISPRED4 physiological-score (MCC-optimized)",
+  "version": "2 (corrected entry_id matching)",
+  "description": "Classification accuracy of ISPRED4 physiological-score (MCC-optimized) at threshold 0.2144549, corrected entry_id matching.",
+  "type": "assessment",
+  "dataset_contact_ids": [
+    "3DBioinfo:Coordinators"
+  ],
+  "dates": {
+    "creation": "2023-05-15T00:00:00Z",
+    "modification": "2023-05-15T00:00:00Z"
+  },
+  "depends_on": {
+    "metrics_id": "3DBioinfo:ACC-at-threshold",
+    "tool_id": "3DBioinfo:compute_ACC",
+    "rel_dataset_ids": [
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_P_Bologna_ISPRED4"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_goldstandard"
+      }
+    ]
+  },
+  "datalink": {
+    "inline_data": {
+      "value": 0.7199,
+      "threshold_used": 0.2144549,
+      "n_entries": 1671
+    }
+  }
+}

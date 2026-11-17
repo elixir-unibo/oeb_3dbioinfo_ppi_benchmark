@@ -1,0 +1,42 @@
+{
+  "_id": "3DBioinfo:2023-05-15_A_ACC_Venclovas_Voronota",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset",
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ],
+  "challenge_ids": [
+    "3DBioinfo:PPI-PhysioClassification"
+  ],
+  "visibility": "public",
+  "name": "Accuracy-at-threshold of Voronota interface energy (normalized)",
+  "version": "2 (corrected entry_id matching)",
+  "description": "Accuracy at a DATA-DRIVEN optimal threshold (0.44175, oriented scale, Youden's J) since no published threshold exists for this feature; corrected entry_id matching (full 1671-entry population).",
+  "type": "assessment",
+  "dataset_contact_ids": [
+    "3DBioinfo:Coordinators"
+  ],
+  "dates": {
+    "creation": "2023-05-15T00:00:00Z",
+    "modification": "2023-05-15T00:00:00Z"
+  },
+  "depends_on": {
+    "metrics_id": "3DBioinfo:ACC-at-threshold",
+    "tool_id": "3DBioinfo:compute_ACC",
+    "rel_dataset_ids": [
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_P_Venclovas_Voronota"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_goldstandard"
+      }
+    ]
+  },
+  "datalink": {
+    "inline_data": {
+      "value": 0.7504,
+      "threshold_used": 0.44175,
+      "threshold_source": "data_driven_youden_j",
+      "n_entries": 1671
+    }
+  }
+}

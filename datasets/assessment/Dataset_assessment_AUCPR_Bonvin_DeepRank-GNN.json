@@ -1,0 +1,40 @@
+{
+  "_id": "3DBioinfo:2023-05-15_A_AUCPR_Bonvin_DeepRank-GNN",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset",
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ],
+  "challenge_ids": [
+    "3DBioinfo:PPI-PhysioClassification"
+  ],
+  "visibility": "public",
+  "name": "AUCPR of DeepRank-GNN",
+  "version": "1",
+  "description": "AUCPR of DeepRank-GNN on 1634 scored entries, corrected entry_id matching. Threshold-free ranking metric (no decision threshold applied).",
+  "type": "assessment",
+  "dataset_contact_ids": [
+    "3DBioinfo:Coordinators"
+  ],
+  "dates": {
+    "creation": "2023-05-15T00:00:00Z",
+    "modification": "2023-05-15T00:00:00Z"
+  },
+  "depends_on": {
+    "metrics_id": "3DBioinfo:AUCPR",
+    "tool_id": "3DBioinfo:compute_AUCPR",
+    "rel_dataset_ids": [
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_P_Bonvin_DeepRank-GNN"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_goldstandard"
+      }
+    ]
+  },
+  "datalink": {
+    "inline_data": {
+      "value": 0.8158,
+      "n_entries": 1634
+    }
+  }
+}

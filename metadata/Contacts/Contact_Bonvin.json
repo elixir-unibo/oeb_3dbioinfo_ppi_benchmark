@@ -1,0 +1,12 @@
+{
+  "_id": "3DBioinfo:Alexandre.Bonvin",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Contact",
+  "givenName": "Alexandre",
+  "surname": "Bonvin",
+  "email": [
+    "unknown@email.es"
+  ],
+  "notes": "Bonvin Lab, Utrecht University, ELIXIR-NL",
+  "contact_type": "person",
+  "community_id": "OEBC_3DBioinfo"
+}

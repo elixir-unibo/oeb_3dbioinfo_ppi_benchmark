@@ -1,0 +1,12 @@
+{
+  "_id": "3DBioinfo:Ceslovas.Venclovas",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Contact",
+  "givenName": "Ceslovas",
+  "surname": "Venclovas",
+  "email": [
+    "unknown@email.es"
+  ],
+  "notes": "Venclovas Lab, Vilnius University",
+  "contact_type": "person",
+  "community_id": "OEBC_3DBioinfo"
+}

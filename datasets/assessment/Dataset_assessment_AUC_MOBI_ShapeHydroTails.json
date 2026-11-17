@@ -1,0 +1,41 @@
+{
+  "_id": "3DBioinfo:2023-05-15_A_AUC_MOBI_ShapeHydroTails",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset",
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ],
+  "challenge_ids": [
+    "3DBioinfo:PPI-PhysioClassification"
+  ],
+  "visibility": "public",
+  "name": "AUC-ROC of MOBI shape+hydrophobicity+tails integrated score",
+  "version": "2 (corrected entry_id matching)",
+  "description": "Assessment dataset: AUC-ROC of MOBI shape+hydrophobicity+tails integrated score on 1671 scored entries (entry_id corrected to ID_InterfaceID for ProtCID-derived complexes -- the original bare-ID matching silently dropped ~700 ProtCID entries). Recomputed value 0.7307 vs. published 0.72.",
+  "type": "assessment",
+  "dataset_contact_ids": [
+    "3DBioinfo:Coordinators"
+  ],
+  "dates": {
+    "creation": "2023-05-15T00:00:00Z",
+    "modification": "2023-05-15T00:00:00Z"
+  },
+  "depends_on": {
+    "metrics_id": "3DBioinfo:AUC-ROC",
+    "tool_id": "3DBioinfo:compute_AUC",
+    "rel_dataset_ids": [
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_P_MOBI_ShapeHydroTails"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_goldstandard"
+      }
+    ]
+  },
+  "datalink": {
+    "inline_data": {
+      "value": 0.7307,
+      "published_value": 0.72,
+      "n_entries": 1671
+    }
+  }
+}

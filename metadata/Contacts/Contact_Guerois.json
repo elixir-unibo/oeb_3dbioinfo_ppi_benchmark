@@ -1,0 +1,12 @@
+{
+  "_id": "3DBioinfo:Raphael.Guerois",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Contact",
+  "givenName": "Raphael",
+  "surname": "Guerois",
+  "email": [
+    "unknown@email.es"
+  ],
+  "notes": "Guerois Lab, CEA Saclay",
+  "contact_type": "person",
+  "community_id": "OEBC_3DBioinfo"
+}

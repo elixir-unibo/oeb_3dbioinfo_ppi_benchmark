@@ -1,0 +1,15 @@
+participant_id,published_auc,resubstitution_auc,cv_auc_mean,cv_auc_std,published_rank,cv_rank
+Bonvin_DeepRank-GNN,0.85,0.8779,0.8796,0.0219,2,1
+RF_Consensus_top221,0.94,0.8775,0.872,0.0361,1,2
+Guerois_IESnorm,0.81,0.8588,0.8606,0.0404,5,3
+Wolfson_ProbaConsensus,0.71,0.8442,0.8438,0.0399,14,4
+Furman_InterfaceAnalyzer,0.84,0.8346,0.8346,0.0527,3,5
+MOBI_ShapeHydroTails,0.72,0.8268,0.8289,0.0151,13,6
+SWISSMODEL_QSQE,0.79,0.8306,0.8254,0.0256,7,7
+Bologna_ISPRED4,0.76,0.8181,0.8191,0.0358,9,8
+Venclovas_Voronota,0.82,0.8173,0.8167,0.0323,4,9
+Zou_DLScoreBC,0.81,0.8071,0.8068,0.0285,5,10
+Correia_MaSIF,0.75,0.7662,0.7668,0.0102,10,11
+Kihara_GOAP,0.75,0.6774,0.6711,0.0844,10,12
+Oliva_CP,0.75,0.5786,0.5788,0.0468,10,13
+FernandezRecio_NIPacking,0.79,0.5675,0.5716,0.0546,7,14

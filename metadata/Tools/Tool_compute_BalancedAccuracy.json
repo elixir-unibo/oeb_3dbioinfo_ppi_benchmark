@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:compute_BalancedAccuracy",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "Balanced Accuracy computation script",
+  "description": "Computes Balanced Accuracy of a participant's binarized prediction (published threshold, or data-driven optimal threshold via Youden's J when no published threshold exists) against the gold-standard label.",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:3D-Bioinfo.Coordinators"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}

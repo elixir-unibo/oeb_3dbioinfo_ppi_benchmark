@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:Kihara_GOAP",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "GOAP statistical potential",
+  "description": "Generalized Orientation-dependent All-atom Potential (GOAP) interface energy.",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:Daisuke.Kihara"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}

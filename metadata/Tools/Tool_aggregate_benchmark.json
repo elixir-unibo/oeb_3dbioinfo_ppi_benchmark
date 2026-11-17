@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:aggregate_benchmark",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "Challenge leaderboard aggregator",
+  "description": "Collects all per-participant assessment datasets of the challenge into one aggregation dataset/plot.",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:3D-Bioinfo.Coordinators"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "group_dir": "repo/groups/group_SWISS-MODEL",
+  "n_candidates_considered": 1,
+  "fold_results": [
+    {
+      "fold": 0,
+      "selected_column": "qsqe_results::I_QSQE",
+      "sign": 1,
+      "train_auc": 0.8361,
+      "test_auc": 0.7969
+    },
+    {
+      "fold": 1,
+      "selected_column": "qsqe_results::I_QSQE",
+      "sign": 1,
+      "train_auc": 0.8247,
+      "test_auc": 0.8447
+    },
+    {
+      "fold": 2,
+      "selected_column": "qsqe_results::I_QSQE",
+      "sign": 1,
+      "train_auc": 0.822,
+      "test_auc": 0.8651
+    },
+    {
+      "fold": 3,
+      "selected_column": "qsqe_results::I_QSQE",
+      "sign": 1,
+      "train_auc": 0.8344,
+      "test_auc": 0.8056
+    },
+    {
+      "fold": 4,
+      "selected_column": "qsqe_results::I_QSQE",
+      "sign": 1,
+      "train_auc": 0.8342,
+      "test_auc": 0.8144
+    }
+  ],
+  "cv_selected_auc_mean": 0.8253,
+  "cv_selected_auc_std": 0.0256,
+  "caveat": "Fold split is this package's own homology-safe reconstruction (cv_fold_assignment.csv), NOT the manuscript's undisclosed split."
+}

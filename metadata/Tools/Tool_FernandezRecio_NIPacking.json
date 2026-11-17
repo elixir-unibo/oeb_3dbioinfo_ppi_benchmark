@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:FernandezRecio_NIPacking",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "NIP (Normalized Interface Packing)",
+  "description": "Normalized interface packing score from the pyDock/CCharpPPI scoring-function library.",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:Juan.Fernandez-Recio"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}

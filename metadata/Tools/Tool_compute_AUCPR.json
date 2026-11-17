@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:compute_AUCPR",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "AUCPR computation script",
+  "description": "Computes the Area Under the Precision-Recall Curve of a participant's oriented raw score against the gold-standard physiological/non-physiological label.",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:3D-Bioinfo.Coordinators"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}

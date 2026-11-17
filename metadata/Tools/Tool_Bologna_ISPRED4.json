@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:Bologna_ISPRED4",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "ISPRED4 physiological-score (MCC-optimized)",
+  "description": "ISPRED4 interface predictor integrated physiological-interface score, MCC-optimized threshold.",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:Rita.Casadio"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}

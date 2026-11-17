@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:Zou_DLScoreBC",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "DLScore-BC",
+  "description": "Deep-learning binary classifier (biological vs crystal) probability score.",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:Xiaoqin.Zou"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}

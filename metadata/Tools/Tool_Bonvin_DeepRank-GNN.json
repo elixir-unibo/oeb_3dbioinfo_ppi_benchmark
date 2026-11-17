@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:Bonvin_DeepRank-GNN",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "DeepRank-GNN",
+  "description": "Graph Neural Network classifier trained on the MANY dataset using PSSM features (Reau et al. 2023).",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:Alexandre.Bonvin"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "group_dir": "repo/groups/group_Schueler-Furman",
+  "n_candidates_considered": 8,
+  "fold_results": [
+    {
+      "fold": 0,
+      "selected_column": "interface_analyzer_docked_100::F_dG-cross/dSASAx100",
+      "sign": -1,
+      "train_auc": 0.8327,
+      "test_auc": 0.8462
+    },
+    {
+      "fold": 1,
+      "selected_column": "interface_analyzer_docked_100::F_dG-cross/dSASAx100",
+      "sign": -1,
+      "train_auc": 0.8626,
+      "test_auc": 0.7365
+    },
+    {
+      "fold": 2,
+      "selected_column": "interface_analyzer_docked_100::F_dG-cross/dSASAx100",
+      "sign": -1,
+      "train_auc": 0.8347,
+      "test_auc": 0.8361
+    },
+    {
+      "fold": 3,
+      "selected_column": "interface_analyzer_docked_100::F_dG-cross/dSASAx100",
+      "sign": -1,
+      "train_auc": 0.828,
+      "test_auc": 0.8611
+    },
+    {
+      "fold": 4,
+      "selected_column": "interface_analyzer_docked_100::F_dG-cross/dSASAx100",
+      "sign": -1,
+      "train_auc": 0.8148,
+      "test_auc": 0.8932
+    }
+  ],
+  "cv_selected_auc_mean": 0.8346,
+  "cv_selected_auc_std": 0.0527,
+  "caveat": "Fold split is this package's own homology-safe reconstruction (cv_fold_assignment.csv), NOT the manuscript's undisclosed split."
+}

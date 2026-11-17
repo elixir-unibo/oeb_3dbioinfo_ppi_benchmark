@@ -2,7 +2,7 @@
 
 **Interactive page: [https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/](https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/)**
 **Submit your own predictions: [https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/#submit-section](https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/#submit-section)**
-Load your own predictions there and see how they rank against the 14 reference methods of Schweke *et al.* (DOI [10.22541/au.167569565.51141128/v1](https://doi.org/10.22541/au.167569565.51141128/v1)). The evaluation runs in your browser; no file is uploaded anywhere.
+Load your own predictions there and see how they rank against the 14 reference methods of Schweke *et al.* (*Proteomics* 2023, DOI [10.1002/pmic.202200323](https://doi.org/10.1002/pmic.202200323)). The evaluation runs in your browser; no file is uploaded anywhere.
 
 Benchmark task: discriminate **physiological** from **crystallographic (non-physiological)** protein homodimer interfaces. 1,671 curated entries (840 physiological, 831 non-physiological). The data were FAIRified in [ppi-benchmark-fair](https://biofold.github.io/ppi-benchmark-fair); this repository connects them to the [OpenEBench](https://openebench.bsc.es) ecosystem (ELIXIR Tools Platform, WP4 Activity 1, University of Bologna node).
 
@@ -27,6 +27,8 @@ Cross-validated performance of the 14 reference methods (5-fold, homology-aware 
 | 13 | shape_hydro_tails | 1671 | 0.729 ± 0.016 | 0.699 ± 0.031 | 0.666 ± 0.014 | 0.671 ± 0.030 | 0.334 ± 0.027 |
 | 14 | ProbaConsensus (ScanNet F_Network) | 1671 | 0.727 ± 0.027 | 0.668 ± 0.044 | 0.668 ± 0.020 | 0.709 ± 0.023 | 0.356 ± 0.050 |
 
+**Random-forest consensus.** Unlike the other 13 methods, which are single fixed scores, the consensus is a trained classifier. Its scores are the leave-one-out probabilities provided in the original benchmark repository (`random_forest_analysis/rf_topk221.out`), used unchanged and not retrained within the folds above. Leave-one-out does not remove homologous entries from the training set, so its AUROC should be read as an upper estimate with respect to the other methods.
+
 `n` is the number of benchmark entries each method scored. Methods with fewer than 1,671 entries are evaluated on their own subset, so values are not strictly comparable across rows (the high AUCPR of QSQE, which is above its AUROC, reflects its subset of 1,123 entries).
 
 ### Example of a new submission
@@ -50,14 +52,31 @@ Rank by AUROC: **6 of 15** (the 14 reference methods plus the new one). The page
 
 ## What is in this repository
 
+**OpenEBench package** (the files OpenEBench needs, at the repository root):
+
+| Path | Content |
+|---|---|
+| `metadata/` | Community, Benchmarking Event, Challenge, Metrics, Tools and Contacts records (OpenEBench JSON, validated against the schemas) |
+| `datasets/` | input, public reference, metrics reference (gold-standard labels, fold assignments), participant, assessment and aggregation datasets |
+| `workflow/` | validation, metric computation and consolidation scripts, Nextflow description, Dockerfile drafts, and `prepare_for_openebench_submission.py` |
+| `schemas/` | offline copy of the OpenEBench 1.0.x JSON Schemas |
+| `qc_analysis/` | quality-control tables and the cross-validated results of the reference methods |
+| `workflow/build_bundle_zip.py` | builds `oeb_ppi_benchmark.zip`, the single-file download of this package, from the files above |
+| `README_STEP_BY_STEP.md`, `OPENEBENCH_SUBMISSION_READINESS.md` | how the package was built and what remains before the registration on OpenEBench |
+
+The package is also available as a single file, `oeb_ppi_benchmark.zip`, attached to each [release](https://github.com/elixir-unibo/oeb_3dbioinfo_ppi_benchmark/releases/latest). It is not stored in the repository: it is built from these files, so the two cannot differ.
+
+**Web page** (the files behind the interactive page):
+
 | Path | Content |
 |---|---|
 | `index.html`, `build/` | the page and the OpenEBench Scientific Visualizer bundle |
-| `data/datasets/participant/` | predictions of the 14 reference methods, with their OpenEBench dataset records |
-| `data/datasets/metrics_reference/` | gold-standard labels and the four cross-validation fold assignments |
-| `data/cv_leaderboard/` | cross-validated results of the reference methods for each strategy |
+| `data/` | copy of the datasets read by the page, the per-strategy leaderboards (`data/cv_leaderboard/`), the demo and template prediction files |
 | `CV_SPLITTING_STRATEGIES.md` | description of the four splitting strategies |
-| `oeb_ppi_benchmark.zip` | the complete OpenEBench bundle: metadata, datasets, schemas, workflow scripts, preparation script |
+
+## Licence and citation
+
+Released under [CC BY-NC 4.0](LICENSE). The source benchmark (vibbits/Elixir-3DBioInfo-Benchmark-Protein-Interfaces) is distributed under CC BY 4.0 and its attribution is preserved. Please cite the original publication (Schweke *et al.*, *Proteomics* 2023, DOI [10.1002/pmic.202200323](https://doi.org/10.1002/pmic.202200323)) and this package; GitHub's "Cite this repository" uses `CITATION.cff`. Each tagged release is archived on Zenodo, which assigns a DOI; cite the concept DOI shown on the repository for the latest version.
 
 ## Deployment note
 

@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:MOBI_ShapeHydroTails",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "MOBI shape+hydrophobicity+tails integrated score",
+  "description": "Integrated score combining interface shape complementarity, hydrophobicity and flexible-tail features.",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:Silvio.Tosatto"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}

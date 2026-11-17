@@ -1,0 +1,41 @@
+{
+  "_id": "3DBioinfo:2023-05-15_A_MCC_Guerois_IESnorm",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset",
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ],
+  "challenge_ids": [
+    "3DBioinfo:PPI-PhysioClassification"
+  ],
+  "visibility": "public",
+  "name": "MCC of IES (normalized)",
+  "version": "1",
+  "description": "MCC of IES (normalized) at published threshold (0.23484, oriented scale) on 1395 scored entries, corrected entry_id matching.",
+  "type": "assessment",
+  "dataset_contact_ids": [
+    "3DBioinfo:Coordinators"
+  ],
+  "dates": {
+    "creation": "2023-05-15T00:00:00Z",
+    "modification": "2023-05-15T00:00:00Z"
+  },
+  "depends_on": {
+    "metrics_id": "3DBioinfo:MCC",
+    "tool_id": "3DBioinfo:compute_MCC",
+    "rel_dataset_ids": [
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_P_Guerois_IESnorm"
+      },
+      {
+        "dataset_id": "3DBioinfo:2023-05-15_goldstandard"
+      }
+    ]
+  },
+  "datalink": {
+    "inline_data": {
+      "value": 0.5375,
+      "n_entries": 1395,
+      "threshold_used": 0.23484
+    }
+  }
+}

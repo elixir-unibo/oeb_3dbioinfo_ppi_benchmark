@@ -1,0 +1,19 @@
+{
+  "_id": "3DBioinfo:SWISSMODEL_QSQE",
+  "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
+  "name": "QSQE (Quaternary Structure Quality Estimate)",
+  "description": "SWISS-MODEL Quaternary Structure Quality Estimate score.",
+  "is_automated": true,
+  "status": "unknown",
+  "tool_access": [
+    {
+      "tool_access_type": "other"
+    }
+  ],
+  "tool_contact_ids": [
+    "3DBioinfo:Torsten.Schwede"
+  ],
+  "community_ids": [
+    "OEBC_3DBioinfo"
+  ]
+}
