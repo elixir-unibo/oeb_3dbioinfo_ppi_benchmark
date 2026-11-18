@@ -1,6 +1,7 @@
 # ELIXIR 3D-BioInfo PPI Benchmark — OpenEBench experiment
 
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24323529.svg)](https://doi.org/10.5281/zenodo.24323529)
 
 > **Original work.** The benchmark was published by Schweke H, Xu Q, Tauriello G, *et al.* (2023) *Discriminating physiological from non-physiological interfaces in structures of protein complexes: A community-wide study.* Proteomics 23(17):e2200323, [doi:10.1002/pmic.202200323](https://doi.org/10.1002/pmic.202200323). The data come from the community repository [vibbits/Elixir-3DBioInfo-Benchmark-Protein-Interfaces](https://github.com/vibbits/Elixir-3DBioInfo-Benchmark-Protein-Interfaces). This repository turns the benchmark into an OpenEBench experiment; please cite the paper when you use the benchmark (see [Citation](#licence-and-citation)).
 
@@ -110,9 +111,11 @@ pmcid={PMC10937251}
   title={ELIXIR - Protein-Protein Interface Benchmark - OpenEBench Experiment},
   author={Capriotti, Emidio and Martelli, Pier Luigi and Savojardo, Castrense},
   year={2026},
-  version={1.0.0},
+  version={1.1.0},
   publisher={Zenodo},
-  url={https://github.com/elixir-unibo/oeb_3dbioinfo_ppi_benchmark}
+  url={https://github.com/elixir-unibo/oeb_3dbioinfo_ppi_benchmark},
+  doi={10.5281/zenodo.24323529},
+  note={Zenodo concept DOI, all versions}
 }
 ```
 
