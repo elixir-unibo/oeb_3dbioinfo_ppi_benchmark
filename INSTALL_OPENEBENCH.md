@@ -62,7 +62,7 @@ docker build -f workflow/Dockerfile.compute_metrics -t <registry>/ppi-compute-me
 docker build -f workflow/Dockerfile.consolidate     -t <registry>/ppi-consolidate:1.1.0     workflow/
 ```
 
-Run each image on one participant with the arguments of section 2 and compare the result with the shell runner. `Dockerfile.consolidate` installs `matplotlib` without a version: pin the version you tested. `workflow/nextflow_main.nf` is a skeleton that has not been run; the tested path is `run_pipeline.sh`.
+Run each image on one participant with the arguments of section 2 and compare the result with the shell runner. `Dockerfile.consolidate` installs `matplotlib` without a version: pin the version you tested. `workflow/nextflow_main.nf` runs the validation and metric steps for one participant with the local executor and no container (`nextflow run workflow/nextflow_main.nf --predictionsFile <predictions.csv> --participant_name <name>`, from the package folder; it gave the same assessment as `run_pipeline.sh` for `Oliva_CP`). The consolidation process is defined there but not connected, and no process names a container image. For the whole benchmark use `run_pipeline.sh`.
 
 ## 5. Register the tools
 

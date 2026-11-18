@@ -8,9 +8,9 @@
     "3DBioinfo:PPI-PhysioClassification"
   ],
   "visibility": "public",
-  "name": "Raw interface scores \u2014 Contact-Propensity (CP) raw score",
+  "name": "Raw interface scores \u2014 F_CP (charged-polar interface contacts, COCOMAPS/CONSRANK)",
   "version": "1",
-  "description": "Per-entry raw score produced by Contact-Propensity (CP) raw score on the 1671 benchmark entries it covers.",
+  "description": "Per-entry raw score produced by F_CP (charged-polar interface contacts, COCOMAPS/CONSRANK) on the 1671 benchmark entries it covers.",
   "type": "participant",
   "dataset_contact_ids": [
     "3DBioinfo:Contact.Oliva"

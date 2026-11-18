@@ -8,9 +8,9 @@
     "3DBioinfo:PPI-PhysioClassification"
   ],
   "visibility": "public",
-  "name": "AUC-ROC of Contact-Propensity (CP) raw score",
+  "name": "AUC-ROC of F_CP (charged-polar interface contacts, COCOMAPS/CONSRANK)",
   "version": "2 (corrected entry_id matching)",
-  "description": "Assessment dataset: AUC-ROC of Contact-Propensity (CP) raw score on 1671 scored entries (entry_id corrected to ID_InterfaceID for ProtCID-derived complexes -- the original bare-ID matching silently dropped ~700 ProtCID entries). Recomputed value 0.7486 vs. published 0.75.",
+  "description": "Assessment dataset: AUC-ROC of F_CP (charged-polar interface contacts, COCOMAPS/CONSRANK) on 1671 scored entries (entry_id corrected to ID_InterfaceID for ProtCID-derived complexes -- the original bare-ID matching silently dropped ~700 ProtCID entries). Recomputed value 0.7486 vs. published 0.75.",
   "type": "assessment",
   "dataset_contact_ids": [
     "3DBioinfo:Coordinators"

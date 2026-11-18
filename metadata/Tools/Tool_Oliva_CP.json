@@ -1,8 +1,8 @@
 {
   "_id": "3DBioinfo:Oliva_CP",
   "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Tool",
-  "name": "Contact-Propensity (CP) raw score",
-  "description": "Residue-contact-propensity-based raw interface score.",
+  "name": "F_CP (charged-polar interface contacts, COCOMAPS/CONSRANK)",
+  "description": "Number of interface residue-residue contacts between charged (C) and polar (P) amino acids: feature F_CP of the COCOMAPS/CONSRANK set of contact descriptors provided by the Oliva group (a contact is a pair of heavy atoms of the two chains within 5 A). The oriented score is the negated count: fewer charged-polar contacts means more physiological.",
   "is_automated": true,
   "status": "unknown",
   "tool_access": [

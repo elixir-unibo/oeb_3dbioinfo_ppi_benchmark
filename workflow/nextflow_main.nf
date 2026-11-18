@@ -1,6 +1,8 @@
-// Skeleton Nextflow pipeline mirroring the OpenEBench 3-step container pattern
-// (validation -> metrics generation -> consolidation), following the structure
-// used by https://github.com/inab/TCGA_benchmarking_workflow
+// Nextflow pipeline for one participant, mirroring the OpenEBench 3-step pattern
+// (validation -> metrics generation -> consolidation). Only VALIDATE and COMPUTE_METRICS
+// are connected below; CONSOLIDATE is defined but not wired, and no process names a container.
+// Run from the package folder:
+//   nextflow run workflow/nextflow_main.nf --predictionsFile <predictions.csv> --participant_name <name>
 
 nextflow.enable.dsl=2
 
@@ -23,7 +25,7 @@ process VALIDATE {
     script:
     """
     mkdir -p validation_out
-    python3 ${baseDir}/workflow/validate.py \
+    python3 ${projectDir}/validate.py \
         --input ${predictions} --public_ref_dir ${public_ref_dir} \
         --community_id ${params.community_id} --challenges_ids ${params.challenge_id} \
         --participant_id ${params.participant_name} --outdir validation_out
@@ -40,7 +42,7 @@ process COMPUTE_METRICS {
     def thrArg = params.threshold ? "--threshold ${params.threshold}" : ""
     """
     mkdir -p assessment_out
-    python3 ${baseDir}/workflow/compute_metrics.py \
+    python3 ${projectDir}/compute_metrics.py \
         --input ${predictions} --goldstandard_dir ${goldstandard_dir} \
         --community_id ${params.community_id} --challenges_ids ${params.challenge_id} \
         --participant_id ${params.participant_name} ${thrArg} --outdir assessment_out
@@ -56,7 +58,7 @@ process CONSOLIDATE {
       path "consolidated/leaderboard.svg", optional: true
     script:
     """
-    python3 ${baseDir}/workflow/consolidate.py \
+    python3 ${projectDir}/consolidate.py \
         --assess_dir ${assess_dir} --community_id ${params.community_id} \
         --challenge_id ${params.challenge_id} --outdir consolidated
     """
