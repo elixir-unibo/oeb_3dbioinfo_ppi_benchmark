@@ -8,9 +8,9 @@
     "3DBioinfo:PPI-PhysioClassification"
   ],
   "visibility": "public",
-  "name": "Accuracy-at-threshold of Contact-Propensity (CP) raw score",
+  "name": "Accuracy-at-threshold of F_CP (charged-polar interface contacts, COCOMAPS/CONSRANK)",
   "version": "2 (corrected entry_id matching)",
-  "description": "Classification accuracy of Contact-Propensity (CP) raw score at threshold 6.9, corrected entry_id matching.",
+  "description": "Classification accuracy of F_CP (charged-polar interface contacts, COCOMAPS/CONSRANK) at threshold 6.9, corrected entry_id matching.",
   "type": "assessment",
   "dataset_contact_ids": [
     "3DBioinfo:Coordinators"

@@ -2,8 +2,8 @@
 """
 Dependency-free, leakage-safe cross-validated evaluation engine, shared by:
   - crossval_metrics.py (CLI, single participant, single strategy)
-  - the local visualizer's upload-and-compare feature
-    (serve_local_openebench_visualizer.py)
+  - the browser-side evaluation of the web page (a JavaScript port of this module,
+    checked against it to four decimals)
 
 For each of the K folds of a chosen homology-safe CV splitting strategy
 (see CV_SPLITTING_STRATEGIES.md -- Strategy 1 CATH/gene, Strategy 2 own

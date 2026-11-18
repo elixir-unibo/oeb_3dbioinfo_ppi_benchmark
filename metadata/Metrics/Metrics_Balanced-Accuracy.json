@@ -4,10 +4,10 @@
   "title": "Balanced Accuracy",
   "description": "Mean of sensitivity (true positive rate on physiological interfaces) and specificity (true negative rate on crystallographic interfaces) at a decision threshold, correcting plain accuracy for class imbalance. Threshold is the published threshold reported for the scoring function when available; otherwise the data-driven optimal threshold (Youden's J statistic) is used.",
   "metrics_contact_ids": [
-    "3DBioinfo:3D-Bioinfo.Coordinators"
+    "3DBioinfo:Coordinators"
   ],
   "formal_definition": "Balanced Accuracy = (TPR + TNR) / 2, TPR = TP/(TP+FN), TNR = TN/(TN+FP)",
   "references": [
-    "doi:10.22541/au.167569565.51141128/v1"
+    "doi:10.1002/pmic.202200323"
   ]
 }

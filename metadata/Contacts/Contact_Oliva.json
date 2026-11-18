@@ -1,12 +1,12 @@
 {
-  "_id": "3DBioinfo:Baldo.Oliva",
+  "_id": "3DBioinfo:Contact.Oliva",
   "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Contact",
-  "givenName": "Baldo",
-  "surname": "Oliva",
+  "givenName": "Contact",
+  "surname": "Oliva group",
   "email": [
     "unknown@email.es"
   ],
-  "notes": "Oliva Lab (GRIB-IMIM/UPF)",
+  "notes": "Placeholder: replace with the contact person of the Oliva group.",
   "contact_type": "person",
   "community_id": "OEBC_3DBioinfo"
 }

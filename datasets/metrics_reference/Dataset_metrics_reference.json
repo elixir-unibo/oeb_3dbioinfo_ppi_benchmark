@@ -13,7 +13,7 @@
   "description": "Ground-truth physiological (1) / non-physiological-crystallographic (0) annotation for each benchmark entry, derived from ProtCID and QSalign consensus plus manual curation of ambiguous cases (6 entries removed, 13 relabeled relative to the original release). Kept at challenge-level visibility: only used internally by the metrics-generation step.",
   "type": "metrics_reference",
   "dataset_contact_ids": [
-    "3DBioinfo:3D-Bioinfo.Coordinators"
+    "3DBioinfo:Coordinators"
   ],
   "dates": {
     "creation": "2023-05-15T00:00:00Z",

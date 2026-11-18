@@ -13,7 +13,7 @@
   "description": "Per-entry raw score produced by QSQE (Quaternary Structure Quality Estimate) on the 1123 benchmark entries it covers.",
   "type": "participant",
   "dataset_contact_ids": [
-    "3DBioinfo:Torsten.Schwede"
+    "3DBioinfo:Contact.SWISS-MODEL"
   ],
   "dates": {
     "creation": "2023-05-15T00:00:00Z",

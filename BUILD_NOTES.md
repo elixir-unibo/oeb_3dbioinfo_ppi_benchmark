@@ -1,3 +1,9 @@
+# Build notes (historical log)
+
+> This file is the chronological log of how the package was built. It is kept for provenance and is **not** an implementation guide: the guide is `INSTALL_OPENEBENCH.md`. Sections that mention a local visualizer describe files that are no longer in the package; the interactive evaluation is now the static web page https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/. Counts and file names stated below were true when each step was run; the current ones are in `OPENEBENCH_SUBMISSION_READINESS.md` and the repository README.
+
+---
+
 # From the Elixir-3DBioInfo PPI benchmark repository to an OpenEBench-compliant benchmarking workflow
 
 Source data: https://github.com/vibbits/Elixir-3DBioInfo-Benchmark-Protein-Interfaces
@@ -193,7 +199,7 @@ NOT regenerated in this pass and still reflect the buggy ID matching.
 5.1  `metadata/Challenges/Challenge_PPI-PhysioClassification.json` lists two `assessment`
      metrics (AUC-ROC, Accuracy-at-threshold) and one `aggregation` metric, each bound to a
      "Tool" that performs the computation (`compute_AUC`, `compute_ACC`, `aggregate_benchmark`),
-     mirroring the published TCGA example 1:1.
+     following the OpenEBench data model.
 
 5.2  Implement the three OpenEBench container steps as standalone, Docker-able CLI scripts
      (`workflow/validate.py`, `workflow/compute_metrics.py`, `workflow/consolidate.py`):
@@ -208,8 +214,7 @@ NOT regenerated in this pass and still reflect the buggy ID matching.
        (`outdir` + `data_model_export_dir`).
 
 5.3  `workflow/nextflow_main.nf` wraps the same three scripts as Nextflow processes
-     (VALIDATE -> COMPUTE_METRICS -> CONSOLIDATE), matching the structure of the reference
-     implementation at https://github.com/inab/TCGA_benchmarking_workflow, so the pipeline can
+     (VALIDATE -> COMPUTE_METRICS -> CONSOLIDATE), so the pipeline can
      later be containerized per-step (one Dockerfile per process) as required before submission
      to OpenEBench support.
 
@@ -230,8 +235,7 @@ NOT regenerated in this pass and still reflect the buggy ID matching.
      `datasets/assessment/Dataset_assessment_AUC_<participant>.json`,
      `datasets/assessment/Dataset_assessment_ACC_<participant>.json`, and one
      `datasets/aggregation/Dataset_aggregation_PPI-PhysioClassification.json` (a `2D-plot` of
-     AUC-ROC vs. Accuracy per participant, following the exact `visualization` block used in the
-     TCGA prototype data).
+     AUC-ROC vs. Accuracy per participant, using the `visualization` block of an OpenEBench aggregation dataset).
 
 --------------------------------------------------------------------------------------------
 ## Step 5b — Homology-safe 5-fold cross-validation (independent check, not a reproduction of the manuscript's CV)
@@ -354,8 +358,7 @@ numbers.
      (`how_to/4_manage_events`).
 
 7.2  Package each of the three steps (`validate.py`, `compute_metrics.py`, `consolidate.py`) as
-     its own Docker image, using the TCGA Cancer Driver Benchmarking dockers repository as a
-     template, and wire them into a versioned, tagged Git repository.
+     its own Docker image, and wire them into a versioned, tagged Git repository.
 
 7.3  Run the containerized workflow inside the OpenEBench Virtual Research Environment (VRE),
      then email the OpenEBench support team the repository URL and the specific tag/commit so
@@ -528,7 +531,7 @@ Files: `datasets/metrics_reference/cv_fold_strategy{1,2,2b,3}_*.csv`,
 
 Short version: 82 of 83 metadata/dataset JSON files in this package now PASS validation against
 the real OpenEBench 1.0.x JSON Schemas (verified with the actual schema repository and its
-$ref resolver, not just eyeballed against the TCGA example). The one failure is structural and
+$ref resolver, not just eyeballed). The one failure is structural and
 cannot be fixed offline: `Community._id` must be a real, platform-assigned `OEBC###` code
 (confirmed via public examples like `openebench.bsc.es/projects/OEBC001`), not a self-chosen
 string. Remaining gaps needing a human/account action on the live platform: Docker images for

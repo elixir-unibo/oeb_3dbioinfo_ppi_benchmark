@@ -66,10 +66,12 @@ Rank by AUROC: **6 of 15** (the 14 reference methods plus the new one). The page
 | `workflow/` | validation, metric computation and consolidation scripts, Nextflow description, Dockerfile drafts, and `prepare_for_openebench_submission.py` |
 | `schemas/` | offline copy of the OpenEBench 1.0.x JSON Schemas |
 | `qc_analysis/` | cross-validated results of the reference methods (`cv_leaderboard/`), working analyses (`diagnostics/`) and analyses computed before a correction and kept for transparency (`superseded/`); see its README |
-| `workflow/build_bundle_zip.py` | builds `oeb_ppi_benchmark.zip`, the single-file download of this package, from the files above |
-| `README_STEP_BY_STEP.md`, `OPENEBENCH_SUBMISSION_READINESS.md` | how the package was built, and its status and what remains before the registration on OpenEBench |
+| `workflow/build_bundle_zip.py` | builds `oeb_ppi_benchmark-v<version>.zip`, the single-file download of this package, from the files above |
+| `INSTALL_OPENEBENCH.md` | how to check the package locally, fill in the values OpenEBench or the groups must supply, and send the registration request |
+| `OPENEBENCH_SUBMISSION_READINESS.md` | status of the package and what remains before the registration on OpenEBench |
+| `BUILD_NOTES.md` | historical log of how the package was built |
 
-The package is also available as a single file, `oeb_ppi_benchmark.zip`, attached to each [release](https://github.com/elixir-unibo/oeb_3dbioinfo_ppi_benchmark/releases/latest). It is not stored in the repository: it is built from these files, so the two cannot differ.
+The package is also available as a single file, `oeb_ppi_benchmark-v<version>.zip`, attached to each [release](https://github.com/elixir-unibo/oeb_3dbioinfo_ppi_benchmark/releases/latest). It is not stored in the repository: it is built from these files, so the two cannot differ.
 
 **Web page** (the files behind the interactive page):
 
@@ -109,7 +111,7 @@ pmcid={PMC10937251}
   title={ELIXIR - Protein-Protein Interface Benchmark - OpenEBench Experiment},
   author={Capriotti, Emidio and Martelli, Pier Luigi and Savojardo, Castrense},
   year={2026},
-  version={1.0.0},
+  version={1.1.0},
   publisher={Zenodo},
   url={https://github.com/elixir-unibo/oeb_3dbioinfo_ppi_benchmark},
   doi={10.5281/zenodo.24323529},

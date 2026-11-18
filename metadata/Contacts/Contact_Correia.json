@@ -1,12 +1,12 @@
 {
-  "_id": "3DBioinfo:Bruno.Correia",
+  "_id": "3DBioinfo:Contact.Correia",
   "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Contact",
-  "givenName": "Bruno",
-  "surname": "Correia",
+  "givenName": "Contact",
+  "surname": "Correia group",
   "email": [
     "unknown@email.es"
   ],
-  "notes": "Correia Lab, EPFL",
+  "notes": "Placeholder: replace with the contact person of the Correia group.",
   "contact_type": "person",
   "community_id": "OEBC_3DBioinfo"
 }

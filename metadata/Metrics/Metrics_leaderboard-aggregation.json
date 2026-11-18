@@ -4,10 +4,10 @@
   "title": "Challenge leaderboard aggregation (AUC vs. ACC per participant)",
   "description": "Combines the per-participant AUC-ROC and Accuracy assessment datasets into a single 2D scatter used to rank/compare all scoring functions in the challenge.",
   "metrics_contact_ids": [
-    "3DBioinfo:3D-Bioinfo.Coordinators"
+    "3DBioinfo:Coordinators"
   ],
   "formal_definition": "Scatter of (AUC-ROC, ACC-at-threshold) per participant tool",
   "references": [
-    "doi:10.22541/au.167569565.51141128/v1"
+    "doi:10.1002/pmic.202200323"
   ]
 }

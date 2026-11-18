@@ -1,12 +1,12 @@
 {
-  "_id": "3DBioinfo:Torsten.Schwede",
+  "_id": "3DBioinfo:Contact.SWISS-MODEL",
   "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Contact",
-  "givenName": "Torsten",
-  "surname": "Schwede",
+  "givenName": "Contact",
+  "surname": "SWISS-MODEL group",
   "email": [
     "unknown@email.es"
   ],
-  "notes": "SWISS-MODEL team, SIB / University of Basel",
+  "notes": "Placeholder: replace with the contact person of the SWISS-MODEL group.",
   "contact_type": "person",
   "community_id": "OEBC_3DBioinfo"
 }

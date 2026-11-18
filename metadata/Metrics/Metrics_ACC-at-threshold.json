@@ -4,10 +4,10 @@
   "title": "Classification Accuracy at reported optimal threshold",
   "description": "Fraction of benchmark entries correctly classified as physiological/non-physiological when the participant's raw score is thresholded at the optimal cut-off reported for that scoring function.",
   "metrics_contact_ids": [
-    "3DBioinfo:3D-Bioinfo.Coordinators"
+    "3DBioinfo:Coordinators"
   ],
   "formal_definition": "ACC = (TP + TN) / (TP + TN + FP + FN)",
   "references": [
-    "doi:10.22541/au.167569565.51141128/v1"
+    "doi:10.1002/pmic.202200323"
   ]
 }

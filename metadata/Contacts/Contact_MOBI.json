@@ -1,12 +1,12 @@
 {
-  "_id": "3DBioinfo:Silvio.Tosatto",
+  "_id": "3DBioinfo:Contact.MOBI",
   "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Contact",
-  "givenName": "Silvio",
-  "surname": "Tosatto",
+  "givenName": "Contact",
+  "surname": "MOBI group",
   "email": [
     "unknown@email.es"
   ],
-  "notes": "MOBI Group, University of Padova",
+  "notes": "Placeholder: replace with the contact person of the MOBI group.",
   "contact_type": "person",
   "community_id": "OEBC_3DBioinfo"
 }
