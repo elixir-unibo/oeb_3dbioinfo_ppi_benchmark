@@ -1,12 +1,12 @@
 {
-  "_id": "3DBioinfo:Haim.Wolfson",
+  "_id": "3DBioinfo:Contact.Wolfson",
   "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Contact",
-  "givenName": "Haim",
-  "surname": "Wolfson",
+  "givenName": "Contact",
+  "surname": "Wolfson group",
   "email": [
     "unknown@email.es"
   ],
-  "notes": "Wolfson Lab, Tel Aviv University",
+  "notes": "Placeholder: replace with the contact person of the Wolfson group.",
   "contact_type": "person",
   "community_id": "OEBC_3DBioinfo"
 }

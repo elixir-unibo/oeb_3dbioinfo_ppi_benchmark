@@ -12,9 +12,9 @@
   "url": "https://github.com/vibbits/Elixir-3DBioInfo-Benchmark-Protein-Interfaces",
   "community_id": "OEBC_3DBioinfo",
   "bench_contact_ids": [
-    "3DBioinfo:3D-Bioinfo.Coordinators"
+    "3DBioinfo:Coordinators"
   ],
   "references": [
-    "doi:10.22541/au.167569565.51141128/v1"
+    "doi:10.1002/pmic.202200323"
   ]
 }

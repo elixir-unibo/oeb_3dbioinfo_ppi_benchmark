@@ -13,7 +13,7 @@
   "description": "Per-entry raw score produced by Contact-Propensity (CP) raw score on the 1671 benchmark entries it covers.",
   "type": "participant",
   "dataset_contact_ids": [
-    "3DBioinfo:Baldo.Oliva"
+    "3DBioinfo:Contact.Oliva"
   ],
   "dates": {
     "creation": "2023-05-15T00:00:00Z",

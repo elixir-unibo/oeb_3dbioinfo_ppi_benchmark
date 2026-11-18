@@ -132,9 +132,9 @@ def update_tool_ids(package_dir, non_interactive):
         tool = load_json(tf)
         name = tool.get("name", os.path.basename(tf))
         print(f"Tool: {name}  (internal id: {tool['_id']})")
-        registered_id = ask("  Official OpenEBench/bio.tools ID, if already registered")
+        registered_id = ask("  Registry ID in CURIE form (e.g. biotools:voronota), if already registered")
         if registered_id:
-            tool["registered_tool_id"] = registered_id
+            tool["registry_tool_id"] = registered_id
             save_json(tf, tool)
             print(f"  -> recorded {registered_id}")
 
@@ -216,7 +216,7 @@ def draft_support_email(package_dir, repo_url, repo_tag, community_id, unresolve
         "ELIXIR 3D-BioInfo Community: 'PPI-PhysioClassification', a classification benchmark",
         "distinguishing physiological from crystallographic (non-physiological) interfaces in",
         "homodimer protein complexes (1671 entries, 14 participant scoring functions), based on",
-        f"Schweke et al. (doi:10.22541/au.167569565.51141128/v1).",
+        f"Schweke et al. (doi:10.1002/pmic.202200323).",
         "",
         f"Community ID: {community_id or '<PENDING -- see note below>'}",
         f"Repository: {repo_url or '<PENDING -- not yet provided>'}",
@@ -268,7 +268,7 @@ def main():
     new_community_id = None
     if not args.non_interactive:
         new_community_id = ask(
-            "Real OpenEBench Community ID (format OEBC###, e.g. OEBC011)",
+            "Real OpenEBench Community ID (format OEBC followed by three digits)",
             validator=lambda v: bool(COMMUNITY_ID_PATTERN.match(v)),
         )
     if new_community_id:

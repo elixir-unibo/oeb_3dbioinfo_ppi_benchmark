@@ -1,3 +1,9 @@
+# Build notes (historical log)
+
+> This file is the chronological log of how the package was built. It is kept for provenance and is **not** an implementation guide: the guide is `INSTALL_OPENEBENCH.md`. Sections that mention a local visualizer describe files that are no longer in the package; the interactive evaluation is now the static web page https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/. Counts and file names stated below were true when each step was run; the current ones are in `OPENEBENCH_SUBMISSION_READINESS.md` and the repository README.
+
+---
+
 # From the Elixir-3DBioInfo PPI benchmark repository to an OpenEBench-compliant benchmarking workflow
 
 Source data: https://github.com/vibbits/Elixir-3DBioInfo-Benchmark-Protein-Interfaces

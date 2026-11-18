@@ -13,7 +13,7 @@
   "description": "List of the 1671 valid entry identifiers (PDB id [+ biological-assembly suffix]) that a conformant participant submission must score, used by the validation step to check submission completeness/format.",
   "type": "public_reference",
   "dataset_contact_ids": [
-    "3DBioinfo:3D-Bioinfo.Coordinators"
+    "3DBioinfo:Coordinators"
   ],
   "dates": {
     "creation": "2023-05-15T00:00:00Z",

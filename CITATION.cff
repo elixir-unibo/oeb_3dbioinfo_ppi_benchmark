@@ -21,12 +21,11 @@ authors:
     orcid: "https://orcid.org/0000-0002-7359-0633"
     affiliation: "University of Bologna"
 version: "1.0.0"
-doi: "10.5281/zenodo.24323529"
 license: CC-BY-NC-4.0
 repository-code: "https://github.com/elixir-unibo/oeb_3dbioinfo_ppi_benchmark"
 url: "https://elixir.unibo.it/tools/oeb_3dbioinfo_ppi_benchmark/"
 keywords:
-  - "protein-protein interaction"
+  - "protein-protein interface"
   - "structural bioinformatics"
   - "benchmark dataset"
   - "OpenEBench"

@@ -1,12 +1,12 @@
 {
-  "_id": "3DBioinfo:Daisuke.Kihara",
+  "_id": "3DBioinfo:Contact.Kihara",
   "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Contact",
-  "givenName": "Daisuke",
-  "surname": "Kihara",
+  "givenName": "Contact",
+  "surname": "Kihara group",
   "email": [
     "unknown@email.es"
   ],
-  "notes": "Kihara Lab, Purdue University",
+  "notes": "Placeholder: replace with the contact person of the Kihara group.",
   "contact_type": "person",
   "community_id": "OEBC_3DBioinfo"
 }

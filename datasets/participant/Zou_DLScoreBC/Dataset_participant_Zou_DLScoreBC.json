@@ -13,7 +13,7 @@
   "description": "Per-entry raw score produced by DLScore-BC on the 1671 benchmark entries it covers.",
   "type": "participant",
   "dataset_contact_ids": [
-    "3DBioinfo:Xiaoqin.Zou"
+    "3DBioinfo:Contact.Zou"
   ],
   "dates": {
     "creation": "2023-05-15T00:00:00Z",

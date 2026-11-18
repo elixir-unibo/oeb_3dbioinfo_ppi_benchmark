@@ -1,12 +1,12 @@
 {
-  "_id": "3DBioinfo:Xiaoqin.Zou",
+  "_id": "3DBioinfo:Contact.Zou",
   "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Contact",
-  "givenName": "Xiaoqin",
-  "surname": "Zou",
+  "givenName": "Contact",
+  "surname": "Zou group",
   "email": [
     "unknown@email.es"
   ],
-  "notes": "Zou Lab, University of Missouri",
+  "notes": "Placeholder: replace with the contact person of the Zou group.",
   "contact_type": "person",
   "community_id": "OEBC_3DBioinfo"
 }

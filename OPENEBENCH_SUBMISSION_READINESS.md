@@ -13,7 +13,7 @@ This package contains the metadata, datasets and workflow of the 3D-BioInfo PPI 
 1. **Community identifier.** `metadata/Community.json` has the placeholder `OEBC_3DBioinfo`. OpenEBench requires an assigned code of the form `OEBC###`. `workflow/prepare_for_openebench_submission.py` replaces the placeholder everywhere once the code is known.
 2. **Tools.** The 14 scoring methods have to be registered as OpenEBench tools to receive official identifiers.
 3. **Containers.** `workflow/Dockerfile.validate`, `Dockerfile.compute_metrics` and `Dockerfile.consolidate` are drafts. They have not been built, tested or published, and matplotlib is not pinned to a version.
-4. **Contacts.** The e-mail addresses in `metadata/Contacts/` are the placeholder `unknown@email.es` and have to be replaced by the real ones.
+4. **Contacts.** The 13 group contacts in `metadata/Contacts/` are placeholders (`Contact <group> group`, e-mail `unknown@email.es`). The contact person of each group and the real e-mail address have to be entered; the preparation script asks for the e-mail address, the names are edited in the files.
 5. **Support request** to OpenEBench with the repository URL and the release tag. The preparation script drafts it.
 
 ## Note on the random-forest consensus

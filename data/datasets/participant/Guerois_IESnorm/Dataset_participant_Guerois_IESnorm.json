@@ -13,7 +13,7 @@
   "description": "Per-entry raw score produced by IES homolog-normalized (10 seq, size-normalized) on the 1395 benchmark entries it covers.",
   "type": "participant",
   "dataset_contact_ids": [
-    "3DBioinfo:Raphael.Guerois"
+    "3DBioinfo:Contact.Guerois"
   ],
   "dates": {
     "creation": "2023-05-15T00:00:00Z",

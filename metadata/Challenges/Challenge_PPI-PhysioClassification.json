@@ -4,7 +4,7 @@
   "acronym": "PPI-PhysioClassification",
   "benchmarking_event_id": "3DBioinfo:PPI-Benchmark-2023",
   "challenge_contact_ids": [
-    "3DBioinfo:3D-Bioinfo.Coordinators"
+    "3DBioinfo:Coordinators"
   ],
   "dates": {
     "challenge_start": "2022-01-01T00:00:00Z",
@@ -57,7 +57,7 @@
   ],
   "name": "Discrimination of physiological vs. non-physiological (crystallographic) homodimer interfaces",
   "references": [
-    "doi:10.22541/au.167569565.51141128/v1"
+    "doi:10.1002/pmic.202200323"
   ],
   "url": "https://github.com/vibbits/Elixir-3DBioInfo-Benchmark-Protein-Interfaces"
 }

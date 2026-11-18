@@ -6,13 +6,13 @@
   "status": "active",
   "description": "ELIXIR 3D-BioInfo Community benchmarking activity on scoring and ranking of protein-protein interfaces and quaternary structure assignment, based on a curated benchmark of 1677 homodimer crystal structures.",
   "community_contact_ids": [
-    "3DBioinfo:3D-Bioinfo.Coordinators"
+    "3DBioinfo:Coordinators"
   ],
   "references": [
-    "doi:10.22541/au.167569565.51141128/v1"
+    "doi:10.1002/pmic.202200323"
   ],
   "keywords": [
-    "protein-protein interaction",
+    "protein-protein interface",
     "quaternary structure",
     "interface scoring",
     "homodimers",

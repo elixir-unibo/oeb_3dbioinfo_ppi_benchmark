@@ -13,7 +13,7 @@
   "description": "Per-entry raw score produced by ISPRED4 physiological-score (MCC-optimized) on the 1671 benchmark entries it covers.",
   "type": "participant",
   "dataset_contact_ids": [
-    "3DBioinfo:Rita.Casadio"
+    "3DBioinfo:Contact.Bologna"
   ],
   "dates": {
     "creation": "2023-05-15T00:00:00Z",

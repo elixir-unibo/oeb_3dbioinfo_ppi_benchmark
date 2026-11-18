@@ -4,10 +4,10 @@
   "title": "F1 Score",
   "description": "Harmonic mean of precision and recall for the physiological-interface class at a decision threshold. Threshold is the published threshold reported for the scoring function when available; otherwise the data-driven optimal threshold (Youden's J statistic) is used.",
   "metrics_contact_ids": [
-    "3DBioinfo:3D-Bioinfo.Coordinators"
+    "3DBioinfo:Coordinators"
   ],
   "formal_definition": "F1 = 2 * Precision * Recall / (Precision + Recall), positive class = physiological interface",
   "references": [
-    "doi:10.22541/au.167569565.51141128/v1"
+    "doi:10.1002/pmic.202200323"
   ]
 }

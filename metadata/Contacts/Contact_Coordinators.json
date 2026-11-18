@@ -1,5 +1,5 @@
 {
-  "_id": "3DBioinfo:3D-Bioinfo.Coordinators",
+  "_id": "3DBioinfo:Coordinators",
   "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Contact",
   "givenName": "3D-Bioinfo",
   "surname": "Coordinators",
