@@ -402,11 +402,11 @@
               Optimise it by cross-validation (default; the strategy above is used)</label>
             <label style="font-weight:400;display:block;margin-bottom:5px;"><input type="radio" name="threshold_mode" value="fixed">
               Use a predefined threshold (nothing is learned)</label>
-            <input type="number" step="any" id="threshold_value" placeholder="threshold, e.g. 0.5" disabled
+            <input type="number" step="any" id="threshold_value" placeholder="threshold (required)" disabled
                    style="width:100%;max-width:240px;padding:7px 10px;font-size:13px;border:1px solid #c9d3e0;border-radius:6px;font-family:inherit;">
             <div style="font-size:12px;color:#6b6b6b;margin-top:4px;">
-              Predefined threshold: entries with a score &ge; the threshold are predicted physiological. It is not needed for a file of binary predictions
-              (0/1, True/False, biological/crystal), which is evaluated as it is. AUROC and AUCPR of a binary file describe its single operating point.
+              Predefined threshold: you must enter the threshold of your submission, on the scale of your scores (entries with a score &ge; the threshold are predicted physiological). The only exception is a file of binary predictions
+              (0/1, True/False, biological/crystal), which has no threshold and is evaluated as it is. AUROC and AUCPR of a binary file describe its single operating point.
             </div>
           </div>
           <div class="form-row">
@@ -1114,7 +1114,7 @@ const REF_PUBLISHED = {"RF_Consensus_top221": {"auroc": 0.9474, "aucpr": 0.9452,
             if (mode === "fixed") {
               goldMap = await getGoldMap();
               const thr = isBinary ? 0.5 : parseFloat(thresholdText);
-              if (isNaN(thr)) throw new Error("enter the predefined threshold, or upload binary 0/1 predictions.");
+              if (isNaN(thr)) throw new Error("a threshold is required when the evaluation is not cross-validated: enter the threshold of your submission (not needed only for binary 0/1 predictions).");
               cvResult = evaluateFixed(scoreMap, goldMap, thr);
               cvResult.threshold_used = isBinary ? "0/1 classes" : String(thr);
               baseline = { participants: Object.keys(REF_PUBLISHED).map(pid => ({ display_name: pid, cv_auroc_mean: REF_PUBLISHED[pid].auroc })) };
