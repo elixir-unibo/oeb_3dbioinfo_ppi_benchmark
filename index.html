@@ -301,15 +301,10 @@
                class="benchmarkingChart_scatter" data-api-url="http://localhost:8080/graphql"></div>
 
         <h2 style="margin-top:28px;">Full metrics table</h2>
-        <div class="subtitle">AUROC and AUCPR are threshold-free ranking metrics. Balanced Accuracy, F1 and MCC
-          are evaluated at each scoring function's published decision threshold, or at the data-driven
-          optimal threshold (Youden's J statistic) when no threshold was published (applies to Voronota only).
-          This is a fixed snapshot of the 14 published scoring functions -- see "Try it yourself" below to
-          evaluate your own predictions with a declared, leakage-safe cross-validation procedure using the full,
-          interactive version of this page.</div>
+        <div class="subtitle">AUROC and AUCPR are threshold-free ranking metrics. The 14 reference methods are shown as held-out, cross-validated values (mean &plusmn; standard deviation over 5 folds) for the splitting strategy selected in the submission section (Strategy 3 at load): the decision threshold of Balanced Accuracy, F1 and MCC is learned on the training folds only (Youden's J statistic). If a submission is evaluated with a <i>predefined threshold</i>, the reference methods are shown instead at their published thresholds on all entries (resubstitution), as in Schweke <i>et al.</i> The two views are labelled in the Evaluation column.</div>
         <table class="data-table" id="full-metrics-table">
           <tr><th>Group</th><th>Participant</th><th>AUROC</th><th>AUCPR</th><th>Balanced Accuracy</th><th>F1 Score</th><th>MCC</th><th>Evaluation</th></tr>
-          <tbody id="full-metrics-tbody"><tr data-participant-id="RF_Consensus_top221" data-group="Consensus (cross-group RF)" data-auroc="0.9474" data-aucpr="0.9452" data-balancedaccuracy="0.8826" data-f1="0.8841" data-mcc="0.7650"><td>Consensus (cross-group RF)</td><td>Random Forest consensus (top-221 features)</td><td>0.947</td><td>0.945</td><td>0.883</td><td>0.884</td><td>0.765</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Bonvin_DeepRank-GNN" data-group="Bonvin" data-auroc="0.8603" data-aucpr="0.8158" data-balancedaccuracy="0.8041" data-f1="0.8234" data-mcc="0.6175"><td>Bonvin</td><td>DeepRank-GNN</td><td>0.860</td><td>0.816</td><td>0.804</td><td>0.823</td><td>0.618</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Furman_InterfaceAnalyzer" data-group="Schueler-Furman" data-auroc="0.8492" data-aucpr="0.8212" data-balancedaccuracy="0.7918" data-f1="0.8025" data-mcc="0.5864"><td>Schueler-Furman</td><td>Rosetta InterfaceAnalyzer</td><td>0.849</td><td>0.821</td><td>0.792</td><td>0.802</td><td>0.586</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Guerois_IESnorm" data-group="Guerois" data-auroc="0.8212" data-aucpr="0.8430" data-balancedaccuracy="0.7683" data-f1="0.8107" data-mcc="0.5375"><td>Guerois</td><td>IES (normalized)</td><td>0.821</td><td>0.843</td><td>0.768</td><td>0.811</td><td>0.537</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Zou_DLScoreBC" data-group="Zou" data-auroc="0.8166" data-aucpr="0.8020" data-balancedaccuracy="0.7473" data-f1="0.7561" data-mcc="0.4956"><td>Zou</td><td>DLScore-BC</td><td>0.817</td><td>0.802</td><td>0.747</td><td>0.756</td><td>0.496</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="SWISSMODEL_QSQE" data-group="SWISS-MODEL" data-auroc="0.8076" data-aucpr="0.9184" data-balancedaccuracy="0.7244" data-f1="0.7412" data-mcc="0.3964"><td>SWISS-MODEL</td><td>QSQE</td><td>0.808</td><td>0.918</td><td>0.724</td><td>0.741</td><td>0.396</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Venclovas_Voronota" data-group="Venclovas" data-auroc="0.8074" data-aucpr="0.7679" data-balancedaccuracy="0.7504" data-f1="0.7522" data-mcc="0.5009"><td>Venclovas</td><td>Voronota</td><td>0.807</td><td>0.768</td><td>0.750</td><td>0.752</td><td>0.501</td><td style="color:#6b6b6b;font-size:12px;">data-driven optimal threshold (resubstitution)</td></tr><tr data-participant-id="FernandezRecio_NIPacking" data-group="Fernandez-Recio" data-auroc="0.7912" data-aucpr="0.7454" data-balancedaccuracy="0.7659" data-f1="0.7665" data-mcc="0.5319"><td>Fernandez-Recio</td><td>NIPacking</td><td>0.791</td><td>0.745</td><td>0.766</td><td>0.766</td><td>0.532</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Bologna_ISPRED4" data-group="Casadio (Bologna)" data-auroc="0.7692" data-aucpr="0.7469" data-balancedaccuracy="0.7200" data-f1="0.7164" data-mcc="0.4402"><td>Casadio (Bologna)</td><td>ISPRED4</td><td>0.769</td><td>0.747</td><td>0.720</td><td>0.716</td><td>0.440</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Correia_MaSIF" data-group="Correia" data-auroc="0.7661" data-aucpr="0.7466" data-balancedaccuracy="0.7077" data-f1="0.7321" data-mcc="0.4174"><td>Correia</td><td>MaSIF</td><td>0.766</td><td>0.747</td><td>0.708</td><td>0.732</td><td>0.417</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Kihara_GOAP" data-group="Kihara" data-auroc="0.7540" data-aucpr="0.7130" data-balancedaccuracy="0.6927" data-f1="0.7080" data-mcc="0.3873"><td>Kihara</td><td>GOAP</td><td>0.754</td><td>0.713</td><td>0.693</td><td>0.708</td><td>0.387</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Oliva_CP" data-group="Oliva" data-auroc="0.7486" data-aucpr="0.7118" data-balancedaccuracy="0.6930" data-f1="0.6948" data-mcc="0.3860"><td>Oliva</td><td>CP/COCOMAPS</td><td>0.749</td><td>0.712</td><td>0.693</td><td>0.695</td><td>0.386</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="MOBI_ShapeHydroTails" data-group="MOBI" data-auroc="0.7307" data-aucpr="0.6985" data-balancedaccuracy="0.6797" data-f1="0.6858" data-mcc="0.3597"><td>MOBI</td><td>shape_hydro_tails</td><td>0.731</td><td>0.699</td><td>0.680</td><td>0.686</td><td>0.360</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr><tr data-participant-id="Wolfson_ProbaConsensus" data-group="Wolfson" data-auroc="0.7262" data-aucpr="0.6610" data-balancedaccuracy="0.6777" data-f1="0.7256" data-mcc="0.3775"><td>Wolfson</td><td>ProbaConsensus (ScanNet F_Network)</td><td>0.726</td><td>0.661</td><td>0.678</td><td>0.726</td><td>0.378</td><td style="color:#6b6b6b;font-size:12px;">published threshold (resubstitution)</td></tr></tbody>
+          <tbody id="full-metrics-tbody"><tr data-participant-id="RF_Consensus_top221" data-group="Consensus (cross-group RF)" data-auroc="0.9481" data-aucpr="0.9463" data-balancedaccuracy="0.8812" data-f1="0.8823" data-mcc="0.7628"><td>Consensus (cross-group RF)</td><td>Random Forest consensus (top-221 features)</td><td>0.948 ± 0.011</td><td>0.946 ± 0.010</td><td>0.881 ± 0.019</td><td>0.882 ± 0.022</td><td>0.763 ± 0.037</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Bonvin_DeepRank-GNN" data-group="Bonvin" data-auroc="0.8606" data-aucpr="0.8208" data-balancedaccuracy="0.8019" data-f1="0.8206" data-mcc="0.6141"><td>Bonvin</td><td>DeepRank-GNN</td><td>0.861 ± 0.015</td><td>0.821 ± 0.039</td><td>0.802 ± 0.016</td><td>0.821 ± 0.019</td><td>0.614 ± 0.032</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Furman_InterfaceAnalyzer" data-group="Schueler-Furman" data-auroc="0.8476" data-aucpr="0.8187" data-balancedaccuracy="0.7936" data-f1="0.7998" data-mcc="0.5883"><td>Schueler-Furman</td><td>Rosetta InterfaceAnalyzer</td><td>0.848 ± 0.019</td><td>0.819 ± 0.047</td><td>0.794 ± 0.022</td><td>0.800 ± 0.021</td><td>0.588 ± 0.044</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Guerois_IESnorm" data-group="Guerois" data-auroc="0.8228" data-aucpr="0.846" data-balancedaccuracy="0.7655" data-f1="0.8074" data-mcc="0.5317"><td>Guerois</td><td>IES (normalized)</td><td>0.823 ± 0.019</td><td>0.846 ± 0.022</td><td>0.765 ± 0.031</td><td>0.807 ± 0.025</td><td>0.532 ± 0.060</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Zou_DLScoreBC" data-group="Zou" data-auroc="0.8176" data-aucpr="0.8023" data-balancedaccuracy="0.7465" data-f1="0.7562" data-mcc="0.4972"><td>Zou</td><td>DLScore-BC</td><td>0.818 ± 0.019</td><td>0.802 ± 0.023</td><td>0.747 ± 0.011</td><td>0.756 ± 0.018</td><td>0.497 ± 0.022</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="SWISSMODEL_QSQE" data-group="SWISS-MODEL" data-auroc="0.8102" data-aucpr="0.9179" data-balancedaccuracy="0.7137" data-f1="0.7736" data-mcc="0.4019"><td>SWISS-MODEL</td><td>QSQE</td><td>0.810 ± 0.050</td><td>0.918 ± 0.031</td><td>0.714 ± 0.022</td><td>0.774 ± 0.069</td><td>0.402 ± 0.060</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Venclovas_Voronota" data-group="Venclovas" data-auroc="0.8077" data-aucpr="0.7716" data-balancedaccuracy="0.749" data-f1="0.7507" data-mcc="0.4996"><td>Venclovas</td><td>Voronota</td><td>0.808 ± 0.019</td><td>0.772 ± 0.041</td><td>0.749 ± 0.023</td><td>0.751 ± 0.025</td><td>0.500 ± 0.046</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="FernandezRecio_NIPacking" data-group="Fernandez-Recio" data-auroc="0.7911" data-aucpr="0.7484" data-balancedaccuracy="0.7663" data-f1="0.7662" data-mcc="0.5326"><td>Fernandez-Recio</td><td>NIPacking</td><td>0.791 ± 0.030</td><td>0.748 ± 0.034</td><td>0.766 ± 0.018</td><td>0.766 ± 0.019</td><td>0.533 ± 0.037</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Bologna_ISPRED4" data-group="Casadio (Bologna)" data-auroc="0.7693" data-aucpr="0.75" data-balancedaccuracy="0.7155" data-f1="0.7075" data-mcc="0.4332"><td>Casadio (Bologna)</td><td>ISPRED4</td><td>0.769 ± 0.029</td><td>0.750 ± 0.023</td><td>0.716 ± 0.023</td><td>0.708 ± 0.029</td><td>0.433 ± 0.046</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Correia_MaSIF" data-group="Correia" data-auroc="0.7667" data-aucpr="0.7497" data-balancedaccuracy="0.7036" data-f1="0.7201" data-mcc="0.4079"><td>Correia</td><td>MaSIF</td><td>0.767 ± 0.022</td><td>0.750 ± 0.034</td><td>0.704 ± 0.031</td><td>0.720 ± 0.030</td><td>0.408 ± 0.062</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Kihara_GOAP" data-group="Kihara" data-auroc="0.754" data-aucpr="0.7174" data-balancedaccuracy="0.6922" data-f1="0.7087" data-mcc="0.3875"><td>Kihara</td><td>GOAP</td><td>0.754 ± 0.038</td><td>0.717 ± 0.063</td><td>0.692 ± 0.021</td><td>0.709 ± 0.028</td><td>0.388 ± 0.042</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Oliva_CP" data-group="Oliva" data-auroc="0.7494" data-aucpr="0.7327" data-balancedaccuracy="0.6901" data-f1="0.6919" data-mcc="0.3811"><td>Oliva</td><td>CP/COCOMAPS</td><td>0.749 ± 0.032</td><td>0.733 ± 0.048</td><td>0.690 ± 0.028</td><td>0.692 ± 0.039</td><td>0.381 ± 0.056</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="MOBI_ShapeHydroTails" data-group="MOBI" data-auroc="0.7294" data-aucpr="0.6991" data-balancedaccuracy="0.6656" data-f1="0.6709" data-mcc="0.3344"><td>MOBI</td><td>shape_hydro_tails</td><td>0.729 ± 0.016</td><td>0.699 ± 0.031</td><td>0.666 ± 0.014</td><td>0.671 ± 0.030</td><td>0.334 ± 0.027</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Wolfson_ProbaConsensus" data-group="Wolfson" data-auroc="0.7271" data-aucpr="0.6682" data-balancedaccuracy="0.6685" data-f1="0.7086" data-mcc="0.3559"><td>Wolfson</td><td>ProbaConsensus (ScanNet F_Network)</td><td>0.727 ± 0.027</td><td>0.668 ± 0.044</td><td>0.668 ± 0.020</td><td>0.709 ± 0.023</td><td>0.356 ± 0.050</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr></tbody>
         </table>
 
         <h2 style="margin-top:28px;">Quartile ranking</h2>
@@ -378,11 +373,7 @@
           entirely in your browser (the file is never uploaded anywhere).</div>
 
         <div class="cv-caveat">
-          Every number shown here is a <b>held-out, cross-validated</b> metric: for each fold of the chosen
-          splitting strategy, the decision threshold used by Balanced Accuracy / F1 / MCC is learned only from
-          the other folds (Youden's J statistic), never from the held-out fold itself. This is different from
-          (and stricter than) the plain resubstitution comparison against the manuscript shown in the Results
-          section above. All computation happens client-side in JavaScript -- your file is read locally via the
+          Two evaluation modes are available. <b>Cross-validation</b> (default, for scores that have no declared threshold): for each fold of the chosen splitting strategy, the decision threshold used by Balanced Accuracy / F1 / MCC is learned only from the other folds (Youden's J statistic), never from the held-out fold, and the reference methods are shown evaluated in the same way. <b>Predefined threshold</b> (for predictions with a threshold fixed beforehand, or binary 0/1 predictions): nothing is learned, the metrics are computed once on all entries covered, and the reference methods are shown at their published thresholds. A predefined threshold that was tuned on this benchmark is as optimistic as those published thresholds. All computation happens client-side in JavaScript -- your file is read locally via the
           browser's File API and never leaves your machine.
         </div>
 
@@ -404,6 +395,19 @@
               <option value="strategy3" selected>Strategy 3 &mdash; combined union of Strategy 1 + 2b (688 components) &mdash; RECOMMENDED</option>
             </select>
             <span class="strategy-doc-link"><a href="CV_SPLITTING_STRATEGIES.md" target="_blank" style="color:var(--brand-dark)">full description of all 4 strategies &#8599;</a></span>
+          </div>
+          <div class="form-row">
+            <label>How should the decision threshold be set?</label>
+            <label style="font-weight:400;display:block;margin-bottom:3px;"><input type="radio" name="threshold_mode" value="cv" checked>
+              Optimise it by cross-validation (default; the strategy above is used)</label>
+            <label style="font-weight:400;display:block;margin-bottom:5px;"><input type="radio" name="threshold_mode" value="fixed">
+              Use a predefined threshold (nothing is learned)</label>
+            <input type="number" step="any" id="threshold_value" placeholder="threshold, e.g. 0.5" disabled
+                   style="width:100%;max-width:240px;padding:7px 10px;font-size:13px;border:1px solid #c9d3e0;border-radius:6px;font-family:inherit;">
+            <div style="font-size:12px;color:#6b6b6b;margin-top:4px;">
+              Predefined threshold: entries with a score &ge; the threshold are predicted physiological. It is not needed for a file of binary predictions
+              (0/1, True/False, biological/crystal), which is evaluated as it is. AUROC and AUCPR of a binary file describe its single operating point.
+            </div>
           </div>
           <div class="form-row">
             <label for="predictions_file">Predictions file (CSV)</label>
@@ -443,8 +447,8 @@
     // network. The real, unmodified visualizer code then renders the real chart from this data;
     // nothing about the chart itself is reimplemented or approximated.
     (function() {
-      window.MOCK_DATASETS_RESPONSE = {"data": {"getDatasets": [{"_id": "3DBioinfo:2023-05-15_PPI-PhysioClassification_Aggregation", "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset", "community_ids": ["OEBC_3DBioinfo"], "challenge_ids": ["3DBioinfo:PPI-PhysioClassification"], "visibility": "public", "name": "Challenge leaderboard: PPI-PhysioClassification", "version": "3 (Correia two-tier entry_id resolution)", "description": "Aggregation of AUC-ROC (x) and Accuracy-at-threshold (y) across all 14 participant scoring functions. Entry-id matching corrected to ID_InterfaceID for ProtCID-derived complexes (previous version silently evaluated only the ~971 QSalign-derived entries, dropping the ~700 ProtCID-derived ones).", "type": "aggregation", "dataset_contact_ids": ["3DBioinfo:Coordinators"], "dates": {"creation": "2023-05-15T00:00:00Z", "modification": "2023-05-15T00:00:00Z"}, "depends_on": {"tool_id": "3DBioinfo:aggregate_benchmark", "rel_dataset_ids": [{"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Bonvin_DeepRank-GNN"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Bonvin_DeepRank-GNN"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Furman_InterfaceAnalyzer"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Furman_InterfaceAnalyzer"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Venclovas_Voronota"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Zou_DLScoreBC"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Zou_DLScoreBC"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Guerois_IESnorm"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Guerois_IESnorm"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_FernandezRecio_NIPacking"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_FernandezRecio_NIPacking"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_SWISSMODEL_QSQE"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_SWISSMODEL_QSQE"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Bologna_ISPRED4"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Bologna_ISPRED4"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Kihara_GOAP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Kihara_GOAP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Correia_MaSIF"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Correia_MaSIF"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Oliva_CP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Oliva_CP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_MOBI_ShapeHydroTails"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_MOBI_ShapeHydroTails"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Wolfson_ProbaConsensus"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Wolfson_ProbaConsensus"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_RF_Consensus_top221"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_RF_Consensus_top221"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Venclovas_Voronota"}]}, "datalink": {"inline_data": "{\"challenge_participants\": [{\"tool_id\": \"3DBioinfo:Bonvin_DeepRank-GNN\", \"metric_x\": 0.8603, \"metric_y\": 0.806}, {\"tool_id\": \"3DBioinfo:Furman_InterfaceAnalyzer\", \"metric_x\": 0.8492, \"metric_y\": 0.7922}, {\"tool_id\": \"3DBioinfo:Venclovas_Voronota\", \"metric_x\": 0.8074, \"metric_y\": 0.7504}, {\"tool_id\": \"3DBioinfo:Zou_DLScoreBC\", \"metric_x\": 0.8166, \"metric_y\": 0.7475}, {\"tool_id\": \"3DBioinfo:Guerois_IESnorm\", \"metric_x\": 0.8212, \"metric_y\": 0.7763}, {\"tool_id\": \"3DBioinfo:FernandezRecio_NIPacking\", \"metric_x\": 0.7912, \"metric_y\": 0.7658}, {\"tool_id\": \"3DBioinfo:SWISSMODEL_QSQE\", \"metric_x\": 0.8076, \"metric_y\": 0.6785}, {\"tool_id\": \"3DBioinfo:Bologna_ISPRED4\", \"metric_x\": 0.7692, \"metric_y\": 0.7199}, {\"tool_id\": \"3DBioinfo:Kihara_GOAP\", \"metric_x\": 0.754, \"metric_y\": 0.693}, {\"tool_id\": \"3DBioinfo:Correia_MaSIF\", \"metric_x\": 0.7661, \"metric_y\": 0.7101}, {\"tool_id\": \"3DBioinfo:Oliva_CP\", \"metric_x\": 0.7486, \"metric_y\": 0.693}, {\"tool_id\": \"3DBioinfo:MOBI_ShapeHydroTails\", \"metric_x\": 0.7307, \"metric_y\": 0.6798}, {\"tool_id\": \"3DBioinfo:Wolfson_ProbaConsensus\", \"metric_x\": 0.7262, \"metric_y\": 0.6786}, {\"tool_id\": \"3DBioinfo:RF_Consensus_top221\", \"metric_x\": 0.9474, \"metric_y\": 0.8825}], \"visualization\": {\"type\": \"2D-plot\", \"x_axis\": \"3DBioinfo:AUC-ROC\", \"y_axis\": \"3DBioinfo:ACC-at-threshold\", \"optimization\": \"top-right\"}}"}}]}};
-      const MOCK_METRICS_RESPONSE = {"data": {"getMetrics": [{"_id": "3DBioinfo:F1-Score", "title": "F1 Score", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:ACC-at-threshold", "title": "Classification Accuracy at reported optimal threshold", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:AUC-ROC", "title": "Area Under the ROC Curve (AUC-ROC)", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:leaderboard-aggregation", "title": "Challenge leaderboard aggregation (AUC vs. ACC per participant)", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:AUCPR", "title": "Area Under the Precision-Recall Curve (AUCPR)", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:MCC", "title": "Matthews Correlation Coefficient (MCC)", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:Balanced-Accuracy", "title": "Balanced Accuracy", "_metadata": "{}", "representation_hints": null}]}};
+      window.MOCK_DATASETS_RESPONSE = {"data": {"getDatasets": [{"_id": "3DBioinfo:2023-05-15_PPI-PhysioClassification_Aggregation", "_schema": "https://www.elixir-europe.org/excelerate/WP2/json-schemas/1.0/Dataset", "community_ids": ["OEBC_3DBioinfo"], "challenge_ids": ["3DBioinfo:PPI-PhysioClassification"], "visibility": "public", "name": "Challenge leaderboard: PPI-PhysioClassification", "version": "3 (Correia two-tier entry_id resolution)", "description": "Aggregation of AUC-ROC (x) and Accuracy-at-threshold (y) across all 14 participant scoring functions. Entry-id matching corrected to ID_InterfaceID for ProtCID-derived complexes (previous version silently evaluated only the ~971 QSalign-derived entries, dropping the ~700 ProtCID-derived ones).", "type": "aggregation", "dataset_contact_ids": ["3DBioinfo:Coordinators"], "dates": {"creation": "2023-05-15T00:00:00Z", "modification": "2023-05-15T00:00:00Z"}, "depends_on": {"tool_id": "3DBioinfo:aggregate_benchmark", "rel_dataset_ids": [{"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Bonvin_DeepRank-GNN"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Bonvin_DeepRank-GNN"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Furman_InterfaceAnalyzer"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Furman_InterfaceAnalyzer"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Venclovas_Voronota"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Zou_DLScoreBC"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Zou_DLScoreBC"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Guerois_IESnorm"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Guerois_IESnorm"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_FernandezRecio_NIPacking"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_FernandezRecio_NIPacking"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_SWISSMODEL_QSQE"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_SWISSMODEL_QSQE"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Bologna_ISPRED4"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Bologna_ISPRED4"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Kihara_GOAP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Kihara_GOAP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Correia_MaSIF"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Correia_MaSIF"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Oliva_CP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Oliva_CP"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_MOBI_ShapeHydroTails"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_MOBI_ShapeHydroTails"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_Wolfson_ProbaConsensus"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Wolfson_ProbaConsensus"}, {"dataset_id": "3DBioinfo:2023-05-15_A_AUC_RF_Consensus_top221"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_RF_Consensus_top221"}, {"dataset_id": "3DBioinfo:2023-05-15_A_ACC_Venclovas_Voronota"}]}, "datalink": {"inline_data": "{\"challenge_participants\": [{\"tool_id\": \"3DBioinfo:Bonvin_DeepRank-GNN\", \"metric_x\": 0.8606, \"metric_y\": 0.8032}, {\"tool_id\": \"3DBioinfo:Furman_InterfaceAnalyzer\", \"metric_x\": 0.8476, \"metric_y\": 0.794}, {\"tool_id\": \"3DBioinfo:Venclovas_Voronota\", \"metric_x\": 0.8077, \"metric_y\": 0.7492}, {\"tool_id\": \"3DBioinfo:Zou_DLScoreBC\", \"metric_x\": 0.8176, \"metric_y\": 0.7467}, {\"tool_id\": \"3DBioinfo:Guerois_IESnorm\", \"metric_x\": 0.8228, \"metric_y\": 0.7728}, {\"tool_id\": \"3DBioinfo:FernandezRecio_NIPacking\", \"metric_x\": 0.7911, \"metric_y\": 0.7662}, {\"tool_id\": \"3DBioinfo:SWISSMODEL_QSQE\", \"metric_x\": 0.8102, \"metric_y\": 0.7078}, {\"tool_id\": \"3DBioinfo:Bologna_ISPRED4\", \"metric_x\": 0.7693, \"metric_y\": 0.7162}, {\"tool_id\": \"3DBioinfo:Kihara_GOAP\", \"metric_x\": 0.754, \"metric_y\": 0.6925}, {\"tool_id\": \"3DBioinfo:Correia_MaSIF\", \"metric_x\": 0.7667, \"metric_y\": 0.7039}, {\"tool_id\": \"3DBioinfo:Oliva_CP\", \"metric_x\": 0.7494, \"metric_y\": 0.69}, {\"tool_id\": \"3DBioinfo:MOBI_ShapeHydroTails\", \"metric_x\": 0.7294, \"metric_y\": 0.6659}, {\"tool_id\": \"3DBioinfo:Wolfson_ProbaConsensus\", \"metric_x\": 0.7271, \"metric_y\": 0.6673}, {\"tool_id\": \"3DBioinfo:RF_Consensus_top221\", \"metric_x\": 0.9481, \"metric_y\": 0.8814}], \"visualization\": {\"type\": \"2D-plot\", \"x_axis\": \"3DBioinfo:AUC-ROC\", \"y_axis\": \"3DBioinfo:ACC-at-threshold\", \"optimization\": \"top-right\"}}"}}]}};
+      const MOCK_METRICS_RESPONSE = {"data": {"getMetrics": [{"_id": "3DBioinfo:F1-Score", "title": "F1 Score", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:ACC-at-threshold", "title": "Accuracy at the decision threshold", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:AUC-ROC", "title": "Area Under the ROC Curve (AUC-ROC)", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:leaderboard-aggregation", "title": "Challenge leaderboard aggregation (AUC vs. ACC per participant)", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:AUCPR", "title": "Area Under the Precision-Recall Curve (AUCPR)", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:MCC", "title": "Matthews Correlation Coefficient (MCC)", "_metadata": "{}", "representation_hints": null}, {"_id": "3DBioinfo:Balanced-Accuracy", "title": "Balanced Accuracy", "_metadata": "{}", "representation_hints": null}]}};
 
       function FakeXHR() {
         this.readyState = 0;
@@ -833,7 +837,7 @@
         strategy3: "Strategy 3 \u2014 combined union of Strategy 1 + 2b (688 components) \u2014 RECOMMENDED",
       };
 
-      function fmtMean(v, s) { return (v === null || v === undefined || isNaN(v)) ? "n/a" : (v.toFixed(3) + " \u00b1 " + (s || 0).toFixed(3)); }
+      function fmtMean(v, s) { return (v === null || v === undefined || isNaN(v)) ? "n/a" : (v.toFixed(3) + ((s === null || s === undefined) ? "" : " \u00b1 " + s.toFixed(3))); }
 
       function parsePredictionsCSV(text) {
         const rows = parseCSV(text);
@@ -846,9 +850,15 @@
           throw new Error("uploaded file must have an 'entry_id' column and a score column named " +
             "'raw_score_oriented', 'score' or 'raw_score'. Columns found: " + cols.join(", "));
         }
+        const POS = ["biological", "physiological", "physio", "bio", "true", "yes"];
+        const NEG = ["crystal", "crystallographic", "non-physiological", "nonphysiological", "non-physio", "nonphysio", "false", "no"];
         const scoreMap = {};
         rows.forEach(r => {
-          const v = parseFloat(r[scoreCol]);
+          let v = parseFloat(r[scoreCol]);
+          if (isNaN(v)) {
+            const t = String(r[scoreCol] === undefined ? "" : r[scoreCol]).trim().toLowerCase();
+            if (POS.includes(t)) v = 1; else if (NEG.includes(t)) v = 0;
+          }
           if (r.entry_id && !isNaN(v)) scoreMap[r.entry_id] = v;
         });
         return scoreMap;
@@ -874,7 +884,7 @@
           "<td>" + fmtMean(r.cv_balanced_accuracy_mean, r.cv_balanced_accuracy_std) + "</td>" +
           "<td>" + fmtMean(r.cv_f1_mean, r.cv_f1_std) + "</td>" +
           "<td>" + fmtMean(r.cv_mcc_mean, r.cv_mcc_std) + "</td>" +
-          "<td style=\"color:#a85314;font-size:12px;font-weight:600;\">CV (" + result.strategy_label + ")</td>";
+          "<td style=\"color:#a85314;font-size:12px;font-weight:600;\">" + result.eval_label + "</td>";
         tbody.appendChild(tr);
 
         const rows = Array.from(tbody.querySelectorAll("tr"));
@@ -914,9 +924,80 @@
         const poll = setInterval(() => { tries++; findAndApply(); if (tries >= 60) clearInterval(poll); }, 500);
       }
 
+const REF_PUBLISHED = {"RF_Consensus_top221": {"auroc": 0.9474, "aucpr": 0.9452, "balanced_accuracy": 0.8826, "f1": 0.8841, "mcc": 0.765, "accuracy": 0.8825}, "Bonvin_DeepRank-GNN": {"auroc": 0.8603, "aucpr": 0.8158, "balanced_accuracy": 0.8041, "f1": 0.8234, "mcc": 0.6175, "accuracy": 0.806}, "Furman_InterfaceAnalyzer": {"auroc": 0.8492, "aucpr": 0.8212, "balanced_accuracy": 0.7918, "f1": 0.8025, "mcc": 0.5864, "accuracy": 0.7922}, "Guerois_IESnorm": {"auroc": 0.8212, "aucpr": 0.843, "balanced_accuracy": 0.7683, "f1": 0.8107, "mcc": 0.5375, "accuracy": 0.7763}, "Zou_DLScoreBC": {"auroc": 0.8166, "aucpr": 0.802, "balanced_accuracy": 0.7473, "f1": 0.7561, "mcc": 0.4956, "accuracy": 0.7475}, "SWISSMODEL_QSQE": {"auroc": 0.8076, "aucpr": 0.9184, "balanced_accuracy": 0.7244, "f1": 0.7412, "mcc": 0.3964, "accuracy": 0.6785}, "Venclovas_Voronota": {"auroc": 0.8074, "aucpr": 0.7679, "balanced_accuracy": 0.7504, "f1": 0.7522, "mcc": 0.5009, "accuracy": 0.7504}, "FernandezRecio_NIPacking": {"auroc": 0.7912, "aucpr": 0.7454, "balanced_accuracy": 0.7659, "f1": 0.7665, "mcc": 0.5319, "accuracy": 0.7658}, "Bologna_ISPRED4": {"auroc": 0.7692, "aucpr": 0.7469, "balanced_accuracy": 0.72, "f1": 0.7164, "mcc": 0.4402, "accuracy": 0.7199}, "Correia_MaSIF": {"auroc": 0.7661, "aucpr": 0.7466, "balanced_accuracy": 0.7077, "f1": 0.7321, "mcc": 0.4174, "accuracy": 0.7101}, "Kihara_GOAP": {"auroc": 0.754, "aucpr": 0.713, "balanced_accuracy": 0.6927, "f1": 0.708, "mcc": 0.3873, "accuracy": 0.693}, "Oliva_CP": {"auroc": 0.7486, "aucpr": 0.7118, "balanced_accuracy": 0.693, "f1": 0.6948, "mcc": 0.386, "accuracy": 0.693}, "MOBI_ShapeHydroTails": {"auroc": 0.7307, "aucpr": 0.6985, "balanced_accuracy": 0.6797, "f1": 0.6858, "mcc": 0.3597, "accuracy": 0.6798}, "Wolfson_ProbaConsensus": {"auroc": 0.7262, "aucpr": 0.661, "balanced_accuracy": 0.6777, "f1": 0.7256, "mcc": 0.3775, "accuracy": 0.6786}};
+
+      function evaluateFixed(scoreMap, goldMap, thr) {
+        const entries = Object.keys(scoreMap).filter(e => (e in goldMap));
+        if (!entries.length) return { error: "no overlapping entries between predictions and gold standard", n_entries: 0 };
+        const y = entries.map(e => goldMap[e]), s = entries.map(e => scoreMap[e]);
+        let auc = NaN, aucpr = NaN;
+        if (new Set(y).size >= 2) { auc = aucMannWhitney(y, s); aucpr = aucprAveragePrecision(y, s); }
+        const preds = s.map(v => v >= thr ? 1 : 0);
+        const c = confusionMatrix(y, preds);
+        const acc = preds.reduce((a, p, i) => a + (p === y[i] ? 1 : 0), 0) / y.length;
+        return {
+          n_entries: entries.length, n_folds: null, threshold: thr,
+          cv_auroc_mean: isNaN(auc) ? null : auc, cv_auroc_std: null,
+          cv_aucpr_mean: isNaN(aucpr) ? null : aucpr, cv_aucpr_std: null,
+          cv_accuracy_mean: acc, cv_accuracy_std: null,
+          cv_balanced_accuracy_mean: balancedAccuracy(c), cv_balanced_accuracy_std: null,
+          cv_f1_mean: f1ScoreJS(c), cv_f1_std: null,
+          cv_mcc_mean: mccScoreJS(c), cv_mcc_std: null,
+        };
+      }
+
+      function applyReferenceView(mode, strategyKey) {
+        const keys = ["auroc", "aucpr", "balanced_accuracy", "f1", "mcc", "accuracy"];
+        let view, label;
+        if (mode === "fixed") {
+          view = pid => { const r = REF_PUBLISHED[pid]; if (!r) return null; const o = {}; keys.forEach(k => { o[k] = [r[k], null]; }); return o; };
+          label = "published threshold (resubstitution)";
+        } else {
+          const data = CACHED_LEADERBOARD[strategyKey];
+          if (!data) return;
+          const byId = {};
+          data.participants.forEach(p => { byId[p.participant_id] = p; });
+          view = pid => { const p = byId[pid]; if (!p) return null; const o = {}; keys.forEach(k => { o[k] = [p["cv_" + k + "_mean"], p["cv_" + k + "_std"]]; }); return o; };
+          label = "CV (" + String(STRATEGY_LABELS[strategyKey] || strategyKey).split(/\s+\u2014\s+/)[0] + ")";
+        }
+        document.querySelectorAll('#full-metrics-tbody tr[data-participant-id]').forEach(tr => {
+          const v = view(tr.getAttribute("data-participant-id"));
+          if (!v) return;
+          tr.setAttribute("data-auroc", v.auroc[0]);
+          tr.setAttribute("data-aucpr", v.aucpr[0]);
+          tr.setAttribute("data-balancedaccuracy", v.balanced_accuracy[0]);
+          tr.setAttribute("data-f1", v.f1[0]);
+          tr.setAttribute("data-mcc", v.mcc[0]);
+          const td = tr.querySelectorAll("td");
+          td[2].textContent = fmtMean(v.auroc[0], v.auroc[1]);
+          td[3].textContent = fmtMean(v.aucpr[0], v.aucpr[1]);
+          td[4].textContent = fmtMean(v.balanced_accuracy[0], v.balanced_accuracy[1]);
+          td[5].textContent = fmtMean(v.f1[0], v.f1[1]);
+          td[6].textContent = fmtMean(v.mcc[0], v.mcc[1]);
+          td[7].textContent = label;
+        });
+        const record = window.MOCK_DATASETS_RESPONSE.data.getDatasets[0];
+        const inline = JSON.parse(record.datalink.inline_data);
+        const base = window.__BASELINE_PARTICIPANTS__ || inline.challenge_participants.slice();
+        window.__BASELINE_PARTICIPANTS__ = base.map(b => {
+          const v = view(String(b.tool_id).replace(/^3DBioinfo:/, ""));
+          return v && v.accuracy[0] !== undefined ? { tool_id: b.tool_id, metric_x: v.auroc[0], metric_y: v.accuracy[0] } : b;
+        });
+      }
+
       function renderResults(result) {
+        applyReferenceView(result.mode, result.strategy);
         const refs = document.getElementById("submit-results-refs");
         const wrap = document.getElementById("submit-results");
+        if (result.mode === "fixed") {
+          refs.innerHTML = "Evaluated with a <b>predefined threshold</b> (" + result.new_result.threshold_used + (result.is_binary ? ", binary predictions" : "") +
+            ") on the " + result.new_result.n_entries + " entries covered of " +
+            "<a href=\"" + result.reference_data_url + "\" style=\"color:var(--brand-dark)\">gold_standard_labels.csv</a>; nothing is learned and no fold assignment is used. Rank " +
+            result.new_result.rank + " of " + result.leaderboard_size + " by AUROC among the reference methods shown at their published thresholds." +
+            (result.is_binary ? " For binary predictions AUROC and AUCPR describe the single operating point." : "") +
+            " Results appended to the existing leaderboard table and chart above. " +
+            "<a href=\"#results-section\" id=\"view-updated-results-link\" class=\"oeb-btn\" style=\"display:inline-block; margin-top:10px; text-decoration:none; padding:7px 16px;\">View updated results</a>";
+        } else
         refs.innerHTML = "Evaluated under <b>" + result.strategy_label + "</b> against reference data " +
           "<a href=\"" + result.reference_data_url + "\" style=\"color:var(--brand-dark)\">gold_standard_labels.csv</a> " +
           "using the fold assignment <a href=\"" + result.fold_file_url + "\" style=\"color:var(--brand-dark)\">" +
@@ -991,6 +1072,17 @@
         return data;
       }
 
+      (function() {
+        const radios = document.querySelectorAll('input[name="threshold_mode"]');
+        function sync() {
+          const m = document.querySelector('input[name="threshold_mode"]:checked').value;
+          document.getElementById("strategy").disabled = (m === "fixed");
+          document.getElementById("threshold_value").disabled = (m !== "fixed");
+        }
+        radios.forEach(r => r.addEventListener("change", sync));
+        sync();
+      })();
+
       document.getElementById("submit-form").addEventListener("submit", function(ev) {
         ev.preventDefault();
         const status = document.getElementById("submit-status");
@@ -1001,6 +1093,9 @@
         const groupName = document.getElementById("group_name").value.trim() || "User submission";
         const participantName = document.getElementById("participant_name").value.trim() || "Uploaded submission";
         const strategyKey = document.getElementById("strategy").value;
+        const modeEl = document.querySelector('input[name="threshold_mode"]:checked');
+        const mode = modeEl ? modeEl.value : "cv";
+        const thresholdText = document.getElementById("threshold_value").value;
 
         btn.disabled = true;
         status.className = ""; status.textContent = "Evaluating submission under the selected CV strategy (in your browser)...";
@@ -1014,10 +1109,26 @@
         reader.onload = async function() {
           try {
             const scoreMap = parsePredictionsCSV(reader.result);
-            const [goldMap, foldMap, baseline] = await Promise.all([
-              getGoldMap(), getFoldMap(strategyKey), getBaselineLeaderboard(strategyKey)
-            ]);
-            const cvResult = crossValidate(scoreMap, goldMap, foldMap);
+            const isBinary = Object.keys(scoreMap).length > 0 && Object.values(scoreMap).every(v => v === 0 || v === 1);
+            let goldMap, baseline, cvResult;
+            if (mode === "fixed") {
+              goldMap = await getGoldMap();
+              const thr = isBinary ? 0.5 : parseFloat(thresholdText);
+              if (isNaN(thr)) throw new Error("enter the predefined threshold, or upload binary 0/1 predictions.");
+              cvResult = evaluateFixed(scoreMap, goldMap, thr);
+              cvResult.threshold_used = isBinary ? "0/1 classes" : String(thr);
+              baseline = { participants: Object.keys(REF_PUBLISHED).map(pid => ({ display_name: pid, cv_auroc_mean: REF_PUBLISHED[pid].auroc })) };
+            } else {
+              if (isBinary) {
+                throw new Error("the uploaded scores take only two values (binary predictions): a threshold cannot be optimised on them. " +
+                  "Choose 'Use a predefined threshold' to evaluate them as they are.");
+              }
+              let foldMap;
+              [goldMap, foldMap, baseline] = await Promise.all([
+                getGoldMap(), getFoldMap(strategyKey), getBaselineLeaderboard(strategyKey)
+              ]);
+              cvResult = crossValidate(scoreMap, goldMap, foldMap);
+            }
             if (cvResult.n_entries === 0) {
               throw new Error("No uploaded entry_id matched the gold standard / fold assignment -- check the entry_id format (expects e.g. '1a17_6').");
             }
@@ -1031,6 +1142,7 @@
               cv_balanced_accuracy_mean: cvResult.cv_balanced_accuracy_mean, cv_balanced_accuracy_std: cvResult.cv_balanced_accuracy_std,
               cv_f1_mean: cvResult.cv_f1_mean, cv_f1_std: cvResult.cv_f1_std,
               cv_mcc_mean: cvResult.cv_mcc_mean, cv_mcc_std: cvResult.cv_mcc_std,
+              threshold_used: cvResult.threshold_used,
             };
             const combined = baseline.participants.map(p => ({ display_name: p.display_name, cv_auroc_mean: p.cv_auroc_mean }));
             combined.push({ display_name: newRow.display_name, cv_auroc_mean: newRow.cv_auroc_mean });
@@ -1038,9 +1150,12 @@
             newRow.rank = combined.findIndex(c => c.display_name === newRow.display_name && c.cv_auroc_mean === newRow.cv_auroc_mean) + 1;
 
             const result = {
-              strategy: strategyKey, strategy_label: STRATEGY_LABELS[strategyKey],
-              fold_file: STRATEGY_FILES[strategyKey].split("/").pop(),
-              fold_file_url: STRATEGY_FILES[strategyKey],
+              mode: mode, is_binary: isBinary,
+              strategy: mode === "fixed" ? "published" : strategyKey,
+              strategy_label: mode === "fixed" ? "predefined threshold" : STRATEGY_LABELS[strategyKey],
+              eval_label: mode === "fixed" ? "Predefined threshold (" + cvResult.threshold_used + ")" : "CV (" + STRATEGY_LABELS[strategyKey] + ")",
+              fold_file: mode === "fixed" ? "" : STRATEGY_FILES[strategyKey].split("/").pop(),
+              fold_file_url: mode === "fixed" ? "" : STRATEGY_FILES[strategyKey],
               reference_data_url: "data/datasets/metrics_reference/gold_standard_labels.csv",
               strategy_doc_url: "CV_SPLITTING_STRATEGIES.md",
               chart_tool_id: chartToolId,
@@ -1051,7 +1166,7 @@
             btn.disabled = false;
             status.className = "ok";
             status.textContent = "Done. \"" + newRow.display_name + "\" scored on " + newRow.n_entries +
-              " entries across " + newRow.n_folds + " folds, ranked #" + newRow.rank + " of " + combined.length + ".";
+              (mode === "fixed" ? " entries at the predefined threshold (" + cvResult.threshold_used + "), ranked #" : " entries across " + newRow.n_folds + " folds, ranked #") + newRow.rank + " of " + combined.length + ".";
             renderResults(result);
             showSection("results-section");
             history.replaceState(null, "", "#results-section");

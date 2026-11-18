@@ -16,7 +16,9 @@ combined-union [recommended]):
   - AUROC and AUCPR are threshold-free and are computed directly on the
     held-out fold.
 This is applied identically to every participant, old or newly uploaded, so
-cross-validated numbers are directly comparable.
+cross-validated numbers are directly comparable. A second function,
+evaluate_fixed_threshold(), evaluates predictions with a predefined threshold
+(or binary 0/1 predictions) without folds; both modes exist on the web page.
 
 No participant's *published* threshold is used here on purpose: mixing a
 globally fixed published threshold for some tools with a data-driven one for
@@ -211,3 +213,30 @@ def cross_validate(scores, gold, fold_of):
         result[f"cv_{key}_mean"] = mean
         result[f"cv_{key}_std"] = sd
     return result
+
+
+def evaluate_fixed_threshold(scores, gold, threshold):
+    """Evaluation with a PREDEFINED threshold: nothing is learned and no folds are used.
+    scores: {entry_id: oriented_score}; entries with score >= threshold are predicted
+    physiological. All metrics are computed once on the entries present in both scores
+    and gold. This is the Python reference of the 'Use a predefined threshold' mode of
+    the web page. For binary predictions (0/1) use threshold 0.5; AUROC and AUCPR then
+    describe the single operating point (AUROC equals the balanced accuracy).
+    A threshold that was tuned on this benchmark is as optimistic as the published
+    thresholds of the reference methods."""
+    entries = [e for e in scores if e in gold]
+    if not entries:
+        return {"error": "no overlapping entries between predictions and gold standard", "n_entries": 0}
+    y = [gold[e] for e in entries]
+    s = [scores[e] for e in entries]
+    preds = [1 if v >= threshold else 0 for v in s]
+    tp, tn, fp, fn = confusion(y, preds)
+    both = len(set(y)) >= 2
+    return {
+        "n_entries": len(entries), "threshold": threshold,
+        "auroc": round(auc_mannwhitney(y, s), 4) if both else None,
+        "aucpr": round(aucpr_average_precision(y, s), 4) if both else None,
+        "accuracy": round(sum(p == l for p, l in zip(preds, y)) / len(y), 4),
+        "balanced_accuracy": round(balanced_accuracy(tp, tn, fp, fn), 4),
+        "f1": round(f1_score_(tp, fp, fn), 4), "mcc": round(mcc_score(tp, tn, fp, fn), 4),
+    }
