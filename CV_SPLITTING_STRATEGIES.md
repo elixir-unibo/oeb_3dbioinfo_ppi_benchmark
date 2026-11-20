@@ -1,11 +1,6 @@
 # Multiple cross-validation splitting strategies for the PPI benchmark
 
-**None of this was read from the Schweke et al. manuscript.** The manuscript states only that
-"ROCs were computed from these scores using 5-fold cross validation to select the best
-performing score for each group" (Results, p.10) and discloses nothing about how its own folds
-were constructed -- no seed, no stratification detail, no sequence-identity control. Everything
-below is this package's own proposal, built to fill that gap with a defensible, leakage-safe
-alternative, not a reproduction of the paper's (undisclosed) procedure.
+**These splits are defined for this package; they are not the folds of Schweke et al.** (Strategies 1 and 3 are grouping rules defined for this package, Strategy 2 is a clustering computed for this package with MMseqs2, and Strategy 2b is the BLASTClust clustering of this benchmark, published in `data/ppi_benchmark_seqs.clust_25_05`.) The manuscript describes a 5-fold cross-validated ROC analysis used to select the best score of each group and its threshold (the point of the ROC most distant from the diagonal; Methods 2.3 and Figure S1 of the supplement). The folds of that analysis are not reproduced here. The splits below keep homologous interfaces together in one fold, and are a proposal of this package.
 
 ## Why a plain random 5-fold split is unsafe here
 
@@ -34,23 +29,23 @@ mmseqs easy-cluster benchmark_sequences.fasta clusterRes tmp \
     --min-seq-id 0.25 -c 0.5 --cov-mode 1 --cluster-mode 1
 ```
 
-Parameters chosen to approximate the user's own prior `blastclust -i sequences.fasta -o
-clusters.txt -S 25 -L 0.5 -b F` protocol (25%% identity, 50%% coverage of the shorter sequence,
+Parameters chosen to approximate the BLASTClust clustering of this benchmark (`blastclust -i sequences.fasta -o
+clusters.txt -S 25 -L 0.5 -b F`, Strategy 2b below; 25%% identity, 50%% coverage of the shorter sequence,
 asymmetric/one-sided coverage requirement) as closely as MMseqs2's model allows:
 `--min-seq-id 0.25` <-> `-S 25`; `-c 0.5 --cov-mode 1` <-> `-L 0.5 -b F` (one-sided coverage);
 `--cluster-mode 1` (connected-component/single-linkage-like) <-> blastclust's transitive
 single-linkage clustering (MMseqs2's *default* cluster mode is greedy set-cover, which is NOT
 equivalent to blastclust and would under-merge transitively-linked chains).
 
-Result: 1076 clusters, largest 25 entries. Validated against the authoritative reference below:
+Result: 1076 clusters, largest 25 entries. Validated against the BLASTClust reference below:
 154/200 sampled entries had an EXACT partner-set match between this run and the reference
 (remaining disagreement is expected from BLAST-vs-k-mer prefiltering and implementation
 differences between blastclust and MMseqs2 -- the two tools are not identical algorithms even
 with matched nominal parameters).
 
-## Strategy 2b -- Authoritative blastclust reference (user-provided)
+## Strategy 2b -- BLASTClust reference clustering (computed by the authors of this package)
 
-The user supplied the actual blastclust output for this exact dataset:
+The clustering of this benchmark computed by the authors of this package with the NCBI BLASTClust program:
 `blastclust -i sequences.fasta -o clusters.txt -S 25 -L 0.5 -b F`, published at
 https://biofold.github.io/ppi-benchmark-fair and
 https://raw.githubusercontent.com/biofold/ppi-benchmark-fair/refs/heads/master/data/ppi_benchmark_seqs.clust_25_05 .

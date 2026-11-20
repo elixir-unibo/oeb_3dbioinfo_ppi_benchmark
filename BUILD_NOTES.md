@@ -504,20 +504,21 @@ Result (full list in `qc_analysis/diagnostics/training_flag_wholerepo_scan.csv`)
 
 
 ---------------------------------------------------------------------------------------------
-## >>> MULTIPLE CROSS-VALIDATION SPLITTING STRATEGIES PROPOSED (own work, not from manuscript) <<<
+## >>> MULTIPLE CROSS-VALIDATION SPLITTING STRATEGIES (defined for this package, not the folds of the manuscript) <<<
 
 See **CV_SPLITTING_STRATEGIES.md** for the full writeup. Short version, to make this
-unambiguous: the Step 5b/5c CV splits described earlier in this README are this package's OWN
-proposal -- the manuscript never discloses how its folds were built. Four alternative,
-leakage-verified (zero groups spanning >1 fold) strategies are now provided:
+unambiguous: the Step 5b/5c CV splits described earlier in this README are defined for this
+package; they are not the folds of the manuscript's own 5-fold analysis (Methods 2.3 and Figure S1
+of its supplement), which is not reproduced here. Four alternative, leakage-verified (zero groups
+spanning >1 fold) strategies are provided:
 
 1. **CATH superfamily / UniProt gene** (original, annotation-based, no external tool).
 2. **MMseqs2 sequence-identity clustering** (this package's own run on sequences extracted
-   from the benchmark's PDB structures), parameterized to approximate the user's own prior
-   `blastclust -S 25 -L 0.5 -b F` protocol.
-3. **Authoritative blastclust reference** (user-provided, from
-   https://biofold.github.io/ppi-benchmark-fair -- confirmed 100% entry-id match against this
-   exact 1677-entry benchmark).
+   from the benchmark's PDB structures), parameterized to approximate the BLASTClust clustering of
+   this benchmark (`blastclust -S 25 -L 0.5 -b F`).
+3. **BLASTClust reference clustering** (computed by the authors of this package with the NCBI
+   BLASTClust program, published at https://biofold.github.io/ppi-benchmark-fair -- 100% entry-id
+   match against this exact 1677-entry benchmark).
 4. **Combined union of (1) and (3)** -- RECOMMENDED: two entries share a fold if either
    structural-annotation or sequence-identity homology links them.
 
@@ -629,9 +630,9 @@ analysis into an interactive comparison tool:
   the CLI (`crossval_metrics.py`) and the server's upload endpoint.
 - **Baseline CV leaderboards** were precomputed for all 14 participants under all 4 strategies
   (`qc_analysis/cv_leaderboard/strategy{1,2,2b,3}.json`) so a new upload is compared against
-  numbers computed with the exact same held-out procedure, not against the resubstitution values
+  numbers computed with the exact same held-out procedure, not against the values at published thresholds
   in `qc_analysis/diagnostics/benchmark_summary_published_vs_recomputed.csv` (which use each tool's own published
-  threshold and are not cross-validated).
+  threshold on all entries and are not cross-validated by this package).
 - The server (`serve_local_openebench_visualizer.py`) exposes `POST /api/evaluate_submission`
   (multipart file upload + chosen strategy + submission name), `GET /api/strategies`, and a
   `GET /package/<path>` read-only file server used to link every leaderboard row to its own
