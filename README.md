@@ -83,7 +83,7 @@ The package is also available as a single file, `oeb_ppi_benchmark-v<version>.zi
 
 ## Relation to the FAIR repository
 
-[biofold/ppi-benchmark-fair](https://github.com/biofold/ppi-benchmark-fair) (Zenodo concept DOI [10.5281/zenodo.24149636](https://doi.org/10.5281/zenodo.24149636)) is a related but separate repository with its own Zenodo record. It addresses a different task: it makes the benchmark data FAIR (metadata, portal, machine-learning-ready files). This repository addresses the benchmarking itself: an OpenEBench package, a workflow and a leaderboard in which new methods are compared with the reference methods. The two records are linked but not merged, and each has its own DOI.
+[biofold/ppi-benchmark-fair](https://github.com/biofold/ppi-benchmark-fair) (Zenodo concept DOI [10.5281/zenodo.24149636](https://doi.org/10.5281/zenodo.24149636)) is a related but separate repository with its own Zenodo record. It addresses a different task: it makes the benchmark data FAIR (metadata, portal, machine-learning-ready files). This repository addresses the benchmarking itself: an OpenEBench package, a workflow and a leaderboard in which new methods are compared with the reference methods. The two records are linked but not merged, and each has its own DOI. Since version 1.3.0 of the FAIR repository (version DOI [10.5281/zenodo.24384378](https://doi.org/10.5281/zenodo.24384378)) it also carries the four cross-validation splits of this package (`datasets/metrics_reference/cv_fold_strategy*.csv`, which are the master) as byte-identical copies and as interface properties; the 1,671 interfaces of this package are the interfaces it uses for the machine-learning baselines, and the six flagged "to delete" remain in its dataset.
 
 ## Licence and citation
 
@@ -111,7 +111,7 @@ pmcid={PMC10937251}
   title={ELIXIR - Protein-Protein Interface Benchmark - OpenEBench Experiment},
   author={Capriotti, Emidio and Martelli, Pier Luigi and Savojardo, Castrense},
   year={2026},
-  version={1.1.0},
+  version={1.2.0},
   publisher={Zenodo},
   url={https://github.com/elixir-unibo/oeb_3dbioinfo_ppi_benchmark},
   doi={10.5281/zenodo.24323529},

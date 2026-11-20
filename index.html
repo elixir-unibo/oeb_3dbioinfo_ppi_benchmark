@@ -166,7 +166,7 @@
       <a href="#datasets-section" data-section="datasets-section" class="nav-link"><span class="material-icons">dataset</span> Datasets</a>
       <a href="#tools-section" data-section="tools-section" class="nav-link"><span class="material-icons">build</span> Tools</a>
       <a href="#submit-section" data-section="submit-section" class="nav-link"><span class="material-icons">upload_file</span> Submit</a>
-      <a href="oeb_ppi_benchmark-v1.1.0.zip" download class="sidebar-download-link" style="display:flex; align-items:center; gap:8px; padding:12px 18px; color:#444; text-decoration:none; border-top:1px solid #e3e8ee; margin-top:8px; padding-top:14px;"><span class="material-icons" style="font-size:18px; color:var(--brand);">archive</span> OEB Bundle</a>
+      <a href="oeb_ppi_benchmark-v1.2.0.zip" download class="sidebar-download-link" style="display:flex; align-items:center; gap:8px; padding:12px 18px; color:#444; text-decoration:none; border-top:1px solid #e3e8ee; margin-top:8px; padding-top:14px;"><span class="material-icons" style="font-size:18px; color:var(--brand);">archive</span> OEB Bundle</a>
     </aside>
 
     <main>
@@ -225,11 +225,12 @@
 
         <h2 style="margin-top:22px;">Leakage-safe cross-validation</h2>
         <div class="description">
-          Because many entries share homologous chains, metrics computed by simple resubstitution
-          over-estimate real-world performance. This package instead provides
-          <b>4 homology-aware CV splitting strategies</b> (CATH/UniProt-based, this package's own
-          MMseqs2 clustering, an authoritative blastclust reference, and a recommended combined
-          union of the two), documented in
+          Because many entries share homologous chains, a metric computed without separating homologous
+          entries can over-estimate the performance on new proteins. This package therefore provides
+          <b>4 homology-aware CV splitting strategies</b> (a CATH superfamily / UniProt gene rule defined for this package,
+          an MMseqs2 clustering computed for this package, the BLASTClust clustering of this benchmark, and a recommended
+          union of the first and the last), built with CATH annotations, MMseqs2 and the NCBI BLASTClust program and
+          documented in
           <a href="CV_SPLITTING_STRATEGIES.md" style="color:var(--brand-dark)">CV_SPLITTING_STRATEGIES.md</a>,
           so every participant's decision threshold is learned only from the <i>other</i> folds,
           never from the held-out one.
@@ -249,7 +250,7 @@
 
         <h2 style="margin-top:22px;">OEB Bundle &mdash; submitting this benchmark to OpenEBench</h2>
         <div class="description">
-          The <b>OEB Bundle</b> link in the sidebar downloads <code>oeb_ppi_benchmark-v1.1.0.zip</code>, release 1.1.0 of the package (<a href="https://github.com/elixir-unibo/oeb_3dbioinfo_ppi_benchmark/releases/tag/v1.1.0" style="color:var(--brand-dark)">release page on GitHub</a>),
+          The <b>OEB Bundle</b> link in the sidebar downloads <code>oeb_ppi_benchmark-v1.2.0.zip</code>, release 1.2.0 of the package (<a href="https://github.com/elixir-unibo/oeb_3dbioinfo_ppi_benchmark/releases/tag/v1.2.0" style="color:var(--brand-dark)">release page on GitHub</a>),
           the complete, self-contained OpenEBench submission package behind this page: the
           Community/Benchmarking Event/Challenge/Dataset metadata JSON files (OpenEBench Scientific
           Benchmarking Data Model), the submission files of the 14 reference methods (13 research groups and a
@@ -301,7 +302,7 @@
                class="benchmarkingChart_scatter" data-api-url="http://localhost:8080/graphql"></div>
 
         <h2 style="margin-top:28px;">Full metrics table</h2>
-        <div class="subtitle">AUROC and AUCPR are threshold-free ranking metrics. The 14 reference methods are shown as held-out, cross-validated values (mean &plusmn; standard deviation over 5 folds) for the splitting strategy selected in the submission section (Strategy 3 at load): the decision threshold of Balanced Accuracy, F1 and MCC is learned on the training folds only (Youden's J statistic). If a submission is evaluated with a <i>predefined threshold</i>, the reference methods are shown instead at their published thresholds on all entries (resubstitution), as in Schweke <i>et al.</i> The two views are labelled in the Evaluation column.</div>
+        <div class="subtitle">AUROC and AUCPR are threshold-free ranking metrics. The 14 reference methods are shown as held-out, cross-validated values (mean &plusmn; standard deviation over 5 folds) for the splitting strategy selected in the submission section (Strategy 3 at load): the decision threshold of Balanced Accuracy, F1 and MCC is learned on the training folds only (Youden's J statistic). If a submission is evaluated with a <i>predefined threshold</i>, the reference methods are shown instead at their published thresholds on all entries, as in Schweke <i>et al.</i> The two views are labelled in the Evaluation column.</div>
         <table class="data-table" id="full-metrics-table">
           <tr><th>Group</th><th>Participant</th><th>AUROC</th><th>AUCPR</th><th>Balanced Accuracy</th><th>F1 Score</th><th>MCC</th><th>Evaluation</th></tr>
           <tbody id="full-metrics-tbody"><tr data-participant-id="RF_Consensus_top221" data-group="Consensus (cross-group RF)" data-auroc="0.9481" data-aucpr="0.9463" data-balancedaccuracy="0.8812" data-f1="0.8823" data-mcc="0.7628"><td>Consensus (cross-group RF)</td><td>Random Forest consensus (top-221 features)</td><td>0.948 ± 0.011</td><td>0.946 ± 0.010</td><td>0.881 ± 0.019</td><td>0.882 ± 0.022</td><td>0.763 ± 0.037</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Bonvin_DeepRank-GNN" data-group="Bonvin" data-auroc="0.8606" data-aucpr="0.8208" data-balancedaccuracy="0.8019" data-f1="0.8206" data-mcc="0.6141"><td>Bonvin</td><td>DeepRank-GNN</td><td>0.861 ± 0.015</td><td>0.821 ± 0.039</td><td>0.802 ± 0.016</td><td>0.821 ± 0.019</td><td>0.614 ± 0.032</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Furman_InterfaceAnalyzer" data-group="Schueler-Furman" data-auroc="0.8476" data-aucpr="0.8187" data-balancedaccuracy="0.7936" data-f1="0.7998" data-mcc="0.5883"><td>Schueler-Furman</td><td>Rosetta InterfaceAnalyzer</td><td>0.848 ± 0.019</td><td>0.819 ± 0.047</td><td>0.794 ± 0.022</td><td>0.800 ± 0.021</td><td>0.588 ± 0.044</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Guerois_IESnorm" data-group="Guerois" data-auroc="0.8228" data-aucpr="0.846" data-balancedaccuracy="0.7655" data-f1="0.8074" data-mcc="0.5317"><td>Guerois</td><td>IES (normalized)</td><td>0.823 ± 0.019</td><td>0.846 ± 0.022</td><td>0.765 ± 0.031</td><td>0.807 ± 0.025</td><td>0.532 ± 0.060</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Zou_DLScoreBC" data-group="Zou" data-auroc="0.8176" data-aucpr="0.8023" data-balancedaccuracy="0.7465" data-f1="0.7562" data-mcc="0.4972"><td>Zou</td><td>DLScore-BC</td><td>0.818 ± 0.019</td><td>0.802 ± 0.023</td><td>0.747 ± 0.011</td><td>0.756 ± 0.018</td><td>0.497 ± 0.022</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="SWISSMODEL_QSQE" data-group="SWISS-MODEL" data-auroc="0.8102" data-aucpr="0.9179" data-balancedaccuracy="0.7137" data-f1="0.7736" data-mcc="0.4019"><td>SWISS-MODEL</td><td>QSQE</td><td>0.810 ± 0.050</td><td>0.918 ± 0.031</td><td>0.714 ± 0.022</td><td>0.774 ± 0.069</td><td>0.402 ± 0.060</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Venclovas_Voronota" data-group="Venclovas" data-auroc="0.8077" data-aucpr="0.7716" data-balancedaccuracy="0.749" data-f1="0.7507" data-mcc="0.4996"><td>Venclovas</td><td>Voronota</td><td>0.808 ± 0.019</td><td>0.772 ± 0.041</td><td>0.749 ± 0.023</td><td>0.751 ± 0.025</td><td>0.500 ± 0.046</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="FernandezRecio_NIPacking" data-group="Fernandez-Recio" data-auroc="0.7911" data-aucpr="0.7484" data-balancedaccuracy="0.7663" data-f1="0.7662" data-mcc="0.5326"><td>Fernandez-Recio</td><td>NIPacking</td><td>0.791 ± 0.030</td><td>0.748 ± 0.034</td><td>0.766 ± 0.018</td><td>0.766 ± 0.019</td><td>0.533 ± 0.037</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Bologna_ISPRED4" data-group="Casadio (Bologna)" data-auroc="0.7693" data-aucpr="0.75" data-balancedaccuracy="0.7155" data-f1="0.7075" data-mcc="0.4332"><td>Casadio (Bologna)</td><td>ISPRED4</td><td>0.769 ± 0.029</td><td>0.750 ± 0.023</td><td>0.716 ± 0.023</td><td>0.708 ± 0.029</td><td>0.433 ± 0.046</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Correia_MaSIF" data-group="Correia" data-auroc="0.7667" data-aucpr="0.7497" data-balancedaccuracy="0.7036" data-f1="0.7201" data-mcc="0.4079"><td>Correia</td><td>MaSIF</td><td>0.767 ± 0.022</td><td>0.750 ± 0.034</td><td>0.704 ± 0.031</td><td>0.720 ± 0.030</td><td>0.408 ± 0.062</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Kihara_GOAP" data-group="Kihara" data-auroc="0.754" data-aucpr="0.7174" data-balancedaccuracy="0.6922" data-f1="0.7087" data-mcc="0.3875"><td>Kihara</td><td>GOAP</td><td>0.754 ± 0.038</td><td>0.717 ± 0.063</td><td>0.692 ± 0.021</td><td>0.709 ± 0.028</td><td>0.388 ± 0.042</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Oliva_CP" data-group="Oliva" data-auroc="0.7494" data-aucpr="0.7327" data-balancedaccuracy="0.6901" data-f1="0.6919" data-mcc="0.3811"><td>Oliva</td><td>CP/COCOMAPS</td><td>0.749 ± 0.032</td><td>0.733 ± 0.048</td><td>0.690 ± 0.028</td><td>0.692 ± 0.039</td><td>0.381 ± 0.056</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="MOBI_ShapeHydroTails" data-group="MOBI" data-auroc="0.7294" data-aucpr="0.6991" data-balancedaccuracy="0.6656" data-f1="0.6709" data-mcc="0.3344"><td>MOBI</td><td>shape_hydro_tails</td><td>0.729 ± 0.016</td><td>0.699 ± 0.031</td><td>0.666 ± 0.014</td><td>0.671 ± 0.030</td><td>0.334 ± 0.027</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr><tr data-participant-id="Wolfson_ProbaConsensus" data-group="Wolfson" data-auroc="0.7271" data-aucpr="0.6682" data-balancedaccuracy="0.6685" data-f1="0.7086" data-mcc="0.3559"><td>Wolfson</td><td>ProbaConsensus (ScanNet F_Network)</td><td>0.727 ± 0.027</td><td>0.668 ± 0.044</td><td>0.668 ± 0.020</td><td>0.709 ± 0.023</td><td>0.356 ± 0.050</td><td style="color:#6b6b6b;font-size:12px;">CV (Strategy 3)</td></tr></tbody>
@@ -331,7 +332,7 @@
           <a href="#submit-section" style="color:var(--brand-dark); font-weight:600;" onclick="showSection('submit-section'); history.replaceState(null,'','#submit-section'); return false;">Submit</a>
           tab -- the whole evaluation (leakage-safe cross-validation, your choice of splitting strategy) runs
           directly in your browser, no server needed. The
-          <a href="oeb_ppi_benchmark-v1.1.0.zip" style="color:var(--brand-dark)">full OpenEBench submission package</a> (release 1.1.0)
+          <a href="oeb_ppi_benchmark-v1.2.0.zip" style="color:var(--brand-dark)">full OpenEBench submission package</a> (release 1.2.0)
           (metadata, Docker images, the submission-prep wizard) is also available here for those steps.
         </div>
         </div>
@@ -373,7 +374,7 @@
           entirely in your browser (the file is never uploaded anywhere).</div>
 
         <div class="cv-caveat">
-          Two evaluation modes are available. <b>Cross-validation</b> (default, for scores that have no declared threshold): for each fold of the chosen splitting strategy, the decision threshold used by Balanced Accuracy / F1 / MCC is learned only from the other folds (Youden's J statistic), never from the held-out fold, and the reference methods are shown evaluated in the same way. <b>Predefined threshold</b> (for predictions with a threshold fixed beforehand, or binary 0/1 predictions): nothing is learned, the metrics are computed once on all entries covered, and the reference methods are shown at their published thresholds. A predefined threshold that was tuned on this benchmark is as optimistic as those published thresholds. All computation happens client-side in JavaScript -- your file is read locally via the
+          Two evaluation modes are available. <b>Cross-validation</b> (default, for scores that have no declared threshold): for each fold of the chosen splitting strategy, the decision threshold used by Balanced Accuracy / F1 / MCC is learned only from the other folds (Youden's J statistic), never from the held-out fold, and the reference methods are shown evaluated in the same way. <b>Predefined threshold</b> (for predictions with a threshold fixed beforehand, or binary 0/1 predictions): nothing is learned, the metrics are computed once on all entries covered, and the reference methods are shown at their published thresholds. The published thresholds of the 14 reference methods were chosen by the authors of the benchmark (Schweke et al., Methods 2.3 and Figure S1 of the supplement); a predefined threshold that was tuned on this same benchmark may give optimistic values. All computation happens client-side in JavaScript -- your file is read locally via the
           browser's File API and never leaves your machine.
         </div>
 
@@ -390,8 +391,8 @@
             <label for="strategy">CV splitting strategy</label>
             <select id="strategy" name="strategy">
               <option value="strategy1">Strategy 1 &mdash; CATH superfamily / UniProt gene (853 groups)</option>
-              <option value="strategy2">Strategy 2 &mdash; this package's own MMseqs2 clustering (1076 clusters)</option>
-              <option value="strategy2b">Strategy 2b &mdash; authoritative blastclust reference, -S25 -L0.5 -bF (1045 clusters)</option>
+              <option value="strategy2">Strategy 2 &mdash; MMseqs2 clustering computed for this package (1076 clusters)</option>
+              <option value="strategy2b">Strategy 2b &mdash; BLASTClust clustering of the benchmark, -S25 -L0.5 -bF (1045 clusters)</option>
               <option value="strategy3" selected>Strategy 3 &mdash; combined union of Strategy 1 + 2b (688 components) &mdash; RECOMMENDED</option>
             </select>
             <span class="strategy-doc-link"><a href="CV_SPLITTING_STRATEGIES.md" target="_blank" style="color:var(--brand-dark)">full description of all 4 strategies &#8599;</a></span>
@@ -832,8 +833,8 @@
       };
       const STRATEGY_LABELS = {
         strategy1: "Strategy 1 \u2014 CATH superfamily / UniProt gene (853 groups)",
-        strategy2: "Strategy 2 \u2014 this package's own MMseqs2 clustering (1076 clusters)",
-        strategy2b: "Strategy 2b \u2014 authoritative blastclust reference, -S25 -L0.5 -bF (1045 clusters)",
+        strategy2: "Strategy 2 \u2014 MMseqs2 clustering computed for this package (1076 clusters)",
+        strategy2b: "Strategy 2b \u2014 BLASTClust clustering of the benchmark, -S25 -L0.5 -bF (1045 clusters)",
         strategy3: "Strategy 3 \u2014 combined union of Strategy 1 + 2b (688 components) \u2014 RECOMMENDED",
       };
 
@@ -951,7 +952,7 @@ const REF_PUBLISHED = {"RF_Consensus_top221": {"auroc": 0.9474, "aucpr": 0.9452,
         let view, label;
         if (mode === "fixed") {
           view = pid => { const r = REF_PUBLISHED[pid]; if (!r) return null; const o = {}; keys.forEach(k => { o[k] = [r[k], null]; }); return o; };
-          label = "published threshold (resubstitution)";
+          label = "published threshold, all entries";
         } else {
           const data = CACHED_LEADERBOARD[strategyKey];
           if (!data) return;

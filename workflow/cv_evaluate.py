@@ -23,9 +23,9 @@ evaluate_fixed_threshold(), evaluates predictions with a predefined threshold
 No participant's *published* threshold is used here on purpose: mixing a
 globally fixed published threshold for some tools with a data-driven one for
 others (including any newly uploaded tool, which has no published threshold)
-would make the comparison apples-to-oranges. The resubstitution metrics in
-qc_analysis/diagnostics/benchmark_summary_published_vs_recomputed.csv (which DO use published
-thresholds) remain the correct place to compare against the manuscript.
+would make the comparison apples-to-oranges. The metrics at the published thresholds in
+qc_analysis/diagnostics/benchmark_summary_published_vs_recomputed.csv (computed on all entries,
+without folds) remain the correct place to compare against the manuscript.
 """
 import csv
 import statistics as st
@@ -222,8 +222,7 @@ def evaluate_fixed_threshold(scores, gold, threshold):
     and gold. This is the Python reference of the 'Use a predefined threshold' mode of
     the web page. For binary predictions (0/1) use threshold 0.5; AUROC and AUCPR then
     describe the single operating point (AUROC equals the balanced accuracy).
-    A threshold that was tuned on this benchmark is as optimistic as the published
-    thresholds of the reference methods."""
+    A threshold that was tuned on this same benchmark may give optimistic values."""
     entries = [e for e in scores if e in gold]
     if not entries:
         return {"error": "no overlapping entries between predictions and gold standard", "n_entries": 0}

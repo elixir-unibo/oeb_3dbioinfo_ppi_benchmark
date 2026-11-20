@@ -1,4 +1,4 @@
-# Status of the OpenEBench package (release 1.1.0)
+# Status of the OpenEBench package (release 1.2.0)
 
 This package contains the metadata, datasets and workflow of the 3D-BioInfo PPI benchmark in the OpenEBench data model. It is **not yet registered on openebench.bsc.es**. OpenEBench has no self-service route for a new benchmarking event: the OpenEBench team loads the package from a repository URL and a release tag, after a support request.
 
